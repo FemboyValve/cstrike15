@@ -34,7 +34,7 @@ $Configuration "Debug"
 {
 	$Linker [$WINDOWS]
 	{
-		$AdditionalDependencies			"$BASE $SRCDIR\lib\win32\debug\libcef.lib"
+		$AdditionalDependencies			"$BASE $SRCDIR\lib\public\libcef.lib"
 	}
 }
 
@@ -42,7 +42,7 @@ $Configuration "Release"
 {
 	$Linker [$WINDOWS]
 	{
-		$AdditionalDependencies			"$BASE $SRCDIR\lib\win32\release\libcef.lib"
+		$AdditionalDependencies			"$BASE $SRCDIR\lib\public\libcef.lib"
 	}
 }
 
