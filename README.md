@@ -14,10 +14,32 @@ This project is a modified version of **Counter-Strike: Global Offensive**, base
 
 ## 📋 Requirements
 
-* **Microsoft Visual Studio 2015 (MSVC 2015)**
-  Required to build the project.
+### ✅ [Microsoft Visual Studio 2015 (MSVC 2015)](https://archive.org/details/vs2015.3.com_enu_202102)
 
-  > *Support for newer toolchains and CMake is in progress.*
+This project requires **Visual Studio 2015 Update 3** to build.
+
+> ⚠️ **Note:** Installing the **ATL/MFC components** is required for successful compilation.
+
+#### 🛠️ How to install ATL/MFC:
+
+1. Run the Visual Studio 2015 installer (`vs_community.exe` or similar).
+2. Choose **"Modify"** if it's already installed, or **"Custom Install"** if installing for the first time.
+3. In the **"Select features"** menu:
+
+   * Expand **"Programming Languages" > "Visual C++"**
+   * Check:
+
+     * ✅ **Common Tools for Visual C++ 2015**
+     * ✅ **Microsoft Foundation Classes for C++** (this includes MFC and ATL)
+4. Complete the installation.
+
+Once installed, `afxres.h` and other required headers will be available at:
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\
+```
+
+> 💡 *Support for newer compilers and CMake is planned for future updates.*
 
 ---
 
