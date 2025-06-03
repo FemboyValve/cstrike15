@@ -1,6 +1,6 @@
-# CS\:GO 2017 (Pre-Hydra Update)
+# CS\:OO (Counter Strike: Open Offensive)
 
-This project is a modified version of **Counter-Strike: Global Offensive**, based on a build from before the Hydra update (2017).
+This project is a modified version of **Counter-Strike: Global Offensive (2017) before Operation Hydra src leak**.
 
 ---
 
@@ -77,3 +77,12 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\
 
 * This version is not intended for public online play.
 * The goal is to preserve and improve on a specific pre-Hydra snapshot of CS\:GO.
+
+## 📚 Resources & Credits
+
+This project makes use of valuable resources and reference code from the following repositories:
+
+* [blackletum/csgo-src](https://github.com/blackletum/csgo-src)
+* [SwagSoftware/Kisak-Strike](https://github.com/SwagSoftware/Kisak-Strike)
+
+Many thanks to the authors of these repositories for their contributions to the community.
