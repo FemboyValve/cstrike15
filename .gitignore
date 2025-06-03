@@ -298,4 +298,5 @@ paket-files/
 *.vcxproj.filters
 *.vcxproj.vpc_crc
 *.sln
+**/_vpc_/
 
