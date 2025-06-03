@@ -101,13 +101,7 @@ entities. Each one is useful under different conditions.
 
 */
 
-
-#ifndef PARTICLEMGR_H
-#define PARTICLEMGR_H
-
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "materialsystem/imaterial.h"
 #include "materialsystem/imaterialsystem.h"
@@ -119,7 +113,7 @@ entities. Each one is useful under different conditions.
 #include "tier0/fasttimer.h"
 #include "utllinkedlist.h"
 #include "utldict.h"
-#ifdef WIN32
+#if (defined(_MSC_VER) && _MSC_VER < 1300) || (defined(__GNUC__) && (__GNUC__ < 3))
 #include <typeinfo.h>
 #else
 #include <typeinfo>
@@ -942,8 +936,3 @@ inline void SwapParticles( Particle *pPrev, Particle *pCur )
 
 
 #include "particle_iterators.h"
-
-
-#endif
-
-
