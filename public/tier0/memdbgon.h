@@ -1,19 +1,9 @@
-//========= Copyright 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: This header, which must be the final include in a .cpp (or .h) file,
-// causes all crt methods to use debugging versions of the memory allocators.
-// NOTE: Use memdbgoff.h to disable memory debugging.
-//
-// $NoKeywords: $
-//=============================================================================//
-
-// SPECIAL NOTE! This file must *not* use include guards; we need to be able
+// SPECIAL NOTE! This file must *NOT* use include guards; we need to be able
 // to include this potentially multiple times (since we can deactivate debugging
 // by including memdbgoff.h)
+// This needs be be the last include in the .cpp file else it will enable/disable memdbg for all files below it!
 
 #if !defined(STEAM) && !defined(NO_MALLOC_OVERRIDE) && !defined(__SPU__)
-
-// SPECIAL NOTE #2: This must be the final include in a .cpp or .h file!!!
 
 #if defined(_DEBUG) && !defined(USE_MEM_DEBUG) && !defined( _PS3 )
 #define USE_MEM_DEBUG 1

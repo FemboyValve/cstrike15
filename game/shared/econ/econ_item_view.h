@@ -242,7 +242,9 @@ public:
 
 	virtual const GameItemDefinition_t *GetItemDefinition() const
 	{
-		return GetStaticData();
+		auto pGameItemDefData = GetStaticData();
+		AssertMsg(pGameItemDefData != nullptr, "wtf");
+		return pGameItemDefData;
 	}
 
 public:

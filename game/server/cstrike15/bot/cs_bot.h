@@ -454,11 +454,6 @@ private:
 };
 
 
-//--------------------------------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------------------
-/**
- * The Counter-strike Bot
- */
 class CCSBot : public CBot< CCSPlayer >
 {
 public:
@@ -483,8 +478,8 @@ public:
 	virtual bool Jump( bool mustJump = false );					///< returns true if jump was started
 
 	//- behavior properties ------------------------------------------------------------------------------------------
-	float GetCombatRange( void ) const;
-	bool IsRogue( void ) const;									///< return true if we dont listen to teammates or pursue scenario goals
+	float GetCombatRange() const;
+	bool IsRogue() const;										///< return true if we dont listen to teammates or pursue scenario goals
 	void SetRogue( bool rogue );
 	bool IsHurrying( void ) const;								///< return true if we are in a hurry 
 	void Hurry( float duration );								///< force bot to hurry

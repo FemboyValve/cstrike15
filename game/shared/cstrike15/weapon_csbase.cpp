@@ -3832,7 +3832,23 @@ void CWeaponCSBase::OnLand( float fVelocity )
 
 void CWeaponCSBase::Recoil( CSWeaponMode weaponMode )
 {
-	/** Removed for partner depot **/
+	CCSPlayer *pPlayer = GetPlayerOwner();
+		if (!pPlayer)
+			return;
+
+	int seed = GetPredictionRandomSeed();
+	float angle;
+	float magnitude;
+	if (weapon_legacy_recoiltable.GetBool())
+	{
+		GetCSWpnData().GetRecoilOffsets(weaponMode, seed, angle, magnitude);
+	}
+	else
+	{
+		g_WeaponRecoilData.GetRecoilOffsets(this, weaponMode, seed, angle, magnitude);
+	}
+
+	pPlayer->KickBack(angle, magnitude);
 }
 
 #ifdef CLIENT_DLL

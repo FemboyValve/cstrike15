@@ -1,9 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Weapon data file parsing, shared by game & client dlls.
-//
-// $NoKeywords: $
-//=============================================================================//
+// Weapon data file parsing, shared by game & client dlls.
 #include "cbase.h"
 #include <keyvalues.h>
 #include <tier0/mem.h>
@@ -14,8 +9,7 @@
 #include "weapon_parse.h"
 #include "econ_item_view.h"
 
-// memdbgon must be the last include file in a .cpp file!!!
-#include "tier0/memdbgon.h"
+#include "tier0/memdbgon.h" // must be the last include file in a .cpp file!!!
 
 CWeaponDatabase g_WeaponDatabase;
 

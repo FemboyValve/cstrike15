@@ -1,14 +1,4 @@
-//===== Copyright 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: 
-//
-//===========================================================================//
-
-#ifndef COMBATWEAPON_SHARED_H
-#define COMBATWEAPON_SHARED_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "sharedInterface.h"
 #include "vphysics_interface.h"
@@ -17,6 +7,7 @@
 #include "weapon_parse.h"
 #include "baseviewmodel_shared.h"
 #include "weapon_proficiency.h"
+#include "econ/econ_entity.h"
 
 #if defined( CLIENT_DLL )
 #undef CBaseCombatWeapon
@@ -120,7 +111,7 @@ namespace vgui2
 // Purpose: Base weapon class, shared on client and server
 //-----------------------------------------------------------------------------
 
-#define BASECOMBATWEAPON_DERIVED_FROM		CBaseAnimating
+#define BASECOMBATWEAPON_DERIVED_FROM		CEconEntity
 
 // temp states for modular weapon body groups
 #define MODULAR_BODYGROUPS_DEFAULT_NONE_SET		0
@@ -223,10 +214,8 @@ public:
 							CBaseCombatWeapon();
 	virtual 				~CBaseCombatWeapon();
 
-	// Get unique weapon ID
-	// FIXMEL4DTOMAINMERGE
-	// We might have to disable this code in main until we refactor all weapons to use this system, as it's a pretty good perf boost
-	virtual int GetWeaponID( void ) const		{ return 0; }
+	// We might have to disable this code in main until we refactor all weapons to use this system, as it's a pretty good perf boost.
+	virtual int GetWeaponID(void) const { assert(true); return 0; } // for now lets always assert to know if this is currently used anywhere.
 
 	const CEconItemView*	GetEconItemView( void ) const;
 	CEconItemView*			GetEconItemView( void );
@@ -265,7 +254,7 @@ public:
 	// HUD Hints
 	virtual bool			ShouldDisplayAltFireHUDHint();
 	virtual void			DisplayAltFireHudHint();	
-	virtual void			RescindAltFireHudHint(); ///< undisplay the hud hint and pretend it never showed.
+	virtual void			RescindAltFireHudHint(); // undisplay the hud hint and pretend it never showed.
 
 	virtual bool			ShouldDisplayReloadHUDHint();
 	virtual void			DisplayReloadHudHint();
@@ -525,7 +514,10 @@ public:
 	virtual void			UpdateVisibility( void );
 
 	virtual void			BoneMergeFastCullBloat( Vector &localMins, Vector &localMaxs, const Vector &thisEntityMins, const Vector &thisEntityMaxs  ) const;
-	virtual bool			OnFireEvent( C_BaseViewModel *pViewModel, const Vector& origin, const QAngle& angles, int event, const char *options ) { return false; }
+	virtual bool			OnFireEvent(C_BaseViewModel *pViewModel, const Vector& origin, const QAngle& angles, int event, const char *options)
+	{
+		return BaseClass::OnFireEvent(pViewModel, origin, angles, event, options);
+	}
 
 	// Should this object cast shadows?
 	virtual ShadowType_t	ShadowCastType();
@@ -762,6 +754,3 @@ inline CBaseCombatWeapon *ToBaseCombatWeapon( CBaseEntity *pEntity )
 		return NULL;
 	return pEntity->MyCombatWeaponPointer();
 }
-
-
-#endif // COMBATWEAPON_SHARED_H

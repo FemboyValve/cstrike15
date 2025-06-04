@@ -412,8 +412,7 @@ bool CCSBot::IsBeyondBotMaxVisionDistance(const Vector &vecTargetPosition) const
  * Check parts in order of importance. Return the first part seen in "visPart" if it is non-NULL.
  */
 
-// We only send back new data every 5 upsates (ie every 1/3 second)
-
+// We only send back new data every 5 updates (ie every 1/3 second)
 bool CCSBot::IsVisible( CCSPlayer *player, bool testFOV, unsigned char *visParts ) const
 {
 	VPROF_BUDGET( "CCSBot::IsVisible( player )", VPROF_BUDGETGROUP_NPCS );
@@ -512,10 +511,10 @@ CCSBot::PartInfo CCSBot::m_partInfo[ MAX_PLAYERS ];
  */
 void CCSBot::ComputePartPositions( CCSPlayer *player )
 {
-	const int headBox = 12;
-	const int gutBox = 9;
-	const int leftElbowBox = 14;
-	const int rightElbowBox = 17;
+	const int headBox = 0;
+	const int gutBox = 4;
+	const int leftElbowBox = 16;
+	const int rightElbowBox = 18;
 	//const int hipBox = 0;
 	//const int leftFootBox = 4;
 	//const int rightFootBox = 8;

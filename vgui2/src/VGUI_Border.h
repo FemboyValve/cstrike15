@@ -1,16 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Core implementation of vgui
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef VGUI_BORDER_H
-#define VGUI_BORDER_H
-
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include <vgui/vgui.h>
 #include <vgui/IBorder.h>
@@ -78,5 +66,3 @@ private:
 };
 
 } // namespace vgui
-
-#endif // VGUI_BORDER_H

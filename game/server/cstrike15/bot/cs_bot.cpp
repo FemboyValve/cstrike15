@@ -786,7 +786,7 @@ float CCSBot::GetNoiseInvestigateChance( void ) const
  * Return true if we are acting like a rogue (not listening to teammates, not doing scenario goals)
  * @todo Account for morale
  */
-bool CCSBot::IsRogue( void ) const
+bool CCSBot::IsRogue() const
 { 
 	CCSBotManager *ctrl = static_cast<CCSBotManager *>( TheCSBots() );
 	if (!ctrl->AllowRogues())
@@ -811,7 +811,7 @@ bool CCSBot::IsRogue( void ) const
 /**
  * Return true if we are in a hurry 
  */
-bool CCSBot::IsHurrying( void ) const
+bool CCSBot::IsHurrying() const
 {
 	if (!m_hurryTimer.IsElapsed())
 		return true;
@@ -835,7 +835,7 @@ bool CCSBot::IsHurrying( void ) const
 /**
  * Return true if it is the early, "safe", part of the round
  */
-bool CCSBot::IsSafe( void ) const
+bool CCSBot::IsSafe() const
 {
 	CCSBotManager *ctrl = static_cast<CCSBotManager *>( TheCSBots() );
 

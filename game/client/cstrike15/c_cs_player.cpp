@@ -1,9 +1,3 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: 
-//
-//===========================================================================//
-
 #include "cbase.h"
 #include "c_cs_player.h"
 #include "c_user_message_register.h"
@@ -87,8 +81,6 @@
 
 // Comment this back in if you want the cl_minmodels convar to operate as normal.
 #define CS_ALLOW_CL_MINMODELS 0
-
-
 
 #if defined( CCSPlayer )
 	#undef CCSPlayer
@@ -231,11 +223,11 @@ ConVar fov_cs_debug( "fov_cs_debug", "0", FCVAR_REPLICATED | FCVAR_CHEAT, "Sets 
 
 #define FREEZECAM_LONGCAM_DIST	320  // over this amount, the camera will zoom close on target
 
-#define sv_magazine_drop_physics 1
+//#define sv_magazine_drop_physics 1
 #define sv_magazine_drop_time 15
 #define sv_magazine_drop_debug 0
 
-//ConVar sv_magazine_drop_physics( "sv_magazine_drop_physics", "1", FCVAR_REPLICATED | FCVAR_RELEASE, "Players drop physical weapon magazines when reloading." );
+ConVar sv_magazine_drop_physics( "sv_magazine_drop_physics", "1", FCVAR_REPLICATED | FCVAR_RELEASE, "Players drop physical weapon magazines when reloading." );
 //ConVar sv_magazine_drop_time( "sv_magazine_drop_time", "15", FCVAR_REPLICATED | FCVAR_RELEASE, "Duration physical magazines stay in the world.", true, 2.0f, true, 20.0f );
 //ConVar sv_magazine_drop_debug( "sv_magazine_drop_debug", "0", FCVAR_REPLICATED | FCVAR_DEVELOPMENTONLY, "Show a debug marker at mag spawn position." );
 
@@ -3642,7 +3634,6 @@ void C_CSPlayer::RecordAmmoForRound( void )
 	{
 		// PRIMARY WEAPON
 		pWeapon = Weapon_GetSlot( WEAPON_SLOT_RIFLE );
-
 		if ( pWeapon )
 		{
 			m_roundEndAmmoCount.nPrimaryWeaponDefIndex = pWeapon->GetEconItemView()->GetItemDefinition()->GetDefinitionIndex();
@@ -3653,7 +3644,9 @@ void C_CSPlayer::RecordAmmoForRound( void )
 		pWeapon = Weapon_GetSlot( WEAPON_SLOT_PISTOL );
 		if ( pWeapon )
 		{
-			m_roundEndAmmoCount.nSecondaryWeaponDefIndex = pWeapon->GetEconItemView()->GetItemDefinition()->GetDefinitionIndex();
+			auto pWeaponEcon_cs_player = pWeapon->GetEconItemView();
+			auto pItemDef = pWeaponEcon_cs_player->GetItemDefinition();
+			m_roundEndAmmoCount.nSecondaryWeaponDefIndex = pItemDef->GetDefinitionIndex();
 			m_roundEndAmmoCount.nSecondaryWeaponAmmoCount = pWeapon->Clip1() + pWeapon->GetReserveAmmoCount( AMMO_POSITION_PRIMARY );
 		}
 	}
@@ -6893,7 +6886,7 @@ void C_CSPlayer::DropPhysicsMag( const char *options )
 {
 	// create a client-side physical magazine model to drop in the world and clatter to the floor. Realism!
 	
-	if ( sv_magazine_drop_physics == 0 )
+	if ( sv_magazine_drop_physics.GetBool() )
 		return;
 
 	CWeaponCSBase *pWeapon = GetActiveCSWeapon();

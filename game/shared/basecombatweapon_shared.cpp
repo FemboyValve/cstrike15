@@ -1,9 +1,3 @@
-//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
 #include "cbase.h"
 #include "in_buttons.h"
 #include "engine/IEngineSound.h"
@@ -35,10 +29,11 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-// The minimum time a hud hint for a weapon should be on screen. If we switch away before
-// this, then teh hud hint counter will be deremented so the hint will be shown again, as
-// if it had never been seen. The total display time for a hud hint is specified in client
-// script HudAnimations.txt (which I can't read here). 
+// Minimum duration (in seconds) that a HUD hint for a weapon must remain visible on screen.
+// If the player switches away from the weapon before this time elapses, the HUD hint counter 
+// will be decremented, causing the hint to be displayed again in the future (as if it was never seen).
+// Note: The total duration a HUD hint is displayed is defined in the client script `HudAnimations.txt`,
+// which is not accessible from this context.
 #define MIN_HUDHINT_DISPLAY_TIME 7.0f
 
 #define HIDEWEAPON_THINK_CONTEXT			"BaseCombatWeapon_HideThink"
@@ -1757,6 +1752,7 @@ void CBaseCombatWeapon::SetViewModel()
 //-----------------------------------------------------------------------------
 bool CBaseCombatWeapon::SendWeaponAnim( int iActivity )
 {
+	iActivity = TranslateViewmodelHandActivity((Activity)iActivity);
 	//For now, just set the ideal activity and be done with it
 	return SetIdealActivity( (Activity) iActivity );
 }
@@ -3388,12 +3384,12 @@ END_NETWORK_TABLE()
 
 const CEconItemView* CBaseCombatWeapon::GetEconItemView( void ) const
 {
-	return nullptr;
+	return BaseClass::GetEconItemView();
 }
 
 CEconItemView* CBaseCombatWeapon::GetEconItemView( void )
 {
-	return nullptr;
+	return (CEconItemView*)BaseClass::GetEconItemView();
 }
 
 int CBaseCombatWeapon::GetReserveAmmoCount( AmmoPosition_t nAmmoPosition, CBaseCombatCharacter * pForcedOwner/* = NULL*/  )
