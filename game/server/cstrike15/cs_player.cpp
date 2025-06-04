@@ -12450,9 +12450,9 @@ void CCSPlayer::FindMatchingWeaponsForTeamLoadout( const char *pchName, int nTea
 CBaseEntity	*CCSPlayer::GiveNamedItem( const char *pchName, int iSubType /*= 0*/, CEconItemView *pScriptItem /*= NULL*/, bool bForce /*= false*/ )
 {
 	if ( !pchName || !pchName[0] )
-		return  NULL;
+		return  nullptr;
 
-	CBaseEntity *pItem = NULL;
+	CBaseEntity *pItem = nullptr;
 
 	if ( ( !pScriptItem || !pScriptItem->IsValid() ) && !( CSGameRules() && CSGameRules()->IsPlayingTraining() ) )
 	{
@@ -12670,7 +12670,7 @@ void CCSPlayer::DoAnimationEvent( PlayerAnimEvent_t event, int nData )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-int CCSPlayer::FlashlightIsOn( void )
+int CCSPlayer::FlashlightIsOn()
 {
 	return IsEffectActive( EF_DIMLIGHT );
 }
@@ -12713,7 +12713,7 @@ void CCSPlayer::SetViewModelArms( const char *armsModel )
 	V_strncpy( m_szArmsModel.GetForModify(), armsModel, MAX_MODEL_STRING_SIZE );
 }
 
-void CCSPlayer::ReportCustomClothingModels( void )
+void CCSPlayer::ReportCustomClothingModels()
 {
 	if ( !CSInventoryManager() )
 		return;
