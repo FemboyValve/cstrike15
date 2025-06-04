@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.20)
 
 project(cstrike15)
 
+set(CMAKE_CXX_STANDARD 14)
+
 #telling cmake that we want 32bit
 set(CMAKE_C_FLAGS "-m32")
 set(CMAKE_CXX_FLAGS "-m32")

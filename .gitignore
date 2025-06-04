@@ -299,3 +299,6 @@ paket-files/
 
 #protobuf
 **/generated_proto/
+
+#cmake
+build/
