@@ -1,9 +1,3 @@
-//====== Copyright � 1996-2005, Valve Corporation, All rights reserved. =======
-//
-// Purpose: 
-//
-//=============================================================================
-
 #include "cbase.h"
 #include <time.h>
 
@@ -39,7 +33,7 @@ IAchievementMgr * CAchievementMgr::GetInstanceInterface()
 
 // [dwenger] Necessary for sorting achievements by award time
 #include <vgui/ISystem.h>
-#include "../../src/public/vgui_controls/Controls.h"
+#include "vgui_controls/Controls.h"
 
 #endif // CLIENT_DLL
 
