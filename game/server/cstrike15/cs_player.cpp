@@ -30,7 +30,6 @@
 #include "weapon_molotov.h"
 #include "weapon_decoy.h"
 #include "weapon_sensorgrenade.h"
-//#include "weapon_carriable_item.h"
 #include <keyvalues.h>
 #include "engine/IEngineSound.h"
 #include "bot.h"
@@ -73,10 +72,9 @@
 #include "particle_parse.h"
 #include "mapinfo.h"
 #include "cstrike15_item_system.h"
-//#include "particle_parse.h"
-#include "../public/vstdlib/vstrtools.h"
-#include "../public/vgui/ILocalize.h"
-#include "../shared/cstrike15/flashbang_projectile.h"
+#include "vstdlib/vstrtools.h"
+#include "vgui/ILocalize.h"
+#include "cstrike15/flashbang_projectile.h"
 #include "usermessages.h"
 #include "teamplayroundbased_gamerules.h"
 #include "animation.h"
@@ -1325,13 +1323,11 @@ void CCSPlayer::Spawn()
 {
 	m_RateLimitLastCommandTimes.Purge();
 
-	// Get rid of the progress bar...
-	SetProgressBarTime( 0 );
+	SetProgressBarTime( 0 ); // Get rid of the progress bar...
 
 	CreateViewModel();
 
 	// Set their player model.
-
 	bool bStartsWithHeavyArmorThisRound = false;
 	// Sometimes spawn a heavy in guardian mode, don't pick model based on player class
 	if ( GetTeamNumber() == TEAM_TERRORIST && CSGameRules()->IsPlayingCoopGuardian() && IsBot() &&
@@ -1362,20 +1358,16 @@ void CCSPlayer::Spawn()
 		}
 
 
-		for ( int i = 1; i <= gpGlobals->maxClients; ++i )
+		for ( int i = 1; i <= gpGlobals->maxClients; ++i ) // iterating through every player... (THIS SUCKS)
 		{
 			CCSPlayer *player = static_cast< CCSPlayer* >( UTIL_PlayerByIndex( i ) );
 
-			if ( player == NULL )
+			if ( player == nullptr )
 				continue;
 
-			// skip players on other teams
-			if ( player->GetTeamNumber() != GetTeamNumber() )
+			// skip players on other teams or if not a bot, fail the test
+			if ( (player->GetTeamNumber() != GetTeamNumber()) || !player->IsBot())
 				continue;
-
-			// if not a bot, fail the test
-			if ( !player->IsBot() )
-				continue ;
 
 			if ( player->HasHeavyArmor() )
 			{
@@ -15874,6 +15866,7 @@ CCSBot* CCSPlayer::FindNearestControllableBot( bool bMustBeValidObserverTarget )
 
 void CCSPlayer::UpdateInventory( bool bInit )
 {
+	assert(false && "UpdateInventory called - remove this assert when implemented");
 #if !defined( NO_STEAM ) && !defined( NO_STEAM_GAMECOORDINATOR )
 	if ( IsFakeClient() )
 		return;

@@ -1,14 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose:		Player for HL1.
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef CS_PLAYER_H
-#define CS_PLAYER_H
 #pragma once
-
 
 #include "basemultiplayerplayer.h"
 #include "server_class.h"
@@ -264,10 +254,6 @@ public:
 	int m_nQuestBonusPoints;
 };
 
-
-//=============================================================================
-// >> CounterStrike player
-//=============================================================================
 class CCSPlayer : public CBaseMultiplayerPlayer, public ICSPlayerAnimStateHelpers
 #if !defined( NO_STEAM ) && !defined( NO_STEAM_GAMECOORDINATOR )
 	, public IHasAttributes, public IInventoryUpdateListener
@@ -1658,7 +1644,7 @@ public:
 #if defined( USE_PLAYER_ATTRIBUTE_MANAGER )
 		return &m_AttributeManager;
 #else
-		return NULL;
+		return nullptr;
 #endif
 	}
 	CAttributeContainer		*GetAttributeContainer( void ) { return NULL; }
@@ -1667,7 +1653,7 @@ public:
 #if defined( USE_PLAYER_ATTRIBUTE_MANAGER )
 		return &m_AttributeList;
 #else
-		return NULL;
+		return nullptr;
 #endif
 	}
 	virtual void			ReapplyProvision( void ) { return; }
@@ -1796,5 +1782,3 @@ inline const char *CCSPlayer::GetClanName( void ) const
 {
 	return m_szClanName;
 }
-
-#endif	//CS_PLAYER_H
