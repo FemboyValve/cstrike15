@@ -826,7 +826,7 @@ public:
 	bool IsDefusing( void ) { return m_bIsDefusing; }
 	CNetworkVar( bool, m_bIsGrabbingHostage );			// tracks whether this player is currently grabbing a hostage
 	CNetworkVar( float, m_fImmuneToGunGameDamageTime );	// When gun game spawn damage immunity will expire
-	CNetworkVar( bool, m_bGunGameImmunity );	// tracks whether this player is currently immune in gun game
+	CNetworkVar( bool, m_bGunGameImmunity );	// TODO: we should rename it to Immune or something NOT related to gungame name.
 	CNetworkVar( bool, m_bMadeFinalGunGameProgressiveKill );
 	CNetworkVar( int,  m_iGunGameProgressiveWeaponIndex );	// index of current gun game weapon
 	CNetworkVar( int, m_iNumGunGameTRKillPoints );	// number of kill points accumulated so far in TR Gun Game mode (resets to 0 when weapon is upgraded)

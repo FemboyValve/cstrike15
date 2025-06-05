@@ -5738,7 +5738,7 @@ void C_CSPlayer::SetBuyMenuOpen( bool bOpen )
 { 
 	m_bIsBuyMenuOpen = bOpen;
 	
-	if ( bOpen == true )
+	if(bOpen)
 		engine->ClientCmd( "open_buymenu" );
 	else
 		engine->ClientCmd( "close_buymenu" );

@@ -1,9 +1,3 @@
-//===== Copyright � 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: Functions dealing with the player.
-//
-//===========================================================================//
-
 #include "cbase.h"
 #include "const.h"
 #include "baseplayer_shared.h"
@@ -78,16 +72,12 @@
 #include "vote_controller.h"
 #include "platforminputdevice.h"
 
-#ifdef PORTAL2
+#if defined(PORTAL2)
 #include "weapon_portalgun.h"
-#endif
-
-#ifdef HL2_DLL
+#elif defined(HL2_DLL)
 #include "combine_mine.h"
 #include "weapon_physcannon.h"
-#endif
-
-#ifdef CSTRIKE_DLL
+#elif defined(CSTRIKE_DLL)
 #include "weapon_c4.h"
 #include "basecsgrenade_projectile.h"
 #include "playerdecals_signature.h"
@@ -8738,7 +8728,7 @@ void CBasePlayer::ActivateMovementConstraint( CBaseEntity *pEntity, const Vector
 //-----------------------------------------------------------------------------
 void CBasePlayer::DeactivateMovementConstraint( )
 {
-	m_hConstraintEntity = NULL;
+	m_hConstraintEntity = nullptr;
 	m_flConstraintRadius = 0.0f;
 	m_vecConstraintCenter = vec3_origin;
 }
@@ -8757,7 +8747,7 @@ CBaseEntity *CBasePlayer::DoubleCheckUseNPC( CBaseEntity *pNPC, const Vector &ve
 
 	UTIL_TraceLine( vecSrc, vecSrc + vecDir * 1024, MASK_SHOT, this, COLLISION_GROUP_NONE, &tr );
 
-	if( tr.m_pEnt != NULL && tr.m_pEnt->MyNPCPointer() && tr.m_pEnt != pNPC )
+	if( tr.m_pEnt != nullptr && tr.m_pEnt->MyNPCPointer() && tr.m_pEnt != pNPC )
 	{
 		// Player is selecting a different NPC through some negative space
 		// in the first NPC's hitboxes (between legs, over shoulder, etc).
@@ -8850,14 +8840,14 @@ void CBasePlayer::InputSetHUDVisibility( inputdata_t &inputdata )
 void CBasePlayer::InputSetFogController( inputdata_t &inputdata )
 {
 	// Find the fog controller with the given name.
-	CFogController *pFogController = NULL;
+	CFogController *pFogController = nullptr;
 	if ( inputdata.value.FieldType() == FIELD_EHANDLE )
 	{
 		pFogController = dynamic_cast<CFogController*>( inputdata.value.Entity().Get() );
 	}
 	else
 	{
-		pFogController = dynamic_cast<CFogController*>( gEntList.FindEntityByName( NULL, inputdata.value.String() ) );
+		pFogController = dynamic_cast<CFogController*>( gEntList.FindEntityByName( nullptr, inputdata.value.String() ) );
 	}
 
 	if ( pFogController )
@@ -8869,7 +8859,7 @@ void CBasePlayer::InputSetFogController( inputdata_t &inputdata )
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
-void CBasePlayer::InitFogController( void )
+void CBasePlayer::InitFogController()
 {
 	// Setup with the default master controller.
 	m_PlayerFog.m_hCtrl = FogSystem()->GetMasterFogController();
@@ -8878,7 +8868,7 @@ void CBasePlayer::InitFogController( void )
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
-void CBasePlayer::InitPostProcessController( void )
+void CBasePlayer::InitPostProcessController()
 {
 	// Setup with the default master controller.
 	m_hPostProcessCtrl = PostProcessSystem()->GetMasterPostProcessController();
@@ -8887,7 +8877,7 @@ void CBasePlayer::InitPostProcessController( void )
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
-void CBasePlayer::InitColorCorrectionController( void )
+void CBasePlayer::InitColorCorrectionController()
 {
 	m_hColorCorrectionCtrl = ColorCorrectionSystem()->GetMasterColorCorrection();
 }
@@ -8898,7 +8888,7 @@ void CBasePlayer::InitColorCorrectionController( void )
 void CBasePlayer::InputSetPostProcessController( inputdata_t &inputdata )
 {
 	// Find the fog controller with the given name.
-	CPostProcessController *pController = NULL;
+	CPostProcessController *pController = nullptr;
 	if ( inputdata.value.FieldType() == FIELD_EHANDLE )
 	{
 		pController = dynamic_cast<CPostProcessController*>( inputdata.value.Entity().Get() );

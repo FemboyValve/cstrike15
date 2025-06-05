@@ -1,14 +1,4 @@
-//====== Copyright 1996-2005, Valve Corporation, All rights reserved. =======
-//
-// Purpose: 
-//
-//=============================================================================
-
-#ifndef CSTRIKE15_ITEM_CONSTANTS_H
-#define CSTRIKE15_ITEM_CONSTANTS_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: Slots for items within loadouts
@@ -299,6 +289,3 @@ enum
 	kCSGODropReason_Quest	= 1,
 	kCSGODropReason_LevelUp	= 2,
 };
-
-
-#endif // CSTRIKE15_ITEM_CONSTANTS_H

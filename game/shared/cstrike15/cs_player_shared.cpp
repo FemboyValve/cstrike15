@@ -1,9 +1,3 @@
- //========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-//=============================================================================//
-
 #include "cbase.h"
 #include "weapon_csbase.h"
 #include "decals.h"
@@ -874,7 +868,7 @@ bool CCSPlayer::IsOtherEnemyAndPlaying( int nEntIndex )
 			return false;
 
 		nOtherTeam = pCSPR->GetTeam( nEntIndex );
-#else if
+#else
 		return false;
 #endif
 	}
@@ -2287,7 +2281,6 @@ void CCSPlayer::DisplayPenetrationDebug( Vector vecEnter, Vector vecExit, float 
 #endif
 }
 
-void CCSPlayer::ImpactTrace( trace_t *pTrace, int iDamageType, char *pCustomImpactName )
 {
 
 #ifdef CLIENT_DLL

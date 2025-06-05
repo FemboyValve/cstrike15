@@ -2295,9 +2295,8 @@ void CCSPlayer::GiveDefaultWearables( void )
 
 void CCSPlayer::GiveWearableFromSlot( loadout_positions_t position )
 {
-	/** Removed for partner depot **/
+	Msg("CSSPlayer::GiveWearableFromSlot(%d)\n", position);
 }
-
 
 void CCSPlayer::SetClanTag( const char *pTag )
 {
@@ -2374,9 +2373,8 @@ void CCSPlayer::CreateRagdollEntity()
 
 int CCSPlayer::OnTakeDamage_Alive( const CTakeDamageInfo &info )
 {
-	if ( m_bGunGameImmunity )
+	if ( m_bGunGameImmunity ) // No damage if immune
 	{
-		// No damage if immune
 		return 0;
 	}
 

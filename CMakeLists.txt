@@ -18,8 +18,7 @@ endif()
 #this order of includes is taken from vpc.
 add_subdirectory(appframework)
 add_subdirectory(avi) # for valve_avi.vpc
-add_subdirectory(bitmap)
-#add_subdirectory(bitmap_byteswap) #is inside bitmap directory
+add_subdirectory(bitmap) # bitmap_byteswap is inside bitmap directory
 add_subdirectory(bonesetup)
 add_subdirectory(choreoobjects)
 add_subdirectory(datacache)
