@@ -1,12 +1,13 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//===========================================================================//
-#ifndef IA32DETECT_H
-#define IA32DETECT_H
+#pragma once
+
+#if defined(_MSC_VER) && _MSC_VER >= 1910
+// MSVC 2017 or newer
+#include <intrin.h>
+#include <tchar.h>
+#elif defined(__GNUC__) || defined(__clang__)
+// GCC or Clang (includes MinGW)
+#include <cpuid.h>
+#endif
 
 #ifdef COMPILER_MSVC64
 extern "C" void __cpuid(int* CPUInfo, int InfoType);
@@ -17,7 +18,7 @@ extern "C" void __cpuid(int* CPUInfo, int InfoType);
 
 
  */
-typedef	unsigned			bit;
+typedef	unsigned bit;
 
 enum CPUVendor
 {
@@ -373,5 +374,3 @@ private:
 		}
 	}
 };
-
-#endif // IA32DETECT_H
