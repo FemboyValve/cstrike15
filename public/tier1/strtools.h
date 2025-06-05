@@ -1,17 +1,4 @@
-//====== Copyright 1996-2005, Valve Corporation, All rights reserved. =======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//===========================================================================//
-
-#ifndef TIER1_STRTOOLS_H
-#define TIER1_STRTOOLS_H
-
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "tier0/basetypes.h"
 #include <stdio.h>
@@ -1478,6 +1465,3 @@ int isbreakablewspace( wchar_t ch );
 
 // Strip white space at the beginning and end of a string
 int V_StrTrim( char *pStr );
-
-
-#endif	// TIER1_STRTOOLS_H

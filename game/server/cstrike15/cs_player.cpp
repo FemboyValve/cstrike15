@@ -2311,7 +2311,7 @@ void CCSPlayer::SetClanTag( const char *pTag )
 {
 	if ( pTag )
 	{
-		Q_strncpy( m_szClanTag, pTag, sizeof( m_szClanTag ) );
+		V_strncpy( m_szClanTag, pTag, sizeof( m_szClanTag ) );
 	}
 }
 
@@ -2319,7 +2319,7 @@ void CCSPlayer::SetClanName( const char *pName )
 {
 	if ( pName )
 	{
-		Q_strncpy( m_szClanName, pName, sizeof( m_szClanName ) );
+		V_strncpy( m_szClanName, pName, sizeof( m_szClanName ) );
 	}
 }
 

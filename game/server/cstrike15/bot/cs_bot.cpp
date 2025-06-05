@@ -1,12 +1,3 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
-
-// Author: Michael S. Booth (mike@turtlerockstudios.com), 2003
-
 #include "cbase.h"
 #include "cs_simple_hostage.h"
 #include "cs_gamerules.h"

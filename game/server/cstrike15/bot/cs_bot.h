@@ -1,19 +1,7 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
+#pragma once
 
-//
-// Author: Michael S. Booth (mike@turtlerockstudios.com), 2003
-//
 // NOTE: The CS Bot code uses Doxygen-style comments. If you run Doxygen over this code, it will 
 // auto-generate documentation.  Visit www.doxygen.org to download the system for free.
-//
-
-#ifndef _CS_BOT_H_
-#define _CS_BOT_H_
 
 #ifdef _GAMECONSOLE
 #define OPT_VIS_CSGO
@@ -2141,7 +2129,3 @@ inline CCSBot *ToCSBot( CBaseEntity *pEntity )
 extern int GetBotFollowCount( CCSPlayer *leader );
 extern const Vector *FindNearbyRetreatSpot( CCSBot *me, float maxRange = 250.0f );
 extern const HidingSpot *FindInitialEncounterSpot( CBaseEntity *me, const Vector &searchOrigin, float enemyArriveTime, float maxRange, bool isSniper );
-
-
-#endif	// _CS_BOT_H_
-
