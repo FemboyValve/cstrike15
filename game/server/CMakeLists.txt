@@ -229,24 +229,40 @@ target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/teamplayroundbased_g
 
 # Define script and file paths using absolute paths
 set(TEXTTOARRAY_SCRIPT "${CMAKE_SOURCE_DIR}/devtools/bin/texttoarray.pl")
-set(NUT_SOURCE "${CMAKE_SOURCE_DIR}/game/server/spawn_helper.nut")
-set(NUT_HEADER "${CMAKE_SOURCE_DIR}/game/server/spawn_helper_nut.h")
 
-# Add custom command to generate the .h file
+# For spawn_helper
+set(NUT_SOURCE_SPAWN "${CMAKE_SOURCE_DIR}/game/server/spawn_helper.nut")
+set(NUT_HEADER_SPAWN "${CMAKE_SOURCE_DIR}/game/server/spawn_helper_nut.h")
+
+# For vscript_server
+set(NUT_SOURCE_VSCRIPT "${CMAKE_SOURCE_DIR}/game/server/vscript_server.nut")
+set(NUT_HEADER_VSCRIPT "${CMAKE_SOURCE_DIR}/game/server/vscript_server_nut.h")
+
+# Add custom command to generate the spawn_helper header
 add_custom_command(
-    OUTPUT ${NUT_HEADER}
-    COMMAND ${CMAKE_COMMAND} -E echo "Generating ${NUT_HEADER} from ${NUT_SOURCE}"
-    COMMAND perl ${TEXTTOARRAY_SCRIPT} ${NUT_SOURCE} g_Script_spawn_helper > ${NUT_HEADER}
-    DEPENDS ${NUT_SOURCE} ${TEXTTOARRAY_SCRIPT}
-    COMMENT "Running texttoarray.pl on ${NUT_SOURCE}"
+    OUTPUT ${NUT_HEADER_SPAWN}
+    COMMAND ${CMAKE_COMMAND} -E echo "Generating ${NUT_HEADER_SPAWN} from ${NUT_SOURCE_SPAWN}"
+    COMMAND perl ${TEXTTOARRAY_SCRIPT} ${NUT_SOURCE_SPAWN} g_Script_spawn_helper > ${NUT_HEADER_SPAWN}
+    DEPENDS ${NUT_SOURCE_SPAWN} ${TEXTTOARRAY_SCRIPT}
+    COMMENT "Running texttoarray.pl on ${NUT_SOURCE_SPAWN}"
     VERBATIM
 )
 
-# Custom target to ensure generation
-add_custom_target(generate_server_nut_header DEPENDS ${NUT_HEADER})
+# Add custom command to generate the vscript_server header
+add_custom_command(
+    OUTPUT ${NUT_HEADER_VSCRIPT}
+    COMMAND ${CMAKE_COMMAND} -E echo "Generating ${NUT_HEADER_VSCRIPT} from ${NUT_SOURCE_VSCRIPT}"
+    COMMAND perl ${TEXTTOARRAY_SCRIPT} ${NUT_SOURCE_VSCRIPT} g_Script_vscript_server > ${NUT_HEADER_VSCRIPT}
+    DEPENDS ${NUT_SOURCE_VSCRIPT} ${TEXTTOARRAY_SCRIPT}
+    COMMENT "Running texttoarray.pl on ${NUT_SOURCE_VSCRIPT}"
+    VERBATIM
+)
+
+# Custom target to ensure generation of both headers
+add_custom_target(generate_server_nut_headers DEPENDS ${NUT_HEADER_SPAWN} ${NUT_HEADER_VSCRIPT})
 
 # Make your actual build target depend on this generation step
-add_dependencies(${OUTBINNAME} generate_server_nut_header)
+add_dependencies(${OUTBINNAME} generate_server_nut_headers)
 
 
 

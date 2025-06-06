@@ -304,5 +304,8 @@ paket-files/
 build/
 tier0/valveetwproviderEvents.h
 /cmake-build
+
+# generated perl stuff
 game/client/vscript_client_nut.h
 game/server/spawn_helper_nut.h
+game/server/vscript_server_nut.h
