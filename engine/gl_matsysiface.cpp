@@ -1015,7 +1015,7 @@ IMaterial *GetMaterialAtCrossHair( void )
 extern void DrawLightmapPage( int lightmapPageID );
 
 static float textureS, textureT;
-static SurfaceHandle_t s_CrossHairSurfID;;
+static SurfaceHandle_t s_CrossHairSurfID;
 static Vector crossHairDiffuseLightColor;
 static Vector crossHairBaseColor;
 static float lightmapCoords[2];
@@ -1041,7 +1041,7 @@ void DebugDrawLightmapAtCrossHair()
 	IMaterial *pMaterial;
 	int lightmapPageSize[2];
 
-	if( s_CrossHairSurfID <= 0 )
+	if( s_CrossHairSurfID == nullptr )
 	{
 		return;
 	}
