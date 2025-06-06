@@ -2281,6 +2281,7 @@ void CCSPlayer::DisplayPenetrationDebug( Vector vecEnter, Vector vecExit, float 
 #endif
 }
 
+void CCSPlayer::ImpactTrace(trace_t *pTrace, int iDamageType, char *pCustomImpactName)
 {
 
 #ifdef CLIENT_DLL
