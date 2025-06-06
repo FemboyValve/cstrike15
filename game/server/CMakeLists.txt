@@ -227,3 +227,26 @@ target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/teamplayroundbased_g
     #}
 #}
 
+# Define script and file paths using absolute paths
+set(TEXTTOARRAY_SCRIPT "${CMAKE_SOURCE_DIR}/devtools/bin/texttoarray.pl")
+set(NUT_SOURCE "${CMAKE_SOURCE_DIR}/game/server/spawn_helper.nut")
+set(NUT_HEADER "${CMAKE_SOURCE_DIR}/game/server/spawn_helper_nut.h")
+
+# Add custom command to generate the .h file
+add_custom_command(
+    OUTPUT ${NUT_HEADER}
+    COMMAND ${CMAKE_COMMAND} -E echo "Generating ${NUT_HEADER} from ${NUT_SOURCE}"
+    COMMAND perl ${TEXTTOARRAY_SCRIPT} ${NUT_SOURCE} g_Script_spawn_helper > ${NUT_HEADER}
+    DEPENDS ${NUT_SOURCE} ${TEXTTOARRAY_SCRIPT}
+    COMMENT "Running texttoarray.pl on ${NUT_SOURCE}"
+    VERBATIM
+)
+
+# Custom target to ensure generation
+add_custom_target(generate_server_nut_header DEPENDS ${NUT_HEADER})
+
+# Make your actual build target depend on this generation step
+add_dependencies(${OUTBINNAME} generate_server_nut_header)
+
+
+
