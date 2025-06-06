@@ -93,6 +93,7 @@ class CCSUsrMsg_PlayerStatsUpdate_Stat;
 class CCSUsrMsg_DisplayInventory;
 class CCSUsrMsg_QuestProgress;
 class CCSUsrMsg_ScoreLeaderboardData;
+class CCSUsrMsg_PlayerDecalDigitalSignature;
 class CCSUsrMsg_XRankGet;
 class CCSUsrMsg_XRankUpd;
 class CCSUsrMsg_CallVoteFailed;
@@ -185,11 +186,12 @@ enum ECstrike15UserMessages {
   CS_UM_ReportHit = 64,
   CS_UM_XpUpdate = 65,
   CS_UM_QuestProgress = 66,
-  CS_UM_ScoreLeaderboardData = 67
+  CS_UM_ScoreLeaderboardData = 67,
+  CS_UM_PlayerDecalDigitalSignature = 68
 };
 bool ECstrike15UserMessages_IsValid(int value);
 const ECstrike15UserMessages ECstrike15UserMessages_MIN = CS_UM_VGUIMenu;
-const ECstrike15UserMessages ECstrike15UserMessages_MAX = CS_UM_ScoreLeaderboardData;
+const ECstrike15UserMessages ECstrike15UserMessages_MAX = CS_UM_PlayerDecalDigitalSignature;
 const int ECstrike15UserMessages_ARRAYSIZE = ECstrike15UserMessages_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ECstrike15UserMessages_descriptor();
@@ -4289,6 +4291,90 @@ class CCSUsrMsg_ScoreLeaderboardData : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static CCSUsrMsg_ScoreLeaderboardData* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CCSUsrMsg_PlayerDecalDigitalSignature : public ::google::protobuf::Message {
+ public:
+  CCSUsrMsg_PlayerDecalDigitalSignature();
+  virtual ~CCSUsrMsg_PlayerDecalDigitalSignature();
+
+  CCSUsrMsg_PlayerDecalDigitalSignature(const CCSUsrMsg_PlayerDecalDigitalSignature& from);
+
+  inline CCSUsrMsg_PlayerDecalDigitalSignature& operator=(const CCSUsrMsg_PlayerDecalDigitalSignature& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CCSUsrMsg_PlayerDecalDigitalSignature& default_instance();
+
+  void Swap(CCSUsrMsg_PlayerDecalDigitalSignature* other);
+
+  // implements Message ----------------------------------------------
+
+  CCSUsrMsg_PlayerDecalDigitalSignature* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CCSUsrMsg_PlayerDecalDigitalSignature& from);
+  void MergeFrom(const CCSUsrMsg_PlayerDecalDigitalSignature& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .PlayerDecalDigitalSignature data = 1;
+  inline bool has_data() const;
+  inline void clear_data();
+  static const int kDataFieldNumber = 1;
+  inline const ::PlayerDecalDigitalSignature& data() const;
+  inline ::PlayerDecalDigitalSignature* mutable_data();
+  inline ::PlayerDecalDigitalSignature* release_data();
+  inline void set_allocated_data(::PlayerDecalDigitalSignature* data);
+
+  // @@protoc_insertion_point(class_scope:CCSUsrMsg_PlayerDecalDigitalSignature)
+ private:
+  inline void set_has_data();
+  inline void clear_has_data();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::PlayerDecalDigitalSignature* data_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_cstrike15_5fusermessages_2eproto();
+  friend void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto();
+  friend void protobuf_ShutdownFile_cstrike15_5fusermessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static CCSUsrMsg_PlayerDecalDigitalSignature* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -10375,6 +10461,48 @@ inline ::ScoreLeaderboardData* CCSUsrMsg_ScoreLeaderboardData::release_data() {
   return temp;
 }
 inline void CCSUsrMsg_ScoreLeaderboardData::set_allocated_data(::ScoreLeaderboardData* data) {
+  delete data_;
+  data_ = data;
+  if (data) {
+    set_has_data();
+  } else {
+    clear_has_data();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// CCSUsrMsg_PlayerDecalDigitalSignature
+
+// optional .PlayerDecalDigitalSignature data = 1;
+inline bool CCSUsrMsg_PlayerDecalDigitalSignature::has_data() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CCSUsrMsg_PlayerDecalDigitalSignature::set_has_data() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CCSUsrMsg_PlayerDecalDigitalSignature::clear_has_data() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CCSUsrMsg_PlayerDecalDigitalSignature::clear_data() {
+  if (data_ != NULL) data_->::PlayerDecalDigitalSignature::Clear();
+  clear_has_data();
+}
+inline const ::PlayerDecalDigitalSignature& CCSUsrMsg_PlayerDecalDigitalSignature::data() const {
+  return data_ != NULL ? *data_ : *default_instance_->data_;
+}
+inline ::PlayerDecalDigitalSignature* CCSUsrMsg_PlayerDecalDigitalSignature::mutable_data() {
+  set_has_data();
+  if (data_ == NULL) data_ = new ::PlayerDecalDigitalSignature;
+  return data_;
+}
+inline ::PlayerDecalDigitalSignature* CCSUsrMsg_PlayerDecalDigitalSignature::release_data() {
+  clear_has_data();
+  ::PlayerDecalDigitalSignature* temp = data_;
+  data_ = NULL;
+  return temp;
+}
+inline void CCSUsrMsg_PlayerDecalDigitalSignature::set_allocated_data(::PlayerDecalDigitalSignature* data) {
   delete data_;
   data_ = data;
   if (data) {

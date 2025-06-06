@@ -64,6 +64,42 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\
 
 ---
 
+## 🛠 Setup Instructions (Linux)
+
+> ⚠️ **Note:** These instructions are incomplete. For best results, refer to **Kisak’s official setup guide**. This section provides a basic local build guide.
+
+### Prerequisites
+
+Make sure you have the required dependencies installed:
+
+```bash
+sudo apt update
+sudo apt install -y protobuf-compiler cmake build-essential
+```
+
+### Build Instructions
+
+1. **Create a build directory** (if it doesn’t already exist):
+
+```bash
+mkdir -p cmake-build
+cd cmake-build
+```
+
+2. **Generate build files with CMake**:
+
+```bash
+cmake ..
+```
+
+3. **Build the project**:
+
+```bash
+make
+```
+
+---
+
 ## ✅ TODO
 
 * [ ] **Migrate** from VPC to **CMake**

@@ -1,67 +1,56 @@
-cmake_minimum_required(VERSION 3.20)
-project(bitmap) # TODO: bitmap_byteswap isnt included in this project yet!
+#//-----------------------------------------------------------------------------
+#//	BITMAP.VPC
+#//
+#//	Project Script
+#//-----------------------------------------------------------------------------
+cmake_minimum_required(VERSION 3.16)
+project(bitmap_libraries)
+set(SRCDIR "${CMAKE_SOURCE_DIR}")
+set(CMAKE_MODULE_PATH ${SRCDIR}/cmake)
+include(${CMAKE_MODULE_PATH}/detect_platform.cmake)
 
-# Add the vpc module path
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
-include(vpc)
+#build byteswap_client
+set(OUTLIBNAME "bitmap_byteswap_client")
 
-set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
+include(${CMAKE_MODULE_PATH}/source_lib_base.cmake)
 
-# Source files with platform conditions
-vpc_file(SOURCE_FILES
-    "bitmap.cpp"
-    "ImageByteSwap.cpp" X360 OR PS3
-    "colorconversion.cpp"
-    "floatbitmap.cpp"
-    "floatbitmap2.cpp"
-    "floatbitmap3.cpp"
-    "floatbitmap4.cpp" WIN32
-    "floatbitmap_bilateralfilter.cpp"
-    "floatcubemap.cpp"
-    "imageformat.cpp"
-    "psd.cpp"
-    "psheet.cpp"
-    "resample.cpp"
-    "tgaloader.cpp"
-    "texturepacker.cpp"
-    "tgawriter.cpp"
-)
+target_sources(${OUTLIBNAME} PRIVATE ImageByteSwap.cpp)
 
-# Header files
-set(HEADER_FILES
-    "${SRCDIR}/public/bitmap/bitmap.h"
-    "${SRCDIR}/public/bitmap/floatbitmap.h"
-    "${SRCDIR}/public/bitmap/imageformat.h"
-    "${SRCDIR}/public/bitmap/imageformat_declarations.h"
-    "${SRCDIR}/public/bitmap/psd.h"
-    "${SRCDIR}/public/bitmap/psheet.h"
-    "${SRCDIR}/public/bitmap/texturepacker.h"
-    "${SRCDIR}/public/bitmap/tgaloader.h"
-    "${SRCDIR}/public/bitmap/tgawriter.h"
-    "${SRCDIR}/public/bitmap/stb_dxt.h"
-)
+#build bitmap_client
+set(OUTLIBNAME "bitmap_client")
 
-add_library(bitmap STATIC ${SOURCE_FILES} ${HEADER_FILES})
+include(${CMAKE_MODULE_PATH}/source_lib_base.cmake)
 
-# Include directories
-if(WIN32)
-    target_include_directories(bitmap PRIVATE "${SRCDIR}/dx9sdk/include")
+if( LINUXALL )
+    target_compile_options(${OUTLIBNAME} PRIVATE -fPIC)
 endif()
 
-if(WIN32 AND DEFINED XDKINSTALLED)
-    target_include_directories(bitmap PRIVATE "$ENV{XEDK}/include/win32")
+if( X360 OR PS3 )
+    #$File	"ImageByteSwap.cpp"					[$X360 || $PS3]
 endif()
-
-if(X360)
-    target_include_directories(bitmap PRIVATE "$ENV{XEDK}/include/xbox")
+target_sources(${OUTLIBNAME} PRIVATE "bitmap.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "colorconversion.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "floatbitmap.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "floatbitmap2.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "floatbitmap3.cpp")
+if( WINDOWS )
+    #$File	"floatbitmap4.cpp"					[$WINDOWS]
 endif()
+target_sources(${OUTLIBNAME} PRIVATE "floatbitmap_bilateralfilter.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "floatcubemap.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "imageformat.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "psd.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "psheet.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "resample.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "tgaloader.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "texturepacker.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "tgawriter.cpp")
 
-# Link libraries
-if(WIN32)
-    if(CMAKE_SIZEOF_VOID_P EQUAL 4)
-        target_link_libraries(bitmap PRIVATE "${SRCDIR}/lib/public/nvtc")
-    else()
-        target_link_libraries(bitmap PRIVATE "${SRCDIR}/lib/public/nvtc64")
-    endif()
-    target_link_libraries(bitmap PRIVATE bitmap_byteswap)
+if( WINDOWS )
+    #$Folder "Link Libraries" [$WINDOWS]
+	#{
+	#	$Lib	"$SRCDIR\lib\public\nvtc"			[!$WIN64]
+	#	$Lib	"$SRCDIR\lib\public\nvtc64"			[$WIN64]
+	#	$Lib	"bitmap_byteswap"
+	#}
 endif()

@@ -1,63 +1,54 @@
-cmake_minimum_required(VERSION 3.20)
-project(appframework)
+#//-----------------------------------------------------------------------------
+#//	APPFRAMEWORK.cmake
+#//
+#//	Project Script
+#//-----------------------------------------------------------------------------
+cmake_minimum_required(VERSION 3.16)
+project(appframework_client)
+set(SRCDIR "${CMAKE_SOURCE_DIR}")
+set(CMAKE_MODULE_PATH ${SRCDIR}/cmake)
+set(OUTLIBNAME "appframework_client")
+set(AF_SRCDIR "${SRCDIR}/appframework")
+set(AF_INCDIR "${SRCDIR}/public/appframework")
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
-include(vpc)
+include(${CMAKE_MODULE_PATH}/detect_platform.cmake)
+include(${CMAKE_MODULE_PATH}/source_lib_base.cmake)
 
-set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
-
-# Source files
-vpc_file(SOURCE_FILES
-    "AppSystemGroup.cpp"
-    "${SRCDIR}/public/filesystem_init.cpp"
-    "VguiMatSysApp.cpp" WIN32
-    "matsysapp.cpp" WIN32
-    "WinApp.cpp" WIN32
-    "posixapp.cpp" UNIX AND NOT APPLE
-    "sdlmgr.cpp" SDL
-    "cocoamgr.mm" APPLE AND NOT SDL
-    "glmrendererinfo_osx.mm" APPLE AND SDL
-)
-
-# Header files
-set(HEADER_FILES
-    "${SRCDIR}/public/appframework/AppFramework.h"
-    "${SRCDIR}/public/appframework/iappsystem.h"
-    "${SRCDIR}/public/appframework/IAppSystemGroup.h"
-    "${SRCDIR}/public/appframework/tier2app.h"
-    "${SRCDIR}/public/appframework/tier3app.h"
-    "${SRCDIR}/public/appframework/matsysapp.h"
-    "${SRCDIR}/public/appframework/VguiMatSysApp.h"
-    "${SRCDIR}/public/appframework/ilaunchermgr.h"
-)
-
-add_library(appframework STATIC ${SOURCE_FILES} ${HEADER_FILES})
-
-# Definitions
-if((WIN32 AND GL) OR UNIX)
-    target_compile_definitions(appframework PRIVATE VERSION_SAFE_STEAM_API_INTERFACES)
+if( NOT IS_LIB_PROJECT AND GL )
+    message(FATAL_ERROR "can't build appframework as dll")
+    #		$AdditionalProjectDependencies	"$BASE;togl"	[!$IS_LIB_PROJECT && $GL]
 endif()
 
-if(CSTRIKE_TRUNK_BUILD OR CSTRIKE_STAGING_BUILD)
-    target_compile_definitions(appframework PRIVATE ALLOW_TEXT_MODE=1)
+if( (WINDOWS AND GL) OR LINUXALL )
+    target_compile_options(${OUTLIBNAME} PRIVATE -fPIC)
+    add_definitions(-DVERSION_SAFE_STEAM_API_INTERFACES -DDX_TO_GL_ABSTRACTION)
+endif()
+if( CSTRIKE_TRUNK_BUILD OR CSTRIKE_STAGING_BUILD )
+    add_definitions(-DALLOW_TEXT_MODE=1)
 endif()
 
-# macOS frameworks
-if(APPLE AND NOT IS_LIB_PROJECT)
-    target_link_options(appframework PRIVATE
-        "-framework" "Carbon"
-        "-framework" "OpenGL"
-        "-framework" "Quartz"
-        "-framework" "Cocoa"
-        "-framework" "IOKit"
-    )
+#Sources
+include_directories(${SRCDIR}/thirdparty/SDL2)
+target_sources(${OUTLIBNAME} PRIVATE "${AF_SRCDIR}/AppSystemGroup.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "${SRCDIR}/public/filesystem_init.cpp")
+if( WINDOWS )
+endif()
+if( POSIX )
+    target_sources(${OUTLIBNAME} PRIVATE "${AF_SRCDIR}/posixapp.cpp")
+endif()
+if( SDL )
+    target_sources(${OUTLIBNAME} PRIVATE "${AF_SRCDIR}/sdlmgr.cpp")
+endif()
+if( OSXALL )
+    if( SDL )
+        target_sources(${OUTLIBNAME} PRIVATE "${AF_SRCDIR}/glmrendererinfo_osx.mm")
+    else()
+        target_sources(${OUTLIBNAME} PRIVATE "${AF_SRCDIR}/cocoamgr.mm")
+    endif()
 endif()
 
-# Link libraries
-if(GL AND NOT IS_LIB_PROJECT)
-    target_link_libraries(appframework PRIVATE togl)
-endif()
-
-if(SDL AND NOT IS_LIB_PROJECT)
-    target_link_libraries(appframework PRIVATE SDL2)
-endif()
+#$Folder	"Link Libraries"
+#{
+#    $ImpLib togl [!$IS_LIB_PROJECT && $GL]
+#    $ImpLib SDL2 [!$IS_LIB_PROJECT && $SDL]
+#}

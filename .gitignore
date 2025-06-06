@@ -303,3 +303,4 @@ paket-files/
 #cmake
 build/
 tier0/valveetwproviderEvents.h
+/cmake-build

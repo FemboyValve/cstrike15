@@ -135,6 +135,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* CCSUsrMsg_ScoreLeaderboardData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   CCSUsrMsg_ScoreLeaderboardData_reflection_ = NULL;
+const ::google::protobuf::Descriptor* CCSUsrMsg_PlayerDecalDigitalSignature_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  CCSUsrMsg_PlayerDecalDigitalSignature_reflection_ = NULL;
 const ::google::protobuf::Descriptor* CCSUsrMsg_XRankGet_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   CCSUsrMsg_XRankGet_reflection_ = NULL;
@@ -892,7 +895,22 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_ScoreLeaderboardData));
-  CCSUsrMsg_XRankGet_descriptor_ = file->message_type(35);
+  CCSUsrMsg_PlayerDecalDigitalSignature_descriptor_ = file->message_type(35);
+  static const int CCSUsrMsg_PlayerDecalDigitalSignature_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_PlayerDecalDigitalSignature, data_),
+  };
+  CCSUsrMsg_PlayerDecalDigitalSignature_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      CCSUsrMsg_PlayerDecalDigitalSignature_descriptor_,
+      CCSUsrMsg_PlayerDecalDigitalSignature::default_instance_,
+      CCSUsrMsg_PlayerDecalDigitalSignature_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_PlayerDecalDigitalSignature, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_PlayerDecalDigitalSignature, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(CCSUsrMsg_PlayerDecalDigitalSignature));
+  CCSUsrMsg_XRankGet_descriptor_ = file->message_type(36);
   static const int CCSUsrMsg_XRankGet_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_XRankGet, mode_idx_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_XRankGet, controller_),
@@ -908,7 +926,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_XRankGet));
-  CCSUsrMsg_XRankUpd_descriptor_ = file->message_type(36);
+  CCSUsrMsg_XRankUpd_descriptor_ = file->message_type(37);
   static const int CCSUsrMsg_XRankUpd_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_XRankUpd, mode_idx_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_XRankUpd, controller_),
@@ -925,7 +943,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_XRankUpd));
-  CCSUsrMsg_CallVoteFailed_descriptor_ = file->message_type(37);
+  CCSUsrMsg_CallVoteFailed_descriptor_ = file->message_type(38);
   static const int CCSUsrMsg_CallVoteFailed_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_CallVoteFailed, reason_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_CallVoteFailed, time_),
@@ -941,7 +959,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_CallVoteFailed));
-  CCSUsrMsg_VoteStart_descriptor_ = file->message_type(38);
+  CCSUsrMsg_VoteStart_descriptor_ = file->message_type(39);
   static const int CCSUsrMsg_VoteStart_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_VoteStart, team_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_VoteStart, ent_idx_),
@@ -962,7 +980,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_VoteStart));
-  CCSUsrMsg_VotePass_descriptor_ = file->message_type(39);
+  CCSUsrMsg_VotePass_descriptor_ = file->message_type(40);
   static const int CCSUsrMsg_VotePass_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_VotePass, team_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_VotePass, vote_type_),
@@ -980,7 +998,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_VotePass));
-  CCSUsrMsg_VoteFailed_descriptor_ = file->message_type(40);
+  CCSUsrMsg_VoteFailed_descriptor_ = file->message_type(41);
   static const int CCSUsrMsg_VoteFailed_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_VoteFailed, team_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_VoteFailed, reason_),
@@ -996,7 +1014,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_VoteFailed));
-  CCSUsrMsg_VoteSetup_descriptor_ = file->message_type(41);
+  CCSUsrMsg_VoteSetup_descriptor_ = file->message_type(42);
   static const int CCSUsrMsg_VoteSetup_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_VoteSetup, potential_issues_),
   };
@@ -1011,7 +1029,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_VoteSetup));
-  CCSUsrMsg_SendLastKillerDamageToClient_descriptor_ = file->message_type(42);
+  CCSUsrMsg_SendLastKillerDamageToClient_descriptor_ = file->message_type(43);
   static const int CCSUsrMsg_SendLastKillerDamageToClient_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_SendLastKillerDamageToClient, num_hits_given_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_SendLastKillerDamageToClient, damage_given_),
@@ -1029,7 +1047,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_SendLastKillerDamageToClient));
-  CCSUsrMsg_ServerRankUpdate_descriptor_ = file->message_type(43);
+  CCSUsrMsg_ServerRankUpdate_descriptor_ = file->message_type(44);
   static const int CCSUsrMsg_ServerRankUpdate_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_ServerRankUpdate, rank_update_),
   };
@@ -1063,7 +1081,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_ServerRankUpdate_RankUpdate));
-  CCSUsrMsg_XpUpdate_descriptor_ = file->message_type(44);
+  CCSUsrMsg_XpUpdate_descriptor_ = file->message_type(45);
   static const int CCSUsrMsg_XpUpdate_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_XpUpdate, data_),
   };
@@ -1078,7 +1096,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_XpUpdate));
-  CCSUsrMsg_ItemPickup_descriptor_ = file->message_type(45);
+  CCSUsrMsg_ItemPickup_descriptor_ = file->message_type(46);
   static const int CCSUsrMsg_ItemPickup_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_ItemPickup, item_),
   };
@@ -1093,7 +1111,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_ItemPickup));
-  CCSUsrMsg_ShowMenu_descriptor_ = file->message_type(46);
+  CCSUsrMsg_ShowMenu_descriptor_ = file->message_type(47);
   static const int CCSUsrMsg_ShowMenu_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_ShowMenu, bits_valid_slots_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_ShowMenu, display_time_),
@@ -1110,7 +1128,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_ShowMenu));
-  CCSUsrMsg_BarTime_descriptor_ = file->message_type(47);
+  CCSUsrMsg_BarTime_descriptor_ = file->message_type(48);
   static const int CCSUsrMsg_BarTime_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_BarTime, time_),
   };
@@ -1125,7 +1143,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_BarTime));
-  CCSUsrMsg_AmmoDenied_descriptor_ = file->message_type(48);
+  CCSUsrMsg_AmmoDenied_descriptor_ = file->message_type(49);
   static const int CCSUsrMsg_AmmoDenied_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_AmmoDenied, ammoidx_),
   };
@@ -1140,7 +1158,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_AmmoDenied));
-  CCSUsrMsg_MarkAchievement_descriptor_ = file->message_type(49);
+  CCSUsrMsg_MarkAchievement_descriptor_ = file->message_type(50);
   static const int CCSUsrMsg_MarkAchievement_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_MarkAchievement, achievement_),
   };
@@ -1155,7 +1173,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_MarkAchievement));
-  CCSUsrMsg_MatchStatsUpdate_descriptor_ = file->message_type(50);
+  CCSUsrMsg_MatchStatsUpdate_descriptor_ = file->message_type(51);
   static const int CCSUsrMsg_MatchStatsUpdate_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_MatchStatsUpdate, update_),
   };
@@ -1170,7 +1188,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_MatchStatsUpdate));
-  CCSUsrMsg_ItemDrop_descriptor_ = file->message_type(51);
+  CCSUsrMsg_ItemDrop_descriptor_ = file->message_type(52);
   static const int CCSUsrMsg_ItemDrop_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_ItemDrop, itemid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_ItemDrop, death_),
@@ -1186,7 +1204,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_ItemDrop));
-  CCSUsrMsg_GlowPropTurnOff_descriptor_ = file->message_type(52);
+  CCSUsrMsg_GlowPropTurnOff_descriptor_ = file->message_type(53);
   static const int CCSUsrMsg_GlowPropTurnOff_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_GlowPropTurnOff, entidx_),
   };
@@ -1201,7 +1219,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_GlowPropTurnOff));
-  CCSUsrMsg_RoundBackupFilenames_descriptor_ = file->message_type(53);
+  CCSUsrMsg_RoundBackupFilenames_descriptor_ = file->message_type(54);
   static const int CCSUsrMsg_RoundBackupFilenames_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_RoundBackupFilenames, count_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_RoundBackupFilenames, index_),
@@ -1219,7 +1237,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_RoundBackupFilenames));
-  CCSUsrMsg_ResetHud_descriptor_ = file->message_type(54);
+  CCSUsrMsg_ResetHud_descriptor_ = file->message_type(55);
   static const int CCSUsrMsg_ResetHud_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_ResetHud, reset_),
   };
@@ -1234,7 +1252,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_ResetHud));
-  CCSUsrMsg_GameTitle_descriptor_ = file->message_type(55);
+  CCSUsrMsg_GameTitle_descriptor_ = file->message_type(56);
   static const int CCSUsrMsg_GameTitle_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_GameTitle, dummy_),
   };
@@ -1249,7 +1267,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_GameTitle));
-  CCSUsrMsg_RequestState_descriptor_ = file->message_type(56);
+  CCSUsrMsg_RequestState_descriptor_ = file->message_type(57);
   static const int CCSUsrMsg_RequestState_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_RequestState, dummy_),
   };
@@ -1264,7 +1282,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_RequestState));
-  CCSUsrMsg_StopSpectatorMode_descriptor_ = file->message_type(57);
+  CCSUsrMsg_StopSpectatorMode_descriptor_ = file->message_type(58);
   static const int CCSUsrMsg_StopSpectatorMode_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_StopSpectatorMode, dummy_),
   };
@@ -1279,7 +1297,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_StopSpectatorMode));
-  CCSUsrMsg_DisconnectToLobby_descriptor_ = file->message_type(58);
+  CCSUsrMsg_DisconnectToLobby_descriptor_ = file->message_type(59);
   static const int CCSUsrMsg_DisconnectToLobby_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_DisconnectToLobby, dummy_),
   };
@@ -1294,7 +1312,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_DisconnectToLobby));
-  CCSUsrMsg_WarmupHasEnded_descriptor_ = file->message_type(59);
+  CCSUsrMsg_WarmupHasEnded_descriptor_ = file->message_type(60);
   static const int CCSUsrMsg_WarmupHasEnded_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_WarmupHasEnded, dummy_),
   };
@@ -1309,7 +1327,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_WarmupHasEnded));
-  CCSUsrMsg_ClientInfo_descriptor_ = file->message_type(60);
+  CCSUsrMsg_ClientInfo_descriptor_ = file->message_type(61);
   static const int CCSUsrMsg_ClientInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_ClientInfo, dummy_),
   };
@@ -1324,7 +1342,7 @@ void protobuf_AssignDesc_cstrike15_5fusermessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CCSUsrMsg_ClientInfo));
-  CCSUsrMsg_ServerRankRevealAll_descriptor_ = file->message_type(61);
+  CCSUsrMsg_ServerRankRevealAll_descriptor_ = file->message_type(62);
   static const int CCSUsrMsg_ServerRankRevealAll_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CCSUsrMsg_ServerRankRevealAll, seconds_till_shutdown_),
   };
@@ -1430,6 +1448,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     CCSUsrMsg_QuestProgress_descriptor_, &CCSUsrMsg_QuestProgress::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     CCSUsrMsg_ScoreLeaderboardData_descriptor_, &CCSUsrMsg_ScoreLeaderboardData::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    CCSUsrMsg_PlayerDecalDigitalSignature_descriptor_, &CCSUsrMsg_PlayerDecalDigitalSignature::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     CCSUsrMsg_XRankGet_descriptor_, &CCSUsrMsg_XRankGet::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1569,6 +1589,8 @@ void protobuf_ShutdownFile_cstrike15_5fusermessages_2eproto() {
   delete CCSUsrMsg_QuestProgress_reflection_;
   delete CCSUsrMsg_ScoreLeaderboardData::default_instance_;
   delete CCSUsrMsg_ScoreLeaderboardData_reflection_;
+  delete CCSUsrMsg_PlayerDecalDigitalSignature::default_instance_;
+  delete CCSUsrMsg_PlayerDecalDigitalSignature_reflection_;
   delete CCSUsrMsg_XRankGet::default_instance_;
   delete CCSUsrMsg_XRankGet_reflection_;
   delete CCSUsrMsg_XRankUpd::default_instance_;
@@ -1723,91 +1745,94 @@ void protobuf_AddDesc_cstrike15_5fusermessages_2eproto() {
     "\n\010quest_id\030\001 \001(\r\022\025\n\rnormal_points\030\002 \001(\r\022"
     "\024\n\014bonus_points\030\003 \001(\r\022\026\n\016is_event_quest\030"
     "\004 \001(\010\"E\n\036CCSUsrMsg_ScoreLeaderboardData\022"
-    "#\n\004data\030\001 \001(\0132\025.ScoreLeaderboardData\":\n\022"
-    "CCSUsrMsg_XRankGet\022\020\n\010mode_idx\030\001 \001(\005\022\022\n\n"
-    "controller\030\002 \001(\005\"K\n\022CCSUsrMsg_XRankUpd\022\020"
-    "\n\010mode_idx\030\001 \001(\005\022\022\n\ncontroller\030\002 \001(\005\022\017\n\007"
-    "ranking\030\003 \001(\005\"8\n\030CCSUsrMsg_CallVoteFaile"
-    "d\022\016\n\006reason\030\001 \001(\005\022\014\n\004time\030\002 \001(\005\"\236\001\n\023CCSU"
-    "srMsg_VoteStart\022\014\n\004team\030\001 \001(\005\022\017\n\007ent_idx"
-    "\030\002 \001(\005\022\021\n\tvote_type\030\003 \001(\005\022\020\n\010disp_str\030\004 "
-    "\001(\t\022\023\n\013details_str\030\005 \001(\t\022\026\n\016other_team_s"
-    "tr\030\006 \001(\t\022\026\n\016is_yes_no_vote\030\007 \001(\010\"\\\n\022CCSU"
-    "srMsg_VotePass\022\014\n\004team\030\001 \001(\005\022\021\n\tvote_typ"
-    "e\030\002 \001(\005\022\020\n\010disp_str\030\003 \001(\t\022\023\n\013details_str"
-    "\030\004 \001(\t\"4\n\024CCSUsrMsg_VoteFailed\022\014\n\004team\030\001"
-    " \001(\005\022\016\n\006reason\030\002 \001(\005\"/\n\023CCSUsrMsg_VoteSe"
-    "tup\022\030\n\020potential_issues\030\001 \003(\t\"\204\001\n&CCSUsr"
-    "Msg_SendLastKillerDamageToClient\022\026\n\016num_"
-    "hits_given\030\001 \001(\005\022\024\n\014damage_given\030\002 \001(\005\022\026"
-    "\n\016num_hits_taken\030\003 \001(\005\022\024\n\014damage_taken\030\004"
-    " \001(\005\"\306\001\n\032CCSUsrMsg_ServerRankUpdate\022;\n\013r"
-    "ank_update\030\001 \003(\0132&.CCSUsrMsg_ServerRankU"
-    "pdate.RankUpdate\032k\n\nRankUpdate\022\022\n\naccoun"
-    "t_id\030\001 \001(\005\022\020\n\010rank_old\030\002 \001(\005\022\020\n\010rank_new"
-    "\030\003 \001(\005\022\020\n\010num_wins\030\004 \001(\005\022\023\n\013rank_change\030"
-    "\005 \001(\002\"Q\n\022CCSUsrMsg_XpUpdate\022;\n\004data\030\001 \001("
-    "\0132-.CMsgGCCstrike15_v2_GC2ServerNotifyXP"
-    "Rewarded\"$\n\024CCSUsrMsg_ItemPickup\022\014\n\004item"
-    "\030\001 \001(\t\"Y\n\022CCSUsrMsg_ShowMenu\022\030\n\020bits_val"
-    "id_slots\030\001 \001(\005\022\024\n\014display_time\030\002 \001(\005\022\023\n\013"
-    "menu_string\030\003 \001(\t\"!\n\021CCSUsrMsg_BarTime\022\014"
-    "\n\004time\030\001 \001(\t\"\'\n\024CCSUsrMsg_AmmoDenied\022\017\n\007"
-    "ammoIdx\030\001 \001(\005\"0\n\031CCSUsrMsg_MarkAchieveme"
-    "nt\022\023\n\013achievement\030\001 \001(\t\",\n\032CCSUsrMsg_Mat"
-    "chStatsUpdate\022\016\n\006update\030\001 \001(\t\"3\n\022CCSUsrM"
-    "sg_ItemDrop\022\016\n\006itemid\030\001 \001(\003\022\r\n\005death\030\002 \001"
-    "(\010\"+\n\031CCSUsrMsg_GlowPropTurnOff\022\016\n\006entid"
-    "x\030\001 \001(\005\"b\n\036CCSUsrMsg_RoundBackupFilename"
-    "s\022\r\n\005count\030\001 \001(\005\022\r\n\005index\030\002 \001(\005\022\020\n\010filen"
-    "ame\030\003 \001(\t\022\020\n\010nicename\030\004 \001(\t\"#\n\022CCSUsrMsg"
-    "_ResetHud\022\r\n\005reset\030\001 \001(\010\"$\n\023CCSUsrMsg_Ga"
-    "meTitle\022\r\n\005dummy\030\001 \001(\005\"\'\n\026CCSUsrMsg_Requ"
-    "estState\022\r\n\005dummy\030\001 \001(\005\",\n\033CCSUsrMsg_Sto"
-    "pSpectatorMode\022\r\n\005dummy\030\001 \001(\005\",\n\033CCSUsrM"
-    "sg_DisconnectToLobby\022\r\n\005dummy\030\001 \001(\005\")\n\030C"
-    "CSUsrMsg_WarmupHasEnded\022\r\n\005dummy\030\001 \001(\005\"%"
-    "\n\024CCSUsrMsg_ClientInfo\022\r\n\005dummy\030\001 \001(\005\">\n"
-    "\035CCSUsrMsg_ServerRankRevealAll\022\035\n\025second"
-    "s_till_shutdown\030\001 \001(\005*\362\013\n\026ECstrike15User"
-    "Messages\022\022\n\016CS_UM_VGUIMenu\020\001\022\020\n\014CS_UM_Ge"
-    "iger\020\002\022\017\n\013CS_UM_Train\020\003\022\021\n\rCS_UM_HudText"
-    "\020\004\022\021\n\rCS_UM_SayText\020\005\022\022\n\016CS_UM_SayText2\020"
-    "\006\022\021\n\rCS_UM_TextMsg\020\007\022\020\n\014CS_UM_HudMsg\020\010\022\022"
-    "\n\016CS_UM_ResetHud\020\t\022\023\n\017CS_UM_GameTitle\020\n\022"
-    "\017\n\013CS_UM_Shake\020\014\022\016\n\nCS_UM_Fade\020\r\022\020\n\014CS_U"
-    "M_Rumble\020\016\022\026\n\022CS_UM_CloseCaption\020\017\022\034\n\030CS"
-    "_UM_CloseCaptionDirect\020\020\022\023\n\017CS_UM_SendAu"
-    "dio\020\021\022\022\n\016CS_UM_RawAudio\020\022\022\023\n\017CS_UM_Voice"
-    "Mask\020\023\022\026\n\022CS_UM_RequestState\020\024\022\020\n\014CS_UM_"
-    "Damage\020\025\022\023\n\017CS_UM_RadioText\020\026\022\022\n\016CS_UM_H"
-    "intText\020\027\022\025\n\021CS_UM_KeyHintText\020\030\022$\n CS_U"
-    "M_ProcessSpottedEntityUpdate\020\031\022\026\n\022CS_UM_"
-    "ReloadEffect\020\032\022\025\n\021CS_UM_AdjustMoney\020\033\022\031\n"
-    "\025CS_UM_UpdateTeamMoney\020\034\022\033\n\027CS_UM_StopSp"
-    "ectatorMode\020\035\022\021\n\rCS_UM_KillCam\020\036\022\032\n\026CS_U"
-    "M_DesiredTimescale\020\037\022\032\n\026CS_UM_CurrentTim"
-    "escale\020 \022\032\n\026CS_UM_AchievementEvent\020!\022\034\n\030"
-    "CS_UM_MatchEndConditions\020\"\022\033\n\027CS_UM_Disc"
-    "onnectToLobby\020#\022\033\n\027CS_UM_PlayerStatsUpda"
-    "te\020$\022\032\n\026CS_UM_DisplayInventory\020%\022\030\n\024CS_U"
-    "M_WarmupHasEnded\020&\022\024\n\020CS_UM_ClientInfo\020\'"
-    "\022\022\n\016CS_UM_XRankGet\020(\022\022\n\016CS_UM_XRankUpd\020)"
-    "\022\030\n\024CS_UM_CallVoteFailed\020-\022\023\n\017CS_UM_Vote"
-    "Start\020.\022\022\n\016CS_UM_VotePass\020/\022\024\n\020CS_UM_Vot"
-    "eFailed\0200\022\023\n\017CS_UM_VoteSetup\0201\022\035\n\031CS_UM_"
-    "ServerRankRevealAll\0202\022&\n\"CS_UM_SendLastK"
-    "illerDamageToClient\0203\022\032\n\026CS_UM_ServerRan"
-    "kUpdate\0204\022\024\n\020CS_UM_ItemPickup\0205\022\022\n\016CS_UM"
-    "_ShowMenu\0206\022\021\n\rCS_UM_BarTime\0207\022\024\n\020CS_UM_"
-    "AmmoDenied\0208\022\031\n\025CS_UM_MarkAchievement\0209\022"
-    "\032\n\026CS_UM_MatchStatsUpdate\020:\022\022\n\016CS_UM_Ite"
-    "mDrop\020;\022\031\n\025CS_UM_GlowPropTurnOff\020<\022\035\n\031CS"
-    "_UM_SendPlayerItemDrops\020=\022\036\n\032CS_UM_Round"
-    "BackupFilenames\020>\022\035\n\031CS_UM_SendPlayerIte"
-    "mFound\020\?\022\023\n\017CS_UM_ReportHit\020@\022\022\n\016CS_UM_X"
-    "pUpdate\020A\022\027\n\023CS_UM_QuestProgress\020B\022\036\n\032CS"
-    "_UM_ScoreLeaderboardData\020CB\005H\001\200\001\000", 6833);
+    "#\n\004data\030\001 \001(\0132\025.ScoreLeaderboardData\"S\n%"
+    "CCSUsrMsg_PlayerDecalDigitalSignature\022*\n"
+    "\004data\030\001 \001(\0132\034.PlayerDecalDigitalSignatur"
+    "e\":\n\022CCSUsrMsg_XRankGet\022\020\n\010mode_idx\030\001 \001("
+    "\005\022\022\n\ncontroller\030\002 \001(\005\"K\n\022CCSUsrMsg_XRank"
+    "Upd\022\020\n\010mode_idx\030\001 \001(\005\022\022\n\ncontroller\030\002 \001("
+    "\005\022\017\n\007ranking\030\003 \001(\005\"8\n\030CCSUsrMsg_CallVote"
+    "Failed\022\016\n\006reason\030\001 \001(\005\022\014\n\004time\030\002 \001(\005\"\236\001\n"
+    "\023CCSUsrMsg_VoteStart\022\014\n\004team\030\001 \001(\005\022\017\n\007en"
+    "t_idx\030\002 \001(\005\022\021\n\tvote_type\030\003 \001(\005\022\020\n\010disp_s"
+    "tr\030\004 \001(\t\022\023\n\013details_str\030\005 \001(\t\022\026\n\016other_t"
+    "eam_str\030\006 \001(\t\022\026\n\016is_yes_no_vote\030\007 \001(\010\"\\\n"
+    "\022CCSUsrMsg_VotePass\022\014\n\004team\030\001 \001(\005\022\021\n\tvot"
+    "e_type\030\002 \001(\005\022\020\n\010disp_str\030\003 \001(\t\022\023\n\013detail"
+    "s_str\030\004 \001(\t\"4\n\024CCSUsrMsg_VoteFailed\022\014\n\004t"
+    "eam\030\001 \001(\005\022\016\n\006reason\030\002 \001(\005\"/\n\023CCSUsrMsg_V"
+    "oteSetup\022\030\n\020potential_issues\030\001 \003(\t\"\204\001\n&C"
+    "CSUsrMsg_SendLastKillerDamageToClient\022\026\n"
+    "\016num_hits_given\030\001 \001(\005\022\024\n\014damage_given\030\002 "
+    "\001(\005\022\026\n\016num_hits_taken\030\003 \001(\005\022\024\n\014damage_ta"
+    "ken\030\004 \001(\005\"\306\001\n\032CCSUsrMsg_ServerRankUpdate"
+    "\022;\n\013rank_update\030\001 \003(\0132&.CCSUsrMsg_Server"
+    "RankUpdate.RankUpdate\032k\n\nRankUpdate\022\022\n\na"
+    "ccount_id\030\001 \001(\005\022\020\n\010rank_old\030\002 \001(\005\022\020\n\010ran"
+    "k_new\030\003 \001(\005\022\020\n\010num_wins\030\004 \001(\005\022\023\n\013rank_ch"
+    "ange\030\005 \001(\002\"Q\n\022CCSUsrMsg_XpUpdate\022;\n\004data"
+    "\030\001 \001(\0132-.CMsgGCCstrike15_v2_GC2ServerNot"
+    "ifyXPRewarded\"$\n\024CCSUsrMsg_ItemPickup\022\014\n"
+    "\004item\030\001 \001(\t\"Y\n\022CCSUsrMsg_ShowMenu\022\030\n\020bit"
+    "s_valid_slots\030\001 \001(\005\022\024\n\014display_time\030\002 \001("
+    "\005\022\023\n\013menu_string\030\003 \001(\t\"!\n\021CCSUsrMsg_BarT"
+    "ime\022\014\n\004time\030\001 \001(\t\"\'\n\024CCSUsrMsg_AmmoDenie"
+    "d\022\017\n\007ammoIdx\030\001 \001(\005\"0\n\031CCSUsrMsg_MarkAchi"
+    "evement\022\023\n\013achievement\030\001 \001(\t\",\n\032CCSUsrMs"
+    "g_MatchStatsUpdate\022\016\n\006update\030\001 \001(\t\"3\n\022CC"
+    "SUsrMsg_ItemDrop\022\016\n\006itemid\030\001 \001(\003\022\r\n\005deat"
+    "h\030\002 \001(\010\"+\n\031CCSUsrMsg_GlowPropTurnOff\022\016\n\006"
+    "entidx\030\001 \001(\005\"b\n\036CCSUsrMsg_RoundBackupFil"
+    "enames\022\r\n\005count\030\001 \001(\005\022\r\n\005index\030\002 \001(\005\022\020\n\010"
+    "filename\030\003 \001(\t\022\020\n\010nicename\030\004 \001(\t\"#\n\022CCSU"
+    "srMsg_ResetHud\022\r\n\005reset\030\001 \001(\010\"$\n\023CCSUsrM"
+    "sg_GameTitle\022\r\n\005dummy\030\001 \001(\005\"\'\n\026CCSUsrMsg"
+    "_RequestState\022\r\n\005dummy\030\001 \001(\005\",\n\033CCSUsrMs"
+    "g_StopSpectatorMode\022\r\n\005dummy\030\001 \001(\005\",\n\033CC"
+    "SUsrMsg_DisconnectToLobby\022\r\n\005dummy\030\001 \001(\005"
+    "\")\n\030CCSUsrMsg_WarmupHasEnded\022\r\n\005dummy\030\001 "
+    "\001(\005\"%\n\024CCSUsrMsg_ClientInfo\022\r\n\005dummy\030\001 \001"
+    "(\005\">\n\035CCSUsrMsg_ServerRankRevealAll\022\035\n\025s"
+    "econds_till_shutdown\030\001 \001(\005*\231\014\n\026ECstrike1"
+    "5UserMessages\022\022\n\016CS_UM_VGUIMenu\020\001\022\020\n\014CS_"
+    "UM_Geiger\020\002\022\017\n\013CS_UM_Train\020\003\022\021\n\rCS_UM_Hu"
+    "dText\020\004\022\021\n\rCS_UM_SayText\020\005\022\022\n\016CS_UM_SayT"
+    "ext2\020\006\022\021\n\rCS_UM_TextMsg\020\007\022\020\n\014CS_UM_HudMs"
+    "g\020\010\022\022\n\016CS_UM_ResetHud\020\t\022\023\n\017CS_UM_GameTit"
+    "le\020\n\022\017\n\013CS_UM_Shake\020\014\022\016\n\nCS_UM_Fade\020\r\022\020\n"
+    "\014CS_UM_Rumble\020\016\022\026\n\022CS_UM_CloseCaption\020\017\022"
+    "\034\n\030CS_UM_CloseCaptionDirect\020\020\022\023\n\017CS_UM_S"
+    "endAudio\020\021\022\022\n\016CS_UM_RawAudio\020\022\022\023\n\017CS_UM_"
+    "VoiceMask\020\023\022\026\n\022CS_UM_RequestState\020\024\022\020\n\014C"
+    "S_UM_Damage\020\025\022\023\n\017CS_UM_RadioText\020\026\022\022\n\016CS"
+    "_UM_HintText\020\027\022\025\n\021CS_UM_KeyHintText\020\030\022$\n"
+    " CS_UM_ProcessSpottedEntityUpdate\020\031\022\026\n\022C"
+    "S_UM_ReloadEffect\020\032\022\025\n\021CS_UM_AdjustMoney"
+    "\020\033\022\031\n\025CS_UM_UpdateTeamMoney\020\034\022\033\n\027CS_UM_S"
+    "topSpectatorMode\020\035\022\021\n\rCS_UM_KillCam\020\036\022\032\n"
+    "\026CS_UM_DesiredTimescale\020\037\022\032\n\026CS_UM_Curre"
+    "ntTimescale\020 \022\032\n\026CS_UM_AchievementEvent\020"
+    "!\022\034\n\030CS_UM_MatchEndConditions\020\"\022\033\n\027CS_UM"
+    "_DisconnectToLobby\020#\022\033\n\027CS_UM_PlayerStat"
+    "sUpdate\020$\022\032\n\026CS_UM_DisplayInventory\020%\022\030\n"
+    "\024CS_UM_WarmupHasEnded\020&\022\024\n\020CS_UM_ClientI"
+    "nfo\020\'\022\022\n\016CS_UM_XRankGet\020(\022\022\n\016CS_UM_XRank"
+    "Upd\020)\022\030\n\024CS_UM_CallVoteFailed\020-\022\023\n\017CS_UM"
+    "_VoteStart\020.\022\022\n\016CS_UM_VotePass\020/\022\024\n\020CS_U"
+    "M_VoteFailed\0200\022\023\n\017CS_UM_VoteSetup\0201\022\035\n\031C"
+    "S_UM_ServerRankRevealAll\0202\022&\n\"CS_UM_Send"
+    "LastKillerDamageToClient\0203\022\032\n\026CS_UM_Serv"
+    "erRankUpdate\0204\022\024\n\020CS_UM_ItemPickup\0205\022\022\n\016"
+    "CS_UM_ShowMenu\0206\022\021\n\rCS_UM_BarTime\0207\022\024\n\020C"
+    "S_UM_AmmoDenied\0208\022\031\n\025CS_UM_MarkAchieveme"
+    "nt\0209\022\032\n\026CS_UM_MatchStatsUpdate\020:\022\022\n\016CS_U"
+    "M_ItemDrop\020;\022\031\n\025CS_UM_GlowPropTurnOff\020<\022"
+    "\035\n\031CS_UM_SendPlayerItemDrops\020=\022\036\n\032CS_UM_"
+    "RoundBackupFilenames\020>\022\035\n\031CS_UM_SendPlay"
+    "erItemFound\020\?\022\023\n\017CS_UM_ReportHit\020@\022\022\n\016CS"
+    "_UM_XpUpdate\020A\022\027\n\023CS_UM_QuestProgress\020B\022"
+    "\036\n\032CS_UM_ScoreLeaderboardData\020C\022%\n!CS_UM"
+    "_PlayerDecalDigitalSignature\020DB\005H\001\200\001\000", 6957);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "cstrike15_usermessages.proto", &protobuf_RegisterTypes);
   CCSUsrMsg_VGUIMenu::default_instance_ = new CCSUsrMsg_VGUIMenu();
@@ -1849,6 +1874,7 @@ void protobuf_AddDesc_cstrike15_5fusermessages_2eproto() {
   CCSUsrMsg_DisplayInventory::default_instance_ = new CCSUsrMsg_DisplayInventory();
   CCSUsrMsg_QuestProgress::default_instance_ = new CCSUsrMsg_QuestProgress();
   CCSUsrMsg_ScoreLeaderboardData::default_instance_ = new CCSUsrMsg_ScoreLeaderboardData();
+  CCSUsrMsg_PlayerDecalDigitalSignature::default_instance_ = new CCSUsrMsg_PlayerDecalDigitalSignature();
   CCSUsrMsg_XRankGet::default_instance_ = new CCSUsrMsg_XRankGet();
   CCSUsrMsg_XRankUpd::default_instance_ = new CCSUsrMsg_XRankUpd();
   CCSUsrMsg_CallVoteFailed::default_instance_ = new CCSUsrMsg_CallVoteFailed();
@@ -1916,6 +1942,7 @@ void protobuf_AddDesc_cstrike15_5fusermessages_2eproto() {
   CCSUsrMsg_DisplayInventory::default_instance_->InitAsDefaultInstance();
   CCSUsrMsg_QuestProgress::default_instance_->InitAsDefaultInstance();
   CCSUsrMsg_ScoreLeaderboardData::default_instance_->InitAsDefaultInstance();
+  CCSUsrMsg_PlayerDecalDigitalSignature::default_instance_->InitAsDefaultInstance();
   CCSUsrMsg_XRankGet::default_instance_->InitAsDefaultInstance();
   CCSUsrMsg_XRankUpd::default_instance_->InitAsDefaultInstance();
   CCSUsrMsg_CallVoteFailed::default_instance_->InitAsDefaultInstance();
@@ -2022,6 +2049,7 @@ bool ECstrike15UserMessages_IsValid(int value) {
     case 65:
     case 66:
     case 67:
+    case 68:
       return true;
     default:
       return false;
@@ -13408,6 +13436,219 @@ void CCSUsrMsg_ScoreLeaderboardData::Swap(CCSUsrMsg_ScoreLeaderboardData* other)
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = CCSUsrMsg_ScoreLeaderboardData_descriptor_;
   metadata.reflection = CCSUsrMsg_ScoreLeaderboardData_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int CCSUsrMsg_PlayerDecalDigitalSignature::kDataFieldNumber;
+#endif  // !_MSC_VER
+
+CCSUsrMsg_PlayerDecalDigitalSignature::CCSUsrMsg_PlayerDecalDigitalSignature()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::InitAsDefaultInstance() {
+  data_ = const_cast< ::PlayerDecalDigitalSignature*>(&::PlayerDecalDigitalSignature::default_instance());
+}
+
+CCSUsrMsg_PlayerDecalDigitalSignature::CCSUsrMsg_PlayerDecalDigitalSignature(const CCSUsrMsg_PlayerDecalDigitalSignature& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::SharedCtor() {
+  _cached_size_ = 0;
+  data_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+CCSUsrMsg_PlayerDecalDigitalSignature::~CCSUsrMsg_PlayerDecalDigitalSignature() {
+  SharedDtor();
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::SharedDtor() {
+  if (this != default_instance_) {
+    delete data_;
+  }
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* CCSUsrMsg_PlayerDecalDigitalSignature::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return CCSUsrMsg_PlayerDecalDigitalSignature_descriptor_;
+}
+
+const CCSUsrMsg_PlayerDecalDigitalSignature& CCSUsrMsg_PlayerDecalDigitalSignature::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_cstrike15_5fusermessages_2eproto();
+  return *default_instance_;
+}
+
+CCSUsrMsg_PlayerDecalDigitalSignature* CCSUsrMsg_PlayerDecalDigitalSignature::default_instance_ = NULL;
+
+CCSUsrMsg_PlayerDecalDigitalSignature* CCSUsrMsg_PlayerDecalDigitalSignature::New() const {
+  return new CCSUsrMsg_PlayerDecalDigitalSignature;
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_data()) {
+      if (data_ != NULL) data_->::PlayerDecalDigitalSignature::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool CCSUsrMsg_PlayerDecalDigitalSignature::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .PlayerDecalDigitalSignature data = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_data()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // optional .PlayerDecalDigitalSignature data = 1;
+  if (has_data()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->data(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* CCSUsrMsg_PlayerDecalDigitalSignature::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // optional .PlayerDecalDigitalSignature data = 1;
+  if (has_data()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->data(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int CCSUsrMsg_PlayerDecalDigitalSignature::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .PlayerDecalDigitalSignature data = 1;
+    if (has_data()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->data());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const CCSUsrMsg_PlayerDecalDigitalSignature* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const CCSUsrMsg_PlayerDecalDigitalSignature*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::MergeFrom(const CCSUsrMsg_PlayerDecalDigitalSignature& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_data()) {
+      mutable_data()->::PlayerDecalDigitalSignature::MergeFrom(from.data());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::CopyFrom(const CCSUsrMsg_PlayerDecalDigitalSignature& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CCSUsrMsg_PlayerDecalDigitalSignature::IsInitialized() const {
+
+  return true;
+}
+
+void CCSUsrMsg_PlayerDecalDigitalSignature::Swap(CCSUsrMsg_PlayerDecalDigitalSignature* other) {
+  if (other != this) {
+    std::swap(data_, other->data_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata CCSUsrMsg_PlayerDecalDigitalSignature::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = CCSUsrMsg_PlayerDecalDigitalSignature_descriptor_;
+  metadata.reflection = CCSUsrMsg_PlayerDecalDigitalSignature_reflection_;
   return metadata;
 }
 

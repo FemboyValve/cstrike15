@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2004, Valve Corporation, All rights reserved. =======
+//====== Copyright ï¿½ 1996-2004, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -9,8 +9,8 @@
 #include "datamodel/idatamodel.h"
 #include "datamodel/dmelement.h"
 #include "datamodel/dmattributevar.h"
-#include "tier1/KeyValues.h"
-#include "tier1/UtlBuffer.h"
+#include "tier1/keyvalues.h"
+#include "tier1/utlbuffer.h"
 #include "datamodel/dmattribute.h"
 #include "filesystem.h"
 #include "tier2/tier2.h"
@@ -344,7 +344,7 @@ CDmElement *CImportMKS::CreateDmeAmalgamatedTexture( const char *pName )
 	CDmElement *pElement = g_pDataModel->GetElement( hElement );
 	if ( !pElement )
 		return NULL;
-
+	//lwss - fixed these from false->NULL
 	// Base members
 	if ( !pElement->AddAttribute( "images", AT_ELEMENT_ARRAY ) )
 		return NULL;
@@ -364,7 +364,7 @@ CDmElement *CImportMKS::CreateDmeSequence( const char *pName )
 	if ( hElement == DMELEMENT_HANDLE_INVALID )
 	{
 		Warning( "Element uses unknown element type %s\n", "CDmeSheetSequence" );
-		return false;
+		return NULL;
 	}
 
 	CDmElement *pElement = g_pDataModel->GetElement( hElement );
@@ -372,13 +372,13 @@ CDmElement *CImportMKS::CreateDmeSequence( const char *pName )
 		return NULL;
 
 	if ( !pElement->AddAttribute( "sequencenumber", AT_INT ) )
-		return false;
+		return NULL;
 	if ( !pElement->AddAttribute( "clamp", AT_BOOL ) )
-		return false;
+		return NULL;
 	if ( !pElement->AddAttribute( "mode", AT_INT ) )
-		return false;
+		return NULL;
 	if ( !pElement->AddAttribute( "frames", AT_ELEMENT_ARRAY ) )
-		return false;
+		return NULL;
 
 	CDmAttribute *pClapAttr = pElement->GetAttribute( "clamp" );
 	Assert( pClapAttr );
@@ -397,7 +397,7 @@ CDmElement *CImportMKS::CreateDmeSequenceFrame( const char *pName )
 	if ( hElement == DMELEMENT_HANDLE_INVALID )
 	{
 		Warning( "Element uses unknown element type %s\n", "CDmeSheetSequenceFrame" );
-		return false;
+		return NULL;
 	}
 
 	CDmElement *pElement = g_pDataModel->GetElement( hElement );
@@ -405,9 +405,9 @@ CDmElement *CImportMKS::CreateDmeSequenceFrame( const char *pName )
 		return NULL;
 
 	if ( !pElement->AddAttribute( "sheetimages", AT_ELEMENT_ARRAY ) )
-		return false;
+		return NULL;
 	if ( !pElement->AddAttribute( "displaytime", AT_FLOAT ) )
-		return false;
+		return NULL;
 
 	return pElement;
 }
@@ -418,7 +418,7 @@ CDmElement *CImportMKS::CreateDmeSheetImage( const char *pImageName )
 	if ( hElement == DMELEMENT_HANDLE_INVALID )
 	{
 		Warning("Element uses unknown element type %s\n", "CDmeSheetImage" );
-		return false;
+		return NULL;
 	}
 
 	CDmElement *pElement = g_pDataModel->GetElement( hElement );

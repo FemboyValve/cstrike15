@@ -1,43 +1,25 @@
-cmake_minimum_required(VERSION 3.20)
+#//-----------------------------------------------------------------------------
+#//	MATHLIB.VPC
+#//
+#//	Project Script
+#//-----------------------------------------------------------------------------
+cmake_minimum_required(VERSION 3.16)
+project(bonesetup_client)
+set(SRCDIR "${CMAKE_SOURCE_DIR}")
+set(CMAKE_MODULE_PATH ${SRCDIR}/cmake)
+set(OUTLIBNAME "bonesetup_client")
 
-project(bonesetup)
+include(${CMAKE_MODULE_PATH}/detect_platform.cmake)
+include(${CMAKE_MODULE_PATH}/source_lib_base.cmake)
 
-# Define source directory
-set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
+include_directories(../public)
 
-# Include directories
-include_directories("${SRCDIR}/public")
-
-# Source files
-set(SOURCE_FILES)
-
-vpc_file(SOURCE_FILES
-    "bone_setup_PS3.cpp" PS3
-    "bone_ik_PS3.cpp" PS3
-    "bone_utils_PS3.cpp" PS3
-    "bone_decode_PS3.cpp" PS3
-    "bone_setup.cpp"
-    "bone_ik.cpp"
-    "bone_utils.cpp"
-    "bone_decode.cpp"
-    "bone_constraints.cpp"
-)
-
-# Header files (optional grouping)
-set(HEADER_FILES
-    bone_utils.h
-)
-if(PS3)
-    list(APPEND HEADER_FILES bone_utils_PS3.h)
+if( LINUXALL )
+    target_compile_options(${OUTLIBNAME} PRIVATE -fPIC)
 endif()
 
-# Public headers (optional grouping)
-set(PUBLIC_HEADERS)
-if(WIN32 OR UNIX)
-    list(APPEND PUBLIC_HEADERS "${SRCDIR}/public/bone_setup.h")
-endif()
-if(PS3)
-    list(APPEND PUBLIC_HEADERS "${SRCDIR}/public/bone_setup_PS3.h")
-endif()
-
-add_library(bonesetup STATIC ${SOURCE_FILES} ${HEADER_FILES} ${PUBLIC_HEADERS})
+target_sources(${OUTLIBNAME} PRIVATE "bone_setup.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "bone_ik.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "bone_utils.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "bone_decode.cpp")
+target_sources(${OUTLIBNAME} PRIVATE "bone_constraints.cpp")

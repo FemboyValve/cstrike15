@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "Navigating to /home/csgo-src/src..."
-cd /home/csgo-src/src || exit 1
-
 # Capture timestamp for log filenames
 timestamp=$(date +"%m%d%Y_%H%M")
 

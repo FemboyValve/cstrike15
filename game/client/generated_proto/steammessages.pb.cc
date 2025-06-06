@@ -1493,7 +1493,7 @@ void protobuf_AssignDesc_steammessages_2eproto() {
       sizeof(CMsgGCMsgSetOptions_MessageRange));
   CMsgGCMsgSetOptions_Option_descriptor_ = CMsgGCMsgSetOptions_descriptor_->enum_type(0);
   CMsgGCHUpdateSession_descriptor_ = file->message_type(57);
-  static const int CMsgGCHUpdateSession_offsets_[9] = {
+  static const int CMsgGCHUpdateSession_offsets_[13] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, steam_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, app_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, online_),
@@ -1503,6 +1503,10 @@ void protobuf_AssignDesc_steammessages_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, os_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, client_addr_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, extra_fields_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, owner_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, cm_session_sysid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, cm_session_identifier_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CMsgGCHUpdateSession, depot_ids_),
   };
   CMsgGCHUpdateSession_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -2095,29 +2099,32 @@ void protobuf_AddDesc_steammessages_2eproto() {
     "\r\022\014\n\004high\030\002 \002(\r\"n\n\006Option\022\030\n\024NOTIFY_USER"
     "_SESSIONS\020\000\022\032\n\026NOTIFY_SERVER_SESSIONS\020\001\022"
     "\027\n\023NOTIFY_ACHIEVEMENTS\020\002\022\025\n\021NOTIFY_VAC_A"
-    "CTION\020\003\"\224\002\n\024CMsgGCHUpdateSession\022\020\n\010stea"
+    "CTION\020\003\"\362\002\n\024CMsgGCHUpdateSession\022\020\n\010stea"
     "m_id\030\001 \001(\006\022\016\n\006app_id\030\002 \001(\r\022\016\n\006online\030\003 \001"
     "(\010\022\027\n\017server_steam_id\030\004 \001(\006\022\023\n\013server_ad"
     "dr\030\005 \001(\r\022\023\n\013server_port\030\006 \001(\r\022\017\n\007os_type"
     "\030\007 \001(\r\022\023\n\013client_addr\030\010 \001(\r\0226\n\014extra_fie"
     "lds\030\t \003(\0132 .CMsgGCHUpdateSession.ExtraFi"
-    "eld\032)\n\nExtraField\022\014\n\004name\030\001 \001(\t\022\r\n\005value"
-    "\030\002 \001(\t\"\354\001\n$CMsgNotificationOfSuspiciousA"
-    "ctivity\022\017\n\007steamid\030\001 \001(\006\022\r\n\005appid\030\002 \001(\r\022"
-    "W\n\022multiple_instances\030\003 \001(\0132;.CMsgNotifi"
-    "cationOfSuspiciousActivity.MultipleGameI"
-    "nstances\032K\n\025MultipleGameInstances\022\032\n\022app"
-    "_instance_count\030\001 \001(\r\022\026\n\016other_steamids\030"
-    "\002 \003(\006*\266\001\n\020GCProtoBufMsgSrc\022 \n\034GCProtoBuf"
-    "MsgSrc_Unspecified\020\000\022\037\n\033GCProtoBufMsgSrc"
-    "_FromSystem\020\001\022 \n\034GCProtoBufMsgSrc_FromSt"
-    "eamID\020\002\022\033\n\027GCProtoBufMsgSrc_FromGC\020\003\022 \n\034"
-    "GCProtoBufMsgSrc_ReplySystem\020\004:9\n\tkey_fi"
-    "eld\022\035.google.protobuf.FieldOptions\030\340\324\003 \001"
-    "(\010:\005false:A\n\022msgpool_soft_limit\022\037.google"
-    ".protobuf.MessageOptions\030\340\324\003 \001(\005:\00232:B\n\022"
-    "msgpool_hard_limit\022\037.google.protobuf.Mes"
-    "sageOptions\030\341\324\003 \001(\005:\003384B\005H\001\200\001\000", 9031);
+    "eld\022\020\n\010owner_id\030\n \001(\006\022\030\n\020cm_session_sysi"
+    "d\030\013 \001(\r\022\035\n\025cm_session_identifier\030\014 \001(\r\022\021"
+    "\n\tdepot_ids\030\r \003(\r\032)\n\nExtraField\022\014\n\004name\030"
+    "\001 \001(\t\022\r\n\005value\030\002 \001(\t\"\354\001\n$CMsgNotificatio"
+    "nOfSuspiciousActivity\022\017\n\007steamid\030\001 \001(\006\022\r"
+    "\n\005appid\030\002 \001(\r\022W\n\022multiple_instances\030\003 \001("
+    "\0132;.CMsgNotificationOfSuspiciousActivity"
+    ".MultipleGameInstances\032K\n\025MultipleGameIn"
+    "stances\022\032\n\022app_instance_count\030\001 \001(\r\022\026\n\016o"
+    "ther_steamids\030\002 \003(\006*\266\001\n\020GCProtoBufMsgSrc"
+    "\022 \n\034GCProtoBufMsgSrc_Unspecified\020\000\022\037\n\033GC"
+    "ProtoBufMsgSrc_FromSystem\020\001\022 \n\034GCProtoBu"
+    "fMsgSrc_FromSteamID\020\002\022\033\n\027GCProtoBufMsgSr"
+    "c_FromGC\020\003\022 \n\034GCProtoBufMsgSrc_ReplySyst"
+    "em\020\004:9\n\tkey_field\022\035.google.protobuf.Fiel"
+    "dOptions\030\340\324\003 \001(\010:\005false:A\n\022msgpool_soft_"
+    "limit\022\037.google.protobuf.MessageOptions\030\340"
+    "\324\003 \001(\005:\00232:B\n\022msgpool_hard_limit\022\037.googl"
+    "e.protobuf.MessageOptions\030\341\324\003 \001(\005:\003384B\005"
+    "H\001\200\001\000", 9125);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "steammessages.proto", &protobuf_RegisterTypes);
   CMsgProtoBufHeader::default_instance_ = new CMsgProtoBufHeader();
@@ -24822,6 +24829,10 @@ const int CMsgGCHUpdateSession::kServerPortFieldNumber;
 const int CMsgGCHUpdateSession::kOsTypeFieldNumber;
 const int CMsgGCHUpdateSession::kClientAddrFieldNumber;
 const int CMsgGCHUpdateSession::kExtraFieldsFieldNumber;
+const int CMsgGCHUpdateSession::kOwnerIdFieldNumber;
+const int CMsgGCHUpdateSession::kCmSessionSysidFieldNumber;
+const int CMsgGCHUpdateSession::kCmSessionIdentifierFieldNumber;
+const int CMsgGCHUpdateSession::kDepotIdsFieldNumber;
 #endif  // !_MSC_VER
 
 CMsgGCHUpdateSession::CMsgGCHUpdateSession()
@@ -24848,6 +24859,9 @@ void CMsgGCHUpdateSession::SharedCtor() {
   server_port_ = 0u;
   os_type_ = 0u;
   client_addr_ = 0u;
+  owner_id_ = GOOGLE_ULONGLONG(0);
+  cm_session_sysid_ = 0u;
+  cm_session_identifier_ = 0u;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -24892,7 +24906,13 @@ void CMsgGCHUpdateSession::Clear() {
     os_type_ = 0u;
     client_addr_ = 0u;
   }
+  if (_has_bits_[9 / 32] & (0xffu << (9 % 32))) {
+    owner_id_ = GOOGLE_ULONGLONG(0);
+    cm_session_sysid_ = 0u;
+    cm_session_identifier_ = 0u;
+  }
   extra_fields_.Clear();
+  depot_ids_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -25041,6 +25061,76 @@ bool CMsgGCHUpdateSession::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(74)) goto parse_extra_fields;
+        if (input->ExpectTag(81)) goto parse_owner_id;
+        break;
+      }
+
+      // optional fixed64 owner_id = 10;
+      case 10: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
+         parse_owner_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED64>(
+                 input, &owner_id_)));
+          set_has_owner_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(88)) goto parse_cm_session_sysid;
+        break;
+      }
+
+      // optional uint32 cm_session_sysid = 11;
+      case 11: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_cm_session_sysid:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &cm_session_sysid_)));
+          set_has_cm_session_sysid();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(96)) goto parse_cm_session_identifier;
+        break;
+      }
+
+      // optional uint32 cm_session_identifier = 12;
+      case 12: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_cm_session_identifier:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &cm_session_identifier_)));
+          set_has_cm_session_identifier();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(104)) goto parse_depot_ids;
+        break;
+      }
+
+      // repeated uint32 depot_ids = 13;
+      case 13: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_depot_ids:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 1, 104, input, this->mutable_depot_ids())));
+        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
+                   == ::google::protobuf::internal::WireFormatLite::
+                      WIRETYPE_LENGTH_DELIMITED) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, this->mutable_depot_ids())));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(104)) goto parse_depot_ids;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -25109,6 +25199,27 @@ void CMsgGCHUpdateSession::SerializeWithCachedSizes(
       9, this->extra_fields(i), output);
   }
 
+  // optional fixed64 owner_id = 10;
+  if (has_owner_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFixed64(10, this->owner_id(), output);
+  }
+
+  // optional uint32 cm_session_sysid = 11;
+  if (has_cm_session_sysid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(11, this->cm_session_sysid(), output);
+  }
+
+  // optional uint32 cm_session_identifier = 12;
+  if (has_cm_session_identifier()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(12, this->cm_session_identifier(), output);
+  }
+
+  // repeated uint32 depot_ids = 13;
+  for (int i = 0; i < this->depot_ids_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(
+      13, this->depot_ids(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -25162,6 +25273,27 @@ void CMsgGCHUpdateSession::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         9, this->extra_fields(i), target);
+  }
+
+  // optional fixed64 owner_id = 10;
+  if (has_owner_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFixed64ToArray(10, this->owner_id(), target);
+  }
+
+  // optional uint32 cm_session_sysid = 11;
+  if (has_cm_session_sysid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(11, this->cm_session_sysid(), target);
+  }
+
+  // optional uint32 cm_session_identifier = 12;
+  if (has_cm_session_identifier()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(12, this->cm_session_identifier(), target);
+  }
+
+  // repeated uint32 depot_ids = 13;
+  for (int i = 0; i < this->depot_ids_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteUInt32ToArray(13, this->depot_ids(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -25226,12 +25358,43 @@ int CMsgGCHUpdateSession::ByteSize() const {
     }
 
   }
+  if (_has_bits_[9 / 32] & (0xffu << (9 % 32))) {
+    // optional fixed64 owner_id = 10;
+    if (has_owner_id()) {
+      total_size += 1 + 8;
+    }
+
+    // optional uint32 cm_session_sysid = 11;
+    if (has_cm_session_sysid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->cm_session_sysid());
+    }
+
+    // optional uint32 cm_session_identifier = 12;
+    if (has_cm_session_identifier()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->cm_session_identifier());
+    }
+
+  }
   // repeated .CMsgGCHUpdateSession.ExtraField extra_fields = 9;
   total_size += 1 * this->extra_fields_size();
   for (int i = 0; i < this->extra_fields_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         this->extra_fields(i));
+  }
+
+  // repeated uint32 depot_ids = 13;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->depot_ids_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::
+        UInt32Size(this->depot_ids(i));
+    }
+    total_size += 1 * this->depot_ids_size() + data_size;
   }
 
   if (!unknown_fields().empty()) {
@@ -25260,6 +25423,7 @@ void CMsgGCHUpdateSession::MergeFrom(const ::google::protobuf::Message& from) {
 void CMsgGCHUpdateSession::MergeFrom(const CMsgGCHUpdateSession& from) {
   GOOGLE_CHECK_NE(&from, this);
   extra_fields_.MergeFrom(from.extra_fields_);
+  depot_ids_.MergeFrom(from.depot_ids_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_steam_id()) {
       set_steam_id(from.steam_id());
@@ -25284,6 +25448,17 @@ void CMsgGCHUpdateSession::MergeFrom(const CMsgGCHUpdateSession& from) {
     }
     if (from.has_client_addr()) {
       set_client_addr(from.client_addr());
+    }
+  }
+  if (from._has_bits_[9 / 32] & (0xffu << (9 % 32))) {
+    if (from.has_owner_id()) {
+      set_owner_id(from.owner_id());
+    }
+    if (from.has_cm_session_sysid()) {
+      set_cm_session_sysid(from.cm_session_sysid());
+    }
+    if (from.has_cm_session_identifier()) {
+      set_cm_session_identifier(from.cm_session_identifier());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -25317,6 +25492,10 @@ void CMsgGCHUpdateSession::Swap(CMsgGCHUpdateSession* other) {
     std::swap(os_type_, other->os_type_);
     std::swap(client_addr_, other->client_addr_);
     extra_fields_.Swap(&other->extra_fields_);
+    std::swap(owner_id_, other->owner_id_);
+    std::swap(cm_session_sysid_, other->cm_session_sysid_);
+    std::swap(cm_session_identifier_, other->cm_session_identifier_);
+    depot_ids_.Swap(&other->depot_ids_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

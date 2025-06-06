@@ -8325,6 +8325,39 @@ class CMsgGCHUpdateSession : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::CMsgGCHUpdateSession_ExtraField >*
       mutable_extra_fields();
 
+  // optional fixed64 owner_id = 10;
+  inline bool has_owner_id() const;
+  inline void clear_owner_id();
+  static const int kOwnerIdFieldNumber = 10;
+  inline ::google::protobuf::uint64 owner_id() const;
+  inline void set_owner_id(::google::protobuf::uint64 value);
+
+  // optional uint32 cm_session_sysid = 11;
+  inline bool has_cm_session_sysid() const;
+  inline void clear_cm_session_sysid();
+  static const int kCmSessionSysidFieldNumber = 11;
+  inline ::google::protobuf::uint32 cm_session_sysid() const;
+  inline void set_cm_session_sysid(::google::protobuf::uint32 value);
+
+  // optional uint32 cm_session_identifier = 12;
+  inline bool has_cm_session_identifier() const;
+  inline void clear_cm_session_identifier();
+  static const int kCmSessionIdentifierFieldNumber = 12;
+  inline ::google::protobuf::uint32 cm_session_identifier() const;
+  inline void set_cm_session_identifier(::google::protobuf::uint32 value);
+
+  // repeated uint32 depot_ids = 13;
+  inline int depot_ids_size() const;
+  inline void clear_depot_ids();
+  static const int kDepotIdsFieldNumber = 13;
+  inline ::google::protobuf::uint32 depot_ids(int index) const;
+  inline void set_depot_ids(int index, ::google::protobuf::uint32 value);
+  inline void add_depot_ids(::google::protobuf::uint32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      depot_ids() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_depot_ids();
+
   // @@protoc_insertion_point(class_scope:CMsgGCHUpdateSession)
  private:
   inline void set_has_steam_id();
@@ -8343,6 +8376,12 @@ class CMsgGCHUpdateSession : public ::google::protobuf::Message {
   inline void clear_has_os_type();
   inline void set_has_client_addr();
   inline void clear_has_client_addr();
+  inline void set_has_owner_id();
+  inline void clear_has_owner_id();
+  inline void set_has_cm_session_sysid();
+  inline void clear_has_cm_session_sysid();
+  inline void set_has_cm_session_identifier();
+  inline void clear_has_cm_session_identifier();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -8355,9 +8394,13 @@ class CMsgGCHUpdateSession : public ::google::protobuf::Message {
   ::google::protobuf::uint32 os_type_;
   ::google::protobuf::uint32 client_addr_;
   ::google::protobuf::RepeatedPtrField< ::CMsgGCHUpdateSession_ExtraField > extra_fields_;
+  ::google::protobuf::uint64 owner_id_;
+  ::google::protobuf::uint32 cm_session_sysid_;
+  ::google::protobuf::uint32 cm_session_identifier_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > depot_ids_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(13 + 31) / 32];
 
   friend void  protobuf_AddDesc_steammessages_2eproto();
   friend void protobuf_AssignDesc_steammessages_2eproto();
@@ -16764,6 +16807,97 @@ CMsgGCHUpdateSession::extra_fields() const {
 inline ::google::protobuf::RepeatedPtrField< ::CMsgGCHUpdateSession_ExtraField >*
 CMsgGCHUpdateSession::mutable_extra_fields() {
   return &extra_fields_;
+}
+
+// optional fixed64 owner_id = 10;
+inline bool CMsgGCHUpdateSession::has_owner_id() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void CMsgGCHUpdateSession::set_has_owner_id() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void CMsgGCHUpdateSession::clear_has_owner_id() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void CMsgGCHUpdateSession::clear_owner_id() {
+  owner_id_ = GOOGLE_ULONGLONG(0);
+  clear_has_owner_id();
+}
+inline ::google::protobuf::uint64 CMsgGCHUpdateSession::owner_id() const {
+  return owner_id_;
+}
+inline void CMsgGCHUpdateSession::set_owner_id(::google::protobuf::uint64 value) {
+  set_has_owner_id();
+  owner_id_ = value;
+}
+
+// optional uint32 cm_session_sysid = 11;
+inline bool CMsgGCHUpdateSession::has_cm_session_sysid() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void CMsgGCHUpdateSession::set_has_cm_session_sysid() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void CMsgGCHUpdateSession::clear_has_cm_session_sysid() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void CMsgGCHUpdateSession::clear_cm_session_sysid() {
+  cm_session_sysid_ = 0u;
+  clear_has_cm_session_sysid();
+}
+inline ::google::protobuf::uint32 CMsgGCHUpdateSession::cm_session_sysid() const {
+  return cm_session_sysid_;
+}
+inline void CMsgGCHUpdateSession::set_cm_session_sysid(::google::protobuf::uint32 value) {
+  set_has_cm_session_sysid();
+  cm_session_sysid_ = value;
+}
+
+// optional uint32 cm_session_identifier = 12;
+inline bool CMsgGCHUpdateSession::has_cm_session_identifier() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void CMsgGCHUpdateSession::set_has_cm_session_identifier() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void CMsgGCHUpdateSession::clear_has_cm_session_identifier() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void CMsgGCHUpdateSession::clear_cm_session_identifier() {
+  cm_session_identifier_ = 0u;
+  clear_has_cm_session_identifier();
+}
+inline ::google::protobuf::uint32 CMsgGCHUpdateSession::cm_session_identifier() const {
+  return cm_session_identifier_;
+}
+inline void CMsgGCHUpdateSession::set_cm_session_identifier(::google::protobuf::uint32 value) {
+  set_has_cm_session_identifier();
+  cm_session_identifier_ = value;
+}
+
+// repeated uint32 depot_ids = 13;
+inline int CMsgGCHUpdateSession::depot_ids_size() const {
+  return depot_ids_.size();
+}
+inline void CMsgGCHUpdateSession::clear_depot_ids() {
+  depot_ids_.Clear();
+}
+inline ::google::protobuf::uint32 CMsgGCHUpdateSession::depot_ids(int index) const {
+  return depot_ids_.Get(index);
+}
+inline void CMsgGCHUpdateSession::set_depot_ids(int index, ::google::protobuf::uint32 value) {
+  depot_ids_.Set(index, value);
+}
+inline void CMsgGCHUpdateSession::add_depot_ids(::google::protobuf::uint32 value) {
+  depot_ids_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+CMsgGCHUpdateSession::depot_ids() const {
+  return depot_ids_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+CMsgGCHUpdateSession::mutable_depot_ids() {
+  return &depot_ids_;
 }
 
 // -------------------------------------------------------------------
