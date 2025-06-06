@@ -23,6 +23,14 @@
 cmake_minimum_required(VERSION 3.16)
 project(KisakStrike)
 
+set(Debug_GCC_Build ON)
+
+#gcc debug stuff
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND Debug_GCC_Build)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer -g")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer -g")
+endif()
+
 add_subdirectory(appframework)
 add_subdirectory(interfaces)
 add_subdirectory(fgdlib)
