@@ -304,3 +304,4 @@ paket-files/
 build/
 tier0/valveetwproviderEvents.h
 /cmake-build
+game/client/vscript_client_nut.h

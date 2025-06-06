@@ -348,3 +348,24 @@ target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/gcsdk_client.a) #evil game coor
 target_link_libraries(${OUTBINNAME} tier2_client tier3_client vgui_controls_client vtf_client bzip2_client libvstdlib_client dmxloader_client bitmap_client mathlib_client tier2_client )
 target_link_libraries(${OUTBINNAME} protobuf )
 
+# Define script and file paths using absolute paths
+set(TEXTTOARRAY_SCRIPT "${CMAKE_SOURCE_DIR}/devtools/bin/texttoarray.pl")
+set(NUT_SOURCE "${CMAKE_SOURCE_DIR}/game/client/vscript_client.nut")
+set(NUT_HEADER "${CMAKE_SOURCE_DIR}/game/client/vscript_client_nut.h")
+
+# Add custom command to generate the .h file
+add_custom_command(
+    OUTPUT ${NUT_HEADER}
+    COMMAND ${CMAKE_COMMAND} -E echo "Generating ${NUT_HEADER} from ${NUT_SOURCE}"
+    COMMAND perl ${TEXTTOARRAY_SCRIPT} ${NUT_SOURCE} g_Script_vscript_client > ${NUT_HEADER}
+    DEPENDS ${NUT_SOURCE} ${TEXTTOARRAY_SCRIPT}
+    COMMENT "Running texttoarray.pl on ${NUT_SOURCE}"
+    VERBATIM
+)
+
+# Custom target to ensure generation
+add_custom_target(generate_nut_header DEPENDS ${NUT_HEADER})
+
+# Make your actual build target depend on this generation step
+add_dependencies(${OUTBINNAME} generate_nut_header)
+
