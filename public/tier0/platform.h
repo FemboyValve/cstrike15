@@ -1,13 +1,4 @@
-//===== Copyright 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose:
-//
-// $NoKeywords: $ 
-//
-//===========================================================================//
-
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#pragma once
 
 #if defined(__x86_64__) || defined(_WIN64)
 #define PLATFORM_64BITS 1
@@ -2564,5 +2555,3 @@ PLATFORM_INTERFACE int V_tier0_snprintf( char *a, int n, PRINTF_FORMAT_STRING co
 PLATFORM_INTERFACE char const * Plat_GetEnv(char const *pEnvVarName);
 
 PLATFORM_INTERFACE bool Plat_GetExecutablePath(char* pBuff, size_t nBuff);
-
-#endif /* PLATFORM_H */

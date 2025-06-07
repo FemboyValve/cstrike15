@@ -1,6 +1,3 @@
-# Kisak-Strike: Gentoo Offensive
-# Main CMake File
-
 # List of targets from VPC
 #                        Dmserializers*         Matchmaking_DS_CSGO*   ServerBrowser*         tier3*
 #                        Dmxloader*             materialsystem*        Server_CSGO*           Unitlib*
@@ -20,10 +17,10 @@
 #NOT DONE
 #engine_ds (seems identical to engine, missing in retail linux64)
 
-cmake_minimum_required(VERSION 3.16)
-project(KisakStrike)
+cmake_minimum_required(VERSION 3.20)
+project(cstrike15)
 
-set(Debug_GCC_Build ON)
+option(Debug_GCC_Build "Debug GCC Build" OFF)
 
 #gcc debug stuff
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND Debug_GCC_Build)

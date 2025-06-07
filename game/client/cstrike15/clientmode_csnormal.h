@@ -1,14 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-//=============================================================================//
-
-#ifndef CS_CLIENTMODE_H
-#define CS_CLIENTMODE_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "clientmode_shared.h"
 #include "counterstrikeviewport.h"
@@ -19,11 +9,11 @@
 enum PostProcessEffect_t
 {
 	POST_EFFECT_DEFAULT = 0,
-	POST_EFFECT_LOW_HEATH,			// 1st person	event
+	POST_EFFECT_LOW_HEATH,				// 1st person	event
 	POST_EFFECT_VERY_LOW_HEATH,
-	POST_EFFECT_IN_BUY_MENU,		// 1st person	event
+	POST_EFFECT_IN_BUY_MENU,			// 1st person	event
 	POST_EFFECT_DEATH_CAM,				// 1st person	event
-	POST_EFFECT_SPECTATING,					// 1st person	state
+	POST_EFFECT_SPECTATING,				// 1st person	state
 	POST_EFFECT_IN_FIRE,
 	POST_EFFECT_ZOOMED_RIFLE,
 	POST_EFFECT_ZOOMED_SNIPER,
@@ -32,8 +22,8 @@ enum PostProcessEffect_t
 	POST_EFFECT_ROUND_END_VIA_BOMBING,
 	POST_EFFECT_SPEC_CAMERA_LERPING,
 	POST_EFFECT_MAP_CONTROLLED,
-	POST_EFFECT_DEATH_CAM_BODYSHOT,				// 1st person	event
-	POST_EFFECT_DEATH_CAM_HEADSHOT,				// 1st person	event
+	POST_EFFECT_DEATH_CAM_BODYSHOT,		// 1st person	event
+	POST_EFFECT_DEATH_CAM_HEADSHOT,		// 1st person	event
 	NUM_POST_EFFECTS
 };
 
@@ -205,6 +195,3 @@ public:
 
 extern IClientMode *GetClientModeNormal();
 extern ClientModeCSNormal* GetClientModeCSNormal();
-
-
-#endif // CS_CLIENTMODE_H

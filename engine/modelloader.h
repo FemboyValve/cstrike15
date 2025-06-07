@@ -1,14 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
-#if !defined( MOD_LOADER_H )
-#define MOD_LOADER_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 struct model_t;
 class IMaterial;
@@ -279,5 +269,3 @@ extern bool g_bBakedPropLightingNoSeparateHDR;
 extern bool g_bHasLightmapAlphaData;
 extern bool g_bBakedPropLightingStreams3;
 extern bool g_bHasLightmapAlphaData3;
-
-#endif // MOD_LOADER_H

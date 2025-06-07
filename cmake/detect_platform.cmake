@@ -1,7 +1,18 @@
-#Something custom/made by me(lwss).
-#Include this in your CMakeLists.txt to set the various platform defines the codebase expects
 if(WIN32)
-    message(FATAL_ERROR "install gentoo")
+    add_definitions(-DWIN32 -D_WIN32 -DWINDOWS)
+    set(WINDOWS "1")
+    set(_DLL_EXT "_client.dll")
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        message(STATUS "Windows(x64) Detected")
+        add_definitions(-DWIN64 -D_WIN64)
+        set(WIN64 "1")
+    elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+        message(STATUS "Windows(x86) Detected")
+        add_definitions(-DWIN32)
+        set(WIN32 "1")
+    else()
+        message(FATAL_ERROR "Weird pointer size! Couldn't detect x64/x86")
+    endif()
 elseif(UNIX AND NOT APPLE) #LINUX
     add_definitions(-DLINUX -D_LINUX -DPOSIX)
     set(LINUXALL "1")
