@@ -1176,7 +1176,6 @@ void ClientModeCSNormal::Update()
 
 					wchar_t wchQuestName[ 256 ] = {};
 
-					locchar_t * locShortName = L"";
 					const locchar_t * locShortName = L"";
 
 					locShortName = g_pVGuiLocalize->Find( pQuestDef->GetShortNameLocToken( ) );
