@@ -1,14 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
-//
-// Purpose: provide a layer of abstraction between GC and vgui localization systems
-//
-//=============================================================================
-
-#ifndef LOCALIZATION_PROVIDER_H
-#define LOCALIZATION_PROVIDER_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "language.h"
 
@@ -258,5 +248,3 @@ private:
 	enum { kBufferSize = 512, };
 	locchar_t m_loc_Buffer[ kBufferSize ];
 };
-
-#endif // LOCALIZATION_PROVIDER_H
