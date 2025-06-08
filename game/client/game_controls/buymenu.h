@@ -1,15 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef BUYMENU_H
-#define BUYMENU_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include <vgui_controls/WizardPanel.h>
 #include <game/client/iviewport.h>
@@ -60,6 +49,3 @@ protected:
 	int			m_iTeam;
 	int			m_iClass;
 };
-
-
-#endif // BUYMENU_H

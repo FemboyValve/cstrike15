@@ -1,9 +1,3 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: Launcher for hammer, which is sitting in its own DLL
-//
-//===========================================================================//
-
 #include <windows.h>
 #include <eh.h>
 #include "appframework/AppFramework.h"

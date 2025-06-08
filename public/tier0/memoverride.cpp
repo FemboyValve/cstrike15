@@ -1,11 +1,3 @@
-//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Insert this file into all projects using the memory system
-// It will cause that project to use the shader memory allocator
-//
-// $NoKeywords: $
-//=============================================================================//
-
 #ifdef SN_TARGET_PS3
 
 #ifdef PS3MEMOVERRIDEWRAP
@@ -471,50 +463,55 @@ ALLOC_CALL void *calloc( size_t nCount, size_t nElementSize )
 //-----------------------------------------------------------------------------
 extern "C"
 {
-
-// 64-bit
+	// 64-bit
 #ifdef _WIN64
-void* __cdecl _malloc_base( size_t nSize )
-{
-	return AllocUnattributed( nSize );
-}
-#else
-void *_malloc_base( size_t nSize )
-{
-	return AllocUnattributed( nSize );
-}
-#endif
-
-#if ( defined ( _MSC_VER ) && _MSC_VER >= 1900 )
-_CRTRESTRICT void *_calloc_base(size_t nCount, size_t nSize)
-{
-	void *pMem = AllocUnattributed(nCount*nSize);
-	memset(pMem, 0, nCount*nSize);
-	return pMem;
-}
-#else
-void *_calloc_base( size_t nSize )
-{
-	void *pMem = AllocUnattributed( nSize );
-	memset(pMem, 0, nSize);
-	return pMem;
-}
-#endif
-
-void *_realloc_base( void *pMem, size_t nSize )
-{
-	return ReallocUnattributed( pMem, nSize );
-}
-
-void *_recalloc_base( void *pMem, size_t nSize )
-{
-	void *pMemOut = ReallocUnattributed( pMem, nSize );
-	if (!pMem)
+	__declspec(restrict) void* __cdecl _malloc_base(size_t nSize)
 	{
-		memset(pMemOut, 0, nSize);
+		return AllocUnattributed(nSize);
 	}
-	return pMemOut;
-}
+#else
+	__declspec(restrict) void *_malloc_base(size_t nSize)
+	{
+		return AllocUnattributed(nSize);
+	}
+#endif
+
+#if ( defined( _MSC_VER ) && _MSC_VER >= 1900 )
+	__declspec(restrict) void *_calloc_base(size_t nCount, size_t nSize)
+	{
+		void *pMem = AllocUnattributed(nCount * nSize);
+		if (pMem)
+		{
+			memset(pMem, 0, nCount * nSize);
+		}
+		return pMem;
+	}
+#else
+	__declspec(restrict) void *_calloc_base(size_t nSize)
+	{
+		void *pMem = AllocUnattributed(nSize);
+		if (pMem)
+		{
+			memset(pMem, 0, nSize);
+		}
+		return pMem;
+	}
+#endif
+
+	__declspec(restrict) void *_realloc_base(void *pMem, size_t nSize)
+	{
+		return ReallocUnattributed(pMem, nSize);
+	}
+
+	__declspec(restrict) void *_recalloc_base(void *pMem, size_t nSize)
+	{
+		void *pMemOut = ReallocUnattributed(pMem, nSize);
+		if (!pMem && pMemOut)
+		{
+			memset(pMemOut, 0, nSize);
+		}
+		return pMemOut;
+	}
 
 void _free_base( void *pMem )
 {
@@ -1348,12 +1345,16 @@ size_t __cdecl _CrtSetDebugFillThreshold( size_t _NewDebugFillThreshold)
 
 #if (_MSC_VER < 1900) || !defined( _DEBUG )
 
-char * __cdecl _strdup ( const char * string )
+char* __cdecl _strdup(const char* string)
 {
+	// Check for null pointer first
+	if (string == NULL)
+		return NULL;
+
 	int nSize = strlen(string) + 1;
-	char *pCopy = (char*)AllocUnattributed( nSize );
-	if ( pCopy )
-		memcpy( pCopy, string, nSize );
+	char* pCopy = (char*)AllocUnattributed(nSize);
+	if (pCopy)
+		memcpy(pCopy, string, nSize);
 	return pCopy;
 }
 

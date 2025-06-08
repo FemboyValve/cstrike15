@@ -16438,7 +16438,7 @@ int CCSPlayer::GetAccountForScoreboard()
 		return m_PreControlData.m_iAccount;
 
 	CCSPlayer* pControllingPlayer = GetControlledByPlayer();
-	if ( pControllingPlayer != NULL )
+	if ( !pControllingPlayer )
 		return pControllingPlayer->m_iAccount;
 	return m_iAccount;
 }

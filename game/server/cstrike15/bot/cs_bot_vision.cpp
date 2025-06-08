@@ -511,13 +511,13 @@ CCSBot::PartInfo CCSBot::m_partInfo[ MAX_PLAYERS ];
  */
 void CCSBot::ComputePartPositions( CCSPlayer *player )
 {
-	const int headBox = 0;
-	const int gutBox = 4;
-	const int leftElbowBox = 16;
-	const int rightElbowBox = 18;
-	//const int hipBox = 0;
-	//const int leftFootBox = 4;
-	//const int rightFootBox = 8;
+	const int headBox = 12;
+	const int gutBox = 9;
+	const int leftElbowBox = 14;
+	const int rightElbowBox = 17;
+	const int hipBox = 0;
+	const int leftFootBox = 4;
+	const int rightFootBox = 8;
 	const int maxBoxIndex = rightElbowBox;
 
 	VPROF_BUDGET( "CCSBot::ComputePartPositions", VPROF_BUDGETGROUP_NPCS );
@@ -568,6 +568,18 @@ void CCSBot::ComputePartPositions( CCSPlayer *player )
 			// right side
 			box = set->pHitbox( rightElbowBox );
 			player->GetBonePosition( box->bone, info->m_rightSidePos, angles );	
+
+			// hips
+			box = set->pHitbox(hipBox);
+			player->GetBonePosition(box->bone, info->m_hipPos, angles);
+
+			// left foot (actual bone position, not just ground level)
+			box = set->pHitbox(leftFootBox);
+			player->GetBonePosition(box->bone, info->m_leftFootPos, angles);
+
+			// right foot  
+			box = set->pHitbox(rightFootBox);
+			player->GetBonePosition(box->bone, info->m_rightFootPos, angles);
 
 			return;
 		}

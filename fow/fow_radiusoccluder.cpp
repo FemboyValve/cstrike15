@@ -79,98 +79,98 @@ bool CFoW_RadiusOccluder::IsInRange( CFoW_Viewer *pViewer )
 // Input  : pFoW - the main FoW object
 //			pViewer - the viewer to obstruct
 //-----------------------------------------------------------------------------
-void CFoW_RadiusOccluder::ObstructViewerGrid( CFoW *pFoW, CFoW_Viewer *pViewer )
+void CFoW_RadiusOccluder::ObstructViewerGrid(CFoW *pFoW, CFoW_Viewer *pViewer)
 {
-	if ( m_bEnabled == false )
+	if (m_bEnabled == false)
 	{
 		return;
 	}
 
 	Vector	vViewerLoc = pViewer->GetLocation();
 	float	flViewerRadius = pViewer->GetSize();
-	Vector	vDelta = ( vViewerLoc - m_vLocation );
+	Vector	vDelta = (vViewerLoc - m_vLocation);
 
 	vDelta.z = 0.0f;
 	float flLength = vDelta.Length();
 
-	if ( flLength > ( flViewerRadius + m_flRadius ) )
+	if (flLength > (flViewerRadius + m_flRadius))
 	{
 		return;
 	}
 
-//	if ( length <= m_flRadius || length > ViewerRadius )
-	if ( flLength <= m_flRadius )
+	//	if ( length <= m_flRadius || length > ViewerRadius )
+	if (flLength <= m_flRadius)
 	{
 		return;
 	}
 
-	float flAngle = ( float )atan2( vDelta.y, vDelta.x );
-	float flTangentLen = sqrt( flLength * flLength - m_flRadius * m_flRadius );
-	float flTangentAngle = ( float )asin( m_flRadius / flLength );
+	float flAngle = (float)atan2(vDelta.y, vDelta.x);
+	float flTangentLen = FastSqrt(flLength * flLength - m_flRadius * m_flRadius);
+	float flTangentAngle = (float)asin(m_flRadius / flLength);
 
 	// compute the two tangent angles
 	float flPos = flAngle + flTangentAngle;
 	float flNeg = flAngle - flTangentAngle;
 
-	float x[ 6 ], y[ 6 ];
+	float x[6], y[6];
 
-	// compute the two tangent points
-	x[ 0 ] = -( float )cos( flPos ) * flTangentLen + vViewerLoc.x;
-	y[ 0 ] = -( float )sin( flPos ) * flTangentLen + vViewerLoc.y;
-	x[ 5 ] = -( float )cos( flNeg ) * flTangentLen + vViewerLoc.x;
-	y[ 5 ] = -( float )sin( flNeg ) * flTangentLen + vViewerLoc.y;
+	// compute the two tangent points using table functions
+	x[0] = -TableCos(flPos) * flTangentLen + vViewerLoc.x;
+	y[0] = -TableSin(flPos) * flTangentLen + vViewerLoc.y;
+	x[5] = -TableCos(flNeg) * flTangentLen + vViewerLoc.x;
+	y[5] = -TableSin(flNeg) * flTangentLen + vViewerLoc.y;
 
 	// extend the tangent points to the viewer's edge
-	x[ 1 ] = -( float )cos( flPos ) * flViewerRadius + vViewerLoc.x;
-	y[ 1 ] = -( float )sin( flPos ) * flViewerRadius + vViewerLoc.y;
-	x[ 4 ] = -( float )cos( flNeg ) * flViewerRadius + vViewerLoc.x;
-	y[ 4 ] = -( float )sin( flNeg ) * flViewerRadius + vViewerLoc.y;
+	x[1] = -TableCos(flPos) * flViewerRadius + vViewerLoc.x;
+	y[1] = -TableSin(flPos) * flViewerRadius + vViewerLoc.y;
+	x[4] = -TableCos(flNeg) * flViewerRadius + vViewerLoc.x;
+	y[4] = -TableSin(flNeg) * flViewerRadius + vViewerLoc.y;
 
 	// compute the forward direction of the viewer's intersection through this blocker
 	float fx = -vDelta.x / flLength;
 	float fy = -vDelta.y / flLength;
 
 	// compute half the length between the viewer's tangent edges
-	float dx2 = x[ 4 ] - x[ 1 ];
-	float dy2 = y[ 4 ] - y[ 1 ];
-	float flHalflen = ( dx2 * dx2 + dy2 * dy2 ) / 4;
+	float dx2 = x[4] - x[1];
+	float dy2 = y[4] - y[1];
+	float flHalflen = (dx2 * dx2 + dy2 * dy2) / 4;
 
 	// compute the side of the triangle that forms from viewer's radius to half way across the viewer's tangent edges
-	float flLen2 = ( float )sqrt( flViewerRadius * flViewerRadius - flHalflen );
+	float flLen2 = FastSqrt(flViewerRadius * flViewerRadius - flHalflen);
 	flLen2 = flViewerRadius - flLen2;
 
 	// compute the box extents to encompass the circle's bounds
-	x[ 2 ] = x[ 1 ] + ( fx * flLen2 );
-	y[ 2 ] = y[ 1 ] + ( fy * flLen2 );
-	x[ 3 ] = x[ 4 ] + ( fx * flLen2 );
-	y[ 3 ] = y[ 4 ] + ( fy * flLen2 );
+	x[2] = x[1] + (fx * flLen2);
+	y[2] = y[1] + (fy * flLen2);
+	x[3] = x[4] + (fx * flLen2);
+	y[3] = y[4] + (fy * flLen2);
 
-	CFOW_2DPlane Planes[ 6 ];
+	CFOW_2DPlane Planes[6];
 
 	for (int i = 0; i < 6; i++)
 	{
-		Planes[ i ].Init( x[ i ], y[ i ], x[ ( i + 1 ) % 6 ], y[ ( i + 1 ) % 6 ] );
+		Planes[i].Init(x[i], y[i], x[(i + 1) % 6], y[(i + 1) % 6]);
 	}
 
-	float flMinX = x[ 0 ], flMinY = y[ 0 ], flMaxX = x[ 0 ], flMaxY = y[ 0 ];
+	float flMinX = x[0], flMinY = y[0], flMaxX = x[0], flMaxY = y[0];
 
-	for ( int i = 1; i < 6; i++ )
+	for (int i = 1; i < 6; i++)
 	{
-		if ( x[ i ] < flMinX )
+		if (x[i] < flMinX)
 		{
-			flMinX = x[ i ];
+			flMinX = x[i];
 		}
-		if ( x[ i ] > flMaxX )
+		if (x[i] > flMaxX)
 		{
-			flMaxX = x[ i ];
+			flMaxX = x[i];
 		}
-		if ( y[ i ] < flMinY )
+		if (y[i] < flMinY)
 		{
-			flMinY = y[ i ];
+			flMinY = y[i];
 		}
-		if ( y[i] > flMaxY )
+		if (y[i] > flMaxY)
 		{
-			flMaxY = y[ i ];
+			flMaxY = y[i];
 		}
 	}
 
@@ -179,20 +179,20 @@ void CFoW_RadiusOccluder::ObstructViewerGrid( CFoW *pFoW, CFoW_Viewer *pViewer )
 	Vector2D	vViewerStart, vViewerEnd;
 	int			nGridSize = pFoW->GetHorizontalGridSize();
 
-	pViewer->GetStartPosition( vViewerStart );
-	pViewer->GetEndPosition( vViewerEnd );
+	pViewer->GetStartPosition(vViewerStart);
+	pViewer->GetEndPosition(vViewerEnd);
 
-	if ( flMinX > vViewerStart.x )
+	if (flMinX > vViewerStart.x)
 	{
-		nGridX = ( int )( flMinX - vViewerStart.x ) / nGridSize;
-		px = vViewerStart.x + ( int )( nGridSize * nGridX );
+		nGridX = (int)(flMinX - vViewerStart.x) / nGridSize;
+		px = vViewerStart.x + (int)(nGridSize * nGridX);
 	}
 	else
 	{
 		px = vViewerStart.x;
 		nGridX = 0;
 	}
-	if ( flMaxX < vViewerEnd.x )
+	if (flMaxX < vViewerEnd.x)
 	{
 		ex = flMaxX;
 	}
@@ -201,17 +201,17 @@ void CFoW_RadiusOccluder::ObstructViewerGrid( CFoW *pFoW, CFoW_Viewer *pViewer )
 		ex = vViewerEnd.x;
 	}
 
-	if ( flMinY > vViewerStart.y )
+	if (flMinY > vViewerStart.y)
 	{
-		nStartGridY = ( int )( flMinY - vViewerStart.y ) / nGridSize;
-		flStart_py = vViewerStart.y + ( int )( nGridSize * nStartGridY );
+		nStartGridY = (int)(flMinY - vViewerStart.y) / nGridSize;
+		flStart_py = vViewerStart.y + (int)(nGridSize * nStartGridY);
 	}
 	else
 	{
 		nStartGridY = 0;
 		flStart_py = vViewerStart.y;
 	}
-	if ( flMaxY < vViewerEnd.y )
+	if (flMaxY < vViewerEnd.y)
 	{
 		ey = flMaxY;
 	}
@@ -227,36 +227,36 @@ void CFoW_RadiusOccluder::ObstructViewerGrid( CFoW *pFoW, CFoW_Viewer *pViewer )
 	px += nGridSize / 2;
 	flStart_py += nGridSize / 2;
 
-	for ( ; px < ex; px += nGridSize, nGridX++)
+	for (; px < ex; px += nGridSize, nGridX++)
 	{
-		for ( nGridY = nStartGridY, py = flStart_py; py < ey; py += nGridSize, nGridY++ )
+		for (nGridY = nStartGridY, py = flStart_py; py < ey; py += nGridSize, nGridY++)
 		{
-			byte	*pPos = pLocalVisibility + ( nGridX * nLocalGridUnits ) + nGridY;
+			byte	*pPos = pLocalVisibility + (nGridX * nLocalGridUnits) + nGridY;
 
-			if ( ( ( *pPos ) & FOW_VG_IS_VISIBLE ) == 0 )
+			if (((*pPos) & FOW_VG_IS_VISIBLE) == 0)
 			{
 				continue;
 			}
 
 			int i;
-			for ( i = 0; i < 6; i++ )
+			for (i = 0; i < 6; i++)
 			{
 #if 0
 				// we don't need to check the bounding planes - these would be used to construct a stencil buffer though
-				if ( i == 1 || i == 2 || i == 3 )
+				if (i == 1 || i == 2 || i == 3)
 				{
 					continue;
 				}
 #endif
-				if ( !Planes[ i ].PointInFront( px, py ) )
+				if (!Planes[i].PointInFront(px, py))
 				{
 					break;
 				}
 			}
 
-			if ( i == 6 )
+			if (i == 6)
 			{
-				( *pPos ) &= ~FOW_VG_IS_VISIBLE;
+				(*pPos) &= ~FOW_VG_IS_VISIBLE;
 			}
 		}
 	}

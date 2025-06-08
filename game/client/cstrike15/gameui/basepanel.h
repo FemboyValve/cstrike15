@@ -1,15 +1,4 @@
-//========= Copyright  1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef BASEPANEL_H
-#define BASEPANEL_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #if !defined( NO_STEAM )
 	#include "utlvector.h"
@@ -260,15 +249,12 @@ public:
 	// Do we want the start screen to come up when we boot up, before we reach main menu?
 	bool			IsStartScreenEnabled( void )	{ return m_bShowStartScreen; }
 
-	// [jason] Start the sign-in blade
+#if 1 //IsGameConsole() // we dont need this if we are on PC.
 	void			SignInFromStartScreen( void );
-
-	// [jason] Dismiss the start screen and commit the user once they've signed in
 	void			CompleteStartScreenSignIn( void );
-
-	// [jason] Callback for the CreateStartScreen interface to allow us to complete the signin process
 	void			NotifySignInCompleted(int userID = -1);
 	void			NotifySignInCancelled( void );
+#endif
 
 	// [jason] Helper function to allow show/hide of the standard Valve main menu (which also enables/disables its processing)
 	void			ShowMainMenu( bool bShow );
@@ -564,5 +550,3 @@ extern CBaseModPanel *BasePanel();
 extern CBaseModPanel *BasePanelSingleton(); // Constructs if not built yet
 
 #endif
-
-#endif // BASEPANEL_H

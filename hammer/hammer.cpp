@@ -1,9 +1,3 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: The application object.
-//
-//===========================================================================//
-
 #include "stdafx.h"
 #include <io.h>
 #include <stdlib.h>

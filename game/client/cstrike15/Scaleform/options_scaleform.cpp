@@ -1,9 +1,3 @@
-//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose:
-//
-// $NoKeywords: $
-//=============================================================================//
 #include "cbase.h"
 #if defined( INCLUDE_SCALEFORM )
 #include "basepanel.h"
@@ -42,7 +36,7 @@ int SortByPriority( COptionsScaleform::Option_t * const *pLeft, COptionsScalefor
 	return ( ( *pLeft )->m_nPriority - ( *pRight )->m_nPriority );
 }
 
-COptionsScaleform* COptionsScaleform::m_pInstanceOptions = NULL;
+COptionsScaleform* COptionsScaleform::m_pInstanceOptions = nullptr;
 COptionsScaleform::DialogType_e COptionsScaleform::m_DialogType( DIALOG_TYPE_NONE );
 CUtlString COptionsScaleform::m_strMessage = "";
 
@@ -119,7 +113,7 @@ COptionsScaleform::~COptionsScaleform()
 
 	m_vecOptions.PurgeAndDeleteElements();
 
-	m_pInstanceOptions = NULL;
+	m_pInstanceOptions = nullptr;
 	m_DialogType = DIALOG_TYPE_NONE;
 
 	if ( m_DialogQueue.Count() > 0 )

@@ -1,13 +1,3 @@
-//========= Copyright (c) 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Normal HUD mode
-//
-// $Workfile:     $
-// $Date:         $
-// $NoKeywords: $
-//=============================================================================//
-
-
 #include "cbase.h"
 #include "clientmode_shared.h"
 #include "iinput.h"
@@ -51,12 +41,9 @@
 #include "matchmaking/imatchframework.h"
 #include "clientmode_csnormal.h"
 
-
 #ifdef PORTAL2
 #include "c_basehlplayer.h"
-#endif // PORTAL2
-
-#ifdef CSTRIKE15
+#elif CSTRIKE15
 #include "c_cs_playerresource.h"
 #endif
 
@@ -194,9 +181,9 @@ static bool __MsgFunc_VGUIMenu( const CCSUsrMsg_VGUIMenu &msg )
 //-----------------------------------------------------------------------------
 ClientModeShared::ClientModeShared()
 {
-	m_pViewport = NULL;
-	m_pChatElement = NULL;
-	m_pWeaponSelection = NULL;
+	m_pViewport = nullptr;
+	m_pChatElement = nullptr;
+	m_pWeaponSelection = nullptr;
 	m_nRootSize[ 0 ] = m_nRootSize[ 1 ] = -1;
 }
 
@@ -262,9 +249,6 @@ void ClientModeShared::Init()
 #if defined( INFESTED_DLL )
 	ListenForGameEvent( "player_fullyjoined" );	
 #endif
-
-
-
 
 	HLTVCamera()->Init();
 #if defined( REPLAY_ENABLED )
@@ -825,7 +809,7 @@ void ClientModeShared::Enable()
 void ClientModeShared::EnableWithRootPanel( vgui::VPANEL pRoot )
 {
 	// Add our viewport to the root panel.
-	if( pRoot != NULL )
+	if(!pRoot)
 	{
 		m_pViewport->SetParent( pRoot );
 	}
@@ -883,7 +867,7 @@ void ClientModeShared::Layout( bool bForce /*= false*/)
 #ifdef DEBUG
 	ConVar ironsight_scoped_viewmodel_fov( "ironsight_scoped_viewmodel_fov", "54", FCVAR_CHEAT, "The fov of the viewmodel when ironsighted" );
 #else
-	#define IRONSIGHT_SCOPED_FOV 54.0f
+	#define IRONSIGHT_SCOPED_FOV 54.0f // TODO: i hope this doesnt also apply for csgo stuff...
 #endif
 #endif
 
@@ -949,7 +933,7 @@ vgui::Panel *ClientModeShared::GetPanelFromViewport( const char *pchNamePath )
 
 	// Find the child
 	int nCurrentInstance = 0;
-	vgui::Panel *pPanel = NULL;
+	vgui::Panel *pPanel = nullptr;
 
 	for ( int i = 0; i < GetViewport()->GetChildCount(); i++ )
 	{
@@ -999,7 +983,7 @@ vgui::Panel *ClientModeShared::GetPanelFromViewport( const char *pchNamePath )
 
 		// Find the child
 		nCurrentInstance = 0;
-		vgui::Panel *pNextPanel = NULL;
+		vgui::Panel *pNextPanel = nullptr;
 
 		for ( int i = 0; i < pPanel->GetChildCount(); i++ )
 		{
@@ -1044,6 +1028,7 @@ bool PlayerNameNotSetYet( const char *pszName )
 
 void ClientModeShared::FireGameEvent( IGameEvent *event )
 {
+	assert(false);
 	ACTIVE_SPLITSCREEN_PLAYER_GUARD( GetSplitScreenPlayerSlot() );
 
 	CBaseHudChat *hudChat = CBaseHudChat::GetHudChat();

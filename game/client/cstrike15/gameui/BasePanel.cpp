@@ -569,7 +569,7 @@ CBaseModPanel::CBaseModPanel( const char *panelName ) : Panel(NULL, panelName )
 	m_bNeedStorageDeviceHandle = false;
 	m_bStorageBladeShown = false;
 	m_iStorageID = XBX_INVALID_STORAGE_ID;
-	m_pAsyncJob = NULL;
+	m_pAsyncJob = nullptr;
 	m_pStorageDeviceValidatedNotify = NULL;
 	m_bStartScreenPlayerSigninCompleted = false;
 	m_bMainMenuShown = true;
@@ -588,9 +588,7 @@ CBaseModPanel::CBaseModPanel( const char *panelName ) : Panel(NULL, panelName )
 
 	// any platforms that go straight to main menu, no start screen, should set this flag:
 	if ( CommandLine()->FindParm( "-nostartscreen" ) || 
-		 IsPC() ||
-		 IsLinux() ||
-		 IsOSX() )
+		!IsGameConsole() )
 	{
 		m_bBypassStartScreen = true;
 	}
@@ -3919,9 +3917,7 @@ bool CBaseModPanel::IsStartScreenActive( void )
 }
 
 
-//-----------------------------------------------------------------------------
-// Purpose: 
-//-----------------------------------------------------------------------------
+#if 1 // IsGameConsole()
 void CBaseModPanel::SignInFromStartScreen()
 {
 	m_bWaitingForUserSignIn = true;
@@ -3929,9 +3925,6 @@ void CBaseModPanel::SignInFromStartScreen()
 	xboxsystem->ShowSigninUI( 1, 0 ); // One user, no special flags
 }
 
-//-----------------------------------------------------------------------------
-// Purpose: 
-//-----------------------------------------------------------------------------
 void CBaseModPanel::NotifySignInCompleted(int userID)
 {
 	// $TODO: sanity checks to verify that we have someone signed in, as needed
@@ -3944,9 +3937,6 @@ void CBaseModPanel::NotifySignInCompleted(int userID)
 	}	
 }
 
-//-----------------------------------------------------------------------------
-// Purpose: 
-//-----------------------------------------------------------------------------
 void CBaseModPanel::NotifySignInCancelled()
 {
 	// $TODO: sanity checks to verify that we have someone signed in, as needed
@@ -3957,6 +3947,7 @@ void CBaseModPanel::NotifySignInCancelled()
 		m_bStartScreenPlayerSigninCompleted = false;
 	}
 }
+#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: [jason] Default implementation of the main menu
@@ -4590,7 +4581,7 @@ void CBaseModPanel::LoadVersionNumbers()
 	const wchar_t *pInvalidVersionText = L"_ _ _ _ _ _";
 
 	// Load the code version number.
-	Assert( m_pCodeVersionLabel != NULL );
+	Assert( m_pCodeVersionLabel != nullptr );
 	const char *codeVersionFileName = "resource\\css_code_version.txt";
 	const char *codeVersionFileNameOfficial = "resource\\css_code_version_local.txt";
 	wchar_t codeVersion[bufferSize];
@@ -4599,7 +4590,7 @@ void CBaseModPanel::LoadVersionNumbers()
 	m_pCodeVersionLabel->SetText( bSuccess ? codeVersion : pInvalidVersionText );
 
 	// Load the content version number.
-	Assert( m_pContentVersionLabel != NULL );
+	Assert( m_pContentVersionLabel != nullptr );
 	const char *contentVersionFileName = "resource\\css_content_version.txt";
 	const char *contentVersionFileNameOfficial = "resource\\css_content_version_local.txt";
 	wchar_t contentVersion[bufferSize];
@@ -5109,7 +5100,7 @@ void CFooterPanel::Paint( void )
 DECLARE_BUILD_FACTORY( CFooterPanel );
 */
 
-#ifdef _GAMECONSOLE
+#if IsGameConsole()
 //-----------------------------------------------------------------------------
 // Purpose: Reload the resource files on the Xbox 360
 //-----------------------------------------------------------------------------

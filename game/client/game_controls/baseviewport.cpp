@@ -1,16 +1,3 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Client DLL VGUI2 Viewport
-//
-// $Workfile:     $
-// $Date:         $
-//
-//-----------------------------------------------------------------------------
-// $Log: $
-//
-// $NoKeywords: $
-//=============================================================================//
-
 #pragma warning( disable : 4800  )  // disable forcing int to bool performance warning
 
 #include "cbase.h"

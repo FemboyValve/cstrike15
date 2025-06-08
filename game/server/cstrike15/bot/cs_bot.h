@@ -1226,6 +1226,9 @@ private:
 		Vector m_feetPos;											///< current feet position
 		Vector m_leftSidePos;										///< current left side position
 		Vector m_rightSidePos;										///< current right side position
+		Vector m_hipPos;
+		Vector m_leftFootPos;
+		Vector m_rightFootPos;
 		int m_validFrame;											///< frame of last computation (for lazy evaluation)
 	};
 	static PartInfo m_partInfo[ MAX_PLAYERS ];						///< part positions for each player

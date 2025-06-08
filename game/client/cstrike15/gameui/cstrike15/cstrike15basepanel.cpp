@@ -1,10 +1,3 @@
-//===== Copyright  1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: Main panel for CS:GO UI
-//
-// $NoKeywords: $
-//===========================================================================//
-
 #include "cbase.h"
 #include "cstrike15basepanel.h"
 
@@ -533,15 +526,20 @@ bool CCStrike15BasePanel::IsScaleformMainMenuActive( void )
 void CCStrike15BasePanel::OnOpenCreateSingleplayerGameDialog( bool bMatchmakingFilter )
 {
 	/* Removed for partner depot */
+	CBaseModPanel::OnOpenCreateSingleplayerGameDialog(bMatchmakingFilter);
 }
 
 void CCStrike15BasePanel::OnOpenCreateMultiplayerGameDialog( void )
 {
+#if 0 //INCLUDE_SCALEFORM
+	CBaseModPanel::ShowScaleformMainMenu(true);
+#else
 	if (IsPC() && !IsScaleformMainMenuEnabled())
 	{
 		// Continue to support the vgui create server dialog
 		CBaseModPanel::OnOpenCreateMultiplayerGameDialog();
 	}
+#endif
 }
 
 void CCStrike15BasePanel::OnOpenCreateMultiplayerGameCommunity( void )
@@ -568,7 +566,7 @@ void CCStrike15BasePanel::DoCommunityQuickPlay( void )
 
 void CCStrike15BasePanel::OnOpenServerBrowser()
 {
-#if !defined(_GAMECONSOLE)
+#if !IsGameConsole()
 	if ( !m_bCommunityServerWarningIssued && player_nevershow_communityservermessage.GetBool() == 0 )
 	{
 		OnOpenMessageBoxThreeway( "#SFUI_MainMenu_ServerBrowserWarning_Title", "#SFUI_MainMenu_ServerBrowserWarning_Text2", "#SFUI_MainMenu_ServerBrowserWarning_Legend", "#SFUI_MainMenu_ServerBrowserWarning_NeverShow", ( MESSAGEBOX_FLAG_OK  |  MESSAGEBOX_FLAG_CANCEL | MESSAGEBOX_FLAG_TERTIARY ), this );	
@@ -834,6 +832,11 @@ void CCStrike15BasePanel::RestorePauseMenu( void )
 void CCStrike15BasePanel::ShowScaleformPauseMenu( bool bShow )
 {
 	/* Removed for partner depot */
+#if defined( INCLUDE_SCALEFORM )
+	//CPauseScaleform::ShowMenu(bShow);
+#else
+	
+#endif
 }
 
 bool CCStrike15BasePanel::IsScaleformPauseMenuActive( void )

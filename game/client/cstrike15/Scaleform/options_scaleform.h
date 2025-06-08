@@ -1,17 +1,6 @@
-//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose:
-//
-// $NoKeywords: $
-//=============================================================================//
-
 #if defined( INCLUDE_SCALEFORM )
 
-#if !defined( __OPTIONS_SCALEFORM_H__ )
-#define __OPTIONS_SCALEFORM_H__
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "messagebox_scaleform.h"
 #include "GameEventListener.h"
@@ -336,7 +325,5 @@ protected:
 
 	SFVALUE					m_pDeadZonePanel;
 };
-
-#endif // __OPTIONS_SCALEFORM_H__
 
 #endif // INCLUDE_SCALEFORM
