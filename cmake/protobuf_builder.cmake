@@ -1,7 +1,9 @@
 include("${CMAKE_MODULE_PATH}/common_functions.cmake")
 
+if(OSXALL OR LINUXALL)
 include(FindProtobuf)
 FIND_PACKAGE(Protobuf REQUIRED)
+endif()
 
 MacroRequired(GENERATED_PROTO_DIR)
 MacroRequired(SRCDIR)
@@ -12,7 +14,7 @@ include_directories(${SRCDIR}/thirdparty/protobuf-2.5.0/src)
 add_definitions(-DPROTOBUF)
 
 if( LINUXALL )
-    set(PROTO_COMPILER "${SRCDIR}/devtools/bin/linux/protoc")
+    set(PROTO_COMPILER "${SRCDIR}/devtools/bin/protoc")
 elseif( WINDOWS )
     set(PROTO_COMPILER "${SRCDIR}/devtools/bin/protoc.exe")
 elseif( OSXALL )

@@ -39,7 +39,7 @@ target_sources(${OUTBINNAME} PRIVATE "sys_common.cpp")
 target_sources(${OUTBINNAME} PRIVATE "sys_ded.cpp")
 target_sources(${OUTBINNAME} PRIVATE "sys_subproc.cpp")
 if( WINDOWS )
-    target_sources(${OUTBINNAME} PRIVATE "sys_windows.cpp" [$WINDOWS])
+    target_sources(${OUTBINNAME} PRIVATE "sys_windows.cpp")
 endif()
 
 ## Console ##
