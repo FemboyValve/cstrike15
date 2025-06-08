@@ -1936,42 +1936,72 @@ void DiscardStaticLightmapData()
 }
 
 //sorts the surfaces in place
-static void SortSurfacesByLightmapID( SurfaceHandle_t *pToSort, int iSurfaceCount )
+static void SortSurfacesByLightmapID(SurfaceHandle_t* pToSort, int iSurfaceCount)
 {
-	SurfaceHandle_t *pSortTemp = (SurfaceHandle_t *)stackalloc( sizeof( SurfaceHandle_t ) * iSurfaceCount );
-	
-	//radix sort
-	for( int radix = 0; radix != 4; ++radix )
-	{
-		//swap the inputs for the next pass
-		{
-			SurfaceHandle_t *pTemp = pToSort;
-			pToSort = pSortTemp;
-			pSortTemp = pTemp;
-		}
+	if (iSurfaceCount <= 1) return;
 
+	SurfaceHandle_t* pSortTemp = (SurfaceHandle_t*)stackalloc(sizeof(SurfaceHandle_t) * iSurfaceCount);
+
+	// Copy original data to temp buffer
+	memcpy(pSortTemp, pToSort, sizeof(SurfaceHandle_t) * iSurfaceCount);
+
+	SurfaceHandle_t* pSource = pSortTemp;
+	SurfaceHandle_t* pDest = pToSort;
+
+	//radix sort
+	for (int radix = 0; radix != 4; ++radix)
+	{
 		int iCounts[256] = { 0 };
 		int iBitOffset = radix * 8;
-		for( int i = 0; i != iSurfaceCount; ++i )
+
+		// Count occurrences of each byte value
+		for (int i = 0; i != iSurfaceCount; ++i)
 		{
-			uint8 val = (materialSortInfoArray[MSurf_MaterialSortID( pSortTemp[i] )].lightmapPageID >> iBitOffset) & 0xFF;
+			uint8 val = (materialSortInfoArray[MSurf_MaterialSortID(pSource[i])].lightmapPageID >> iBitOffset) & 0xFF;
 			++iCounts[val];
 		}
 
+		// Build cumulative offset table (prefix sum)
 		int iOffsetTable[256];
 		iOffsetTable[0] = 0;
-		for( int i = 0; i != 255; ++i )
+		for (int i = 1; i < 256; ++i)
 		{
-			iOffsetTable[i + 1] = iOffsetTable[i] + iCounts[i];
+			iOffsetTable[i] = iOffsetTable[i - 1] + iCounts[i - 1];
 		}
 
-		for( int i = 0; i != iSurfaceCount; ++i )
-		{
-			uint8 val = (materialSortInfoArray[MSurf_MaterialSortID( pSortTemp[i] )].lightmapPageID >> iBitOffset) & 0xFF;
-			int iWriteIndex = iOffsetTable[val];
-			pToSort[iWriteIndex] = pSortTemp[i];
-			++iOffsetTable[val];
+		// Verify the total doesn't exceed array bounds
+		int total = iOffsetTable[255] + iCounts[255];
+		if (total != iSurfaceCount) {
+			// Something is wrong with the data - abort
+			return;
 		}
+
+		// Distribute elements to sorted positions
+		for (int i = 0; i != iSurfaceCount; ++i)
+		{
+			uint8 val = (materialSortInfoArray[MSurf_MaterialSortID(pSource[i])].lightmapPageID >> iBitOffset) & 0xFF;
+			int iWriteIndex = iOffsetTable[val]++;
+
+			// Safety check (should never trigger with correct implementation)
+			if (iWriteIndex >= iSurfaceCount) {
+				// Handle error gracefully
+				return;
+			}
+
+			pDest[iWriteIndex] = pSource[i];
+		}
+
+		// Swap source and destination for next iteration
+		SurfaceHandle_t* pTemp = pSource;
+		pSource = pDest;
+		pDest = pTemp;
+	}
+
+	// If we ended with data in the temp buffer, copy it back
+	// (This happens when we do an odd number of passes)
+	if (pSource == pSortTemp)
+	{
+		memcpy(pToSort, pSortTemp, sizeof(SurfaceHandle_t) * iSurfaceCount);
 	}
 }
 

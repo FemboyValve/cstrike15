@@ -1,0 +1,27 @@
+# just because compiles doesnt mean it works correctly...
+# this is with windows sdk 8... 
+# 12/90 compiles so far...
+
+hammer_launcher.exe
+srcds.exe (Dedicated_main)
+
+engien_ds.dll
+engine.dll
+client.dll (csgo)
+datacache.dll
+bonesetup.dll
+dedicated.dll
+commedit.dll
+inputsystem.dll
+matchmaking.dll
+
+bzip2.lib
+fow.lib
+bitmap.lib
+bitmap_byteswap.lib
+datamodel.lib
+choreobjects.lib
+dme_controls.lib
+appframework.lib
+dmserializers.lib
+dmxloader.lib

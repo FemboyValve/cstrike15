@@ -1,15 +1,4 @@
-//========= Copyright © 1996-2009, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: radius occlusion for Fog of War
-//
-// $NoKeywords: $
-//=====================================================================================//
-
-#ifndef FOW_RADIUSOCCLUDER_H
-#define FOW_RADIUSOCCLUDER_H
-#if defined( COMPILER_MSVC )
 #pragma once
-#endif
 
 #include "mathlib/vector.h"
 
@@ -59,5 +48,3 @@ private:
 	bool		m_bEnabled;
 	uint8		m_nHeightGroup;			// the height group this occluder belongs to
 };
-
-#endif // FOW_RADIUSOCCLUDER_H
