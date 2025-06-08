@@ -236,10 +236,8 @@ inline void ThreadPause()
 	__db16cyc();
 #elif defined( COMPILER_GCC )
 	__asm __volatile( "pause" );
-#elif defined ( COMPILER_MSVC64 )
+#elif defined(_MSC_VER)
 	_mm_pause();
-#elif defined( COMPILER_MSVC32 )
-	__asm pause;
 #elif defined( COMPILER_MSVCX360 )
 	YieldProcessor(); 
 	__asm { or r0,r0,r0 } 

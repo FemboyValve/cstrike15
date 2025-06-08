@@ -22,6 +22,9 @@ project(cstrike15)
 
 option(Debug_GCC_Build "Debug GCC Build" OFF)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+include(game_detect)
+
 #gcc debug stuff
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND Debug_GCC_Build)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer -g")

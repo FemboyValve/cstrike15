@@ -1,5 +1,6 @@
 set(CMAKE_MODULE_PATH ${SRCDIR}/cmake)
 include(${CMAKE_MODULE_PATH}/common_functions.cmake)
+include(vpc)
 
 MacroRequired( SRCDIR )
 MacroRequired( GAMENAME )
@@ -10,6 +11,10 @@ set(GENERATED_PROTO_DIR "${SRCDIR}/game/client/generated_proto")
 
 add_definitions(-DNO_STRING_T -DCLIENT_DLL -DVECTOR -DVERSION_SAFE_STEAM_API_INTERFACES -DPROTECTED_THINGS_ENABLE)
 add_definitions(-DENABLE_CHROMEHTMLWINDOW -DENABLE_STUDIO_SOFTBODY)
+
+if(WINDOWS)
+    add_definitions(-DWIN32 COMPILER_MSVC32)
+endif()
 
 include_directories(${SRCDIR}/game/shared)
 include_directories(./game_controls)
@@ -24,8 +29,6 @@ TargetBuildAndAddProto( ${OUTBINNAME} ${SRCDIR}/common/network_connection.proto 
 TargetBuildAndAddProto( ${OUTBINNAME} ${SRCDIR}/gcsdk/steammessages.proto ${GENERATED_PROTO_DIR} )
 TargetBuildAndAddProto( ${OUTBINNAME} ${SRCDIR}/game/shared/base_gcmessages.proto ${GENERATED_PROTO_DIR} )
 
-#NUT stuff would go here..
-
 if( LINUXALL )
     #lwss- add Wno-narrowing to fix compilation
     target_compile_options(${OUTBINNAME} PRIVATE "-Wno-narrowing")
@@ -34,107 +37,112 @@ if( LINUXALL )
 endif()
 
 #$Folder	"Source Files"
-target_sources(${OUTBINNAME} PRIVATE "hl2/C_Func_Monitor.cpp")
-target_sources(${OUTBINNAME} PRIVATE "geiger.cpp")
-if( NOT CSGO )
-    #$File	"history_resource.cpp"		[!$CSGO]
-endif()
-target_sources(${OUTBINNAME} PRIVATE "hud_weapon.cpp")
-target_sources(${OUTBINNAME} PRIVATE "train.cpp")
-if( NOT CSGO )
-    target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/weapon_parse_default.cpp")
-endif()
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/achievement_saverestore.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/achievement_saverestore.h")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/achievementmgr.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/achievementmgr.h")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/achievements_and_stats_interface.h")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/achievements_hlx.cpp")
-if( NOT CSGO )
-    #$File	"achievement_notification_panel.cpp"		[!$CSGO]
-    #$File	"achievement_notification_panel.h"			[!$CSGO]
-endif()
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/activitylist.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/ammodef.cpp")
-target_sources(${OUTBINNAME} PRIVATE "animatedentitytextureproxy.cpp")
-target_sources(${OUTBINNAME} PRIVATE "animatedoffsettextureproxy.cpp")
-target_sources(${OUTBINNAME} PRIVATE "animatedtextureproxy.cpp")
-target_sources(${OUTBINNAME} PRIVATE "AnimateSpecificTextureProxy.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/animation.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/base_playeranimstate.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/baseachievement.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/baseachievement.h")
-target_sources(${OUTBINNAME} PRIVATE "baseanimatedtextureproxy.cpp")
-target_sources(${OUTBINNAME} PRIVATE "baseclientrendertargets.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/basecombatcharacter_shared.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/basecombatweapon_shared.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/baseentity_shared.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/basegrenade_shared.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/baseparticleentity.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/baseplayer_shared.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/baseviewmodel_shared.cpp")
-target_sources(${OUTBINNAME} PRIVATE "beamdraw.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/beam_shared.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/common/blackbox_helper.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/common/blackbox_helper.h")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/public/engine/iblackbox.h")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/public/bone_accessor.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/bone_merge_cache.cpp")
-if( PS3 )
-    #$File	"buildrenderables_PS3.cpp"			[$PS3]
-endif()
-target_sources(${OUTBINNAME} PRIVATE "c_ai_basehumanoid.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_ai_basenpc.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_baseanimating.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_baseanimatingoverlay.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_basecombatcharacter.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_basecombatweapon.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_basedoor.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_baseentity.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_baseflex.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_baselesson.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_baselesson.h")
-target_sources(${OUTBINNAME} PRIVATE "c_baseplayer.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_basetoggle.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_basetoggle.h")
-target_sources(${OUTBINNAME} PRIVATE "c_baseviewmodel.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_beamspotlight.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_breakableprop.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_colorcorrection.h")
-target_sources(${OUTBINNAME} PRIVATE "c_colorcorrection.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_colorcorrectionvolume.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_dynamiclight.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_entitydissolve.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_entityfreezing.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_entityparticletrail.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_env_ambient_light.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_env_ambient_light.h")
-target_sources(${OUTBINNAME} PRIVATE "c_env_cascade_light.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_env_cascade_light.h")
-target_sources(${OUTBINNAME} PRIVATE "csm_parallel_split.h")
-target_sources(${OUTBINNAME} PRIVATE "csm_parallel_split.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_env_fog_controller.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_env_particlescript.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_env_projectedtexture.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_env_projectedtexture.h")
-target_sources(${OUTBINNAME} PRIVATE "c_env_screenoverlay.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_env_tonemap_controller.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_env_dof_controller.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_entityflame.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_fire_smoke.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_fish.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_areaportalwindow.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_breakablesurf.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_breakablesurf.h")
-target_sources(${OUTBINNAME} PRIVATE "c_func_brush.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_conveyor.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_dust.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_lod.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_movelinear.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_occluder.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_reflective_glass.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_rotating.cpp")
-target_sources(${OUTBINNAME} PRIVATE "c_func_smokevolume.cpp")
+vpc_file(SRC_FILES
+    "hl2/C_Func_Monitor.cpp"
+    "geiger.cpp"
+    "hud_weapon.cpp"
+    "train.cpp"
+    "${SRCDIR}/game/shared/achievement_saverestore.cpp"
+    "${SRCDIR}/game/shared/achievement_saverestore.h"
+    "${SRCDIR}/game/shared/achievementmgr.cpp"
+    "${SRCDIR}/game/shared/achievementmgr.h"
+    "${SRCDIR}/game/shared/achievements_and_stats_interface.h"
+    "${SRCDIR}/game/shared/achievements_hlx.cpp"
+    "history_resource.cpp"	NOT CSGO
+    "achievement_notification_panel.cpp" NOT CSGO
+    "achievement_notification_panel.h"	NOT CSGO
+    "${SRCDIR}/game/shared/weapon_parse_default.cpp" NOT CSGO
+    "${SRCDIR}/game/shared/activitylist.cpp"
+    "${SRCDIR}/game/shared/ammodef.cpp"
+    "animatedentitytextureproxy.cpp"
+    "animatedoffsettextureproxy.cpp"
+    "buildrenderables_PS3.cpp" PS3
+    "animatedtextureproxy.cpp"
+    "AnimateSpecificTextureProxy.cpp"
+    "${SRCDIR}/game/shared/animation.cpp"
+    "${SRCDIR}/game/shared/base_playeranimstate.cpp"
+    "${SRCDIR}/game/shared/baseachievement.cpp"
+    "${SRCDIR}/game/shared/baseachievement.h"
+    "baseanimatedtextureproxy.cpp"
+    "baseclientrendertargets.cpp"
+    "${SRCDIR}/game/shared/basecombatcharacter_shared.cpp"
+    "${SRCDIR}/game/shared/basecombatweapon_shared.cpp"
+    "${SRCDIR}/game/shared/baseentity_shared.cpp"
+    "${SRCDIR}/game/shared/basegrenade_shared.cpp"
+    "${SRCDIR}/game/shared/baseparticleentity.cpp"
+    "${SRCDIR}/game/shared/baseplayer_shared.cpp"
+    "${SRCDIR}/game/shared/baseviewmodel_shared.cpp"
+    "beamdraw.cpp"
+    "${SRCDIR}/game/shared/beam_shared.cpp"
+    "${SRCDIR}/common/blackbox_helper.cpp"
+    "${SRCDIR}/common/blackbox_helper.h"
+    "${SRCDIR}/public/engine/iblackbox.h"
+    "${SRCDIR}/public/bone_accessor.cpp"
+    "${SRCDIR}/game/shared/bone_merge_cache.cpp"
+    "c_ai_basehumanoid.cpp"
+    "c_ai_basenpc.cpp"
+    "c_baseanimating.cpp"
+    "c_baseanimatingoverlay.cpp"
+    "c_basecombatcharacter.cpp"
+    "c_basecombatweapon.cpp"
+    "c_basedoor.cpp"
+    "c_baseentity.cpp"
+    "c_baseflex.cpp"
+    "c_baselesson.cpp"
+    "c_baselesson.h"
+    "c_baseplayer.cpp"
+    "c_basetoggle.cpp"
+    "c_baseviewmodel.cpp"
+    "c_beamspotlight.cpp"
+    "c_breakableprop.cpp"
+    "c_colorcorrection.h"
+    "c_basetoggle.h"
+    "c_entitydissolve.cpp"
+    "c_entityfreezing.cpp"
+    "c_colorcorrection.cpp"
+    "c_colorcorrectionvolume.cpp"
+    "c_dynamiclight.cpp"
+    "c_entityparticletrail.cpp"
+    "c_env_ambient_light.cpp"
+    "c_fish.cpp"
+    "c_fire_smoke.cpp"
+    "c_env_ambient_light.h"
+    "c_env_cascade_light.h"
+    "c_env_cascade_light.cpp"
+    "c_env_screenoverlay.cpp"
+    "csm_parallel_split.cpp"
+    "csm_parallel_split.h"
+    "c_env_particlescript.cpp"
+    "c_env_fog_controller.cpp"
+    "c_env_projectedtexture.cpp"
+    "c_env_projectedtexture.h"
+    "c_env_tonemap_controller.cpp"
+    "c_env_dof_controller.cpp"
+    "c_entityflame.cpp"
+    "c_func_areaportalwindow.cpp"
+    "c_func_breakablesurf.cpp"
+    "c_func_breakablesurf.h"
+    "c_memorylog.h"		PS3 OR X360
+    "c_memorylog.cpp" 	PS3 OR X360
+    "c_mod_lesson_stubs.cpp" NOT CSGO
+    "hl2/hud_autoaim.cpp" NOT CSGO
+    "hl2/C_BaseHLPlayer.cpp" PS3 OR X360
+    "c_func_brush.cpp"
+    "c_func_conveyor.cpp"
+    "c_func_dust.cpp"
+    "c_func_lod.cpp"
+    "c_func_movelinear.cpp"
+    "c_func_occluder.cpp"
+    "c_func_reflective_glass.cpp"
+    "c_func_rotating.cpp"
+    "c_func_smokevolume.cpp"
+    "${SRCDIR}/common/ps3/vjobutils.cpp" PS3
+    "mp3player.h" WINDOWS OR POSIX
+    "mp3player.cpp" WINDOWS OR POSIX
+)
+
+target_sources(${OUTBINNAME} PRIVATE ${SRC_FILES})
+
 target_sources(${OUTBINNAME} PRIVATE "c_func_tracktrain.cpp")
 target_sources(${OUTBINNAME} PRIVATE "c_gameinstructor.cpp")
 target_sources(${OUTBINNAME} PRIVATE "c_gameinstructor.h")
@@ -145,13 +153,6 @@ target_sources(${OUTBINNAME} PRIVATE "c_keyvalue_saver.cpp")
 target_sources(${OUTBINNAME} PRIVATE "c_keyvalue_saver.h")
 target_sources(${OUTBINNAME} PRIVATE "c_lightglow.cpp")
 target_sources(${OUTBINNAME} PRIVATE "C_MaterialModifyControl.cpp")
-if( X360 OR PS3 )
-    #$File	"c_memorylog.cpp"								[$X360||$PS3]
-    #$File	"c_memorylog.h"									[$X360||$PS3]
-endif()
-if( NOT CSGO )
-    target_sources(${OUTBINNAME} PRIVATE "c_mod_lesson_stubs.cpp")
-endif()
 target_sources(${OUTBINNAME} PRIVATE "c_movie_display.cpp")
 target_sources(${OUTBINNAME} PRIVATE "c_particle_system.cpp")
 target_sources(${OUTBINNAME} PRIVATE "c_physbox.cpp")
@@ -194,10 +195,6 @@ target_sources(${OUTBINNAME} PRIVATE "c_vehicle_choreo_generic.cpp")
 target_sources(${OUTBINNAME} PRIVATE "c_vehicle_jeep.cpp")
 target_sources(${OUTBINNAME} PRIVATE "c_vguiscreen.cpp")
 target_sources(${OUTBINNAME} PRIVATE "hl2/c_waterbullet.cpp")
-if( NOT CSGO )
-    #$File	"hl2/hud_autoaim.cpp"					[!$CSGO]
-    #$File	"hl2/C_BaseHLPlayer.cpp"				[$PS3 && !$CSGO]
-endif()
 target_sources(${OUTBINNAME} PRIVATE "C_WaterLODControl.cpp")
 target_sources(${OUTBINNAME} PRIVATE "c_world.cpp")
 target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/cam_thirdperson.cpp")
@@ -441,9 +438,6 @@ target_sources(${OUTBINNAME} PRIVATE "WorldDimsProxy.cpp")
 target_sources(${OUTBINNAME} PRIVATE "vgui_hudvideo.cpp")
 target_sources(${OUTBINNAME} PRIVATE "vgui_video.cpp")
 target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/mp_shareddefs.cpp")
-if( PS3 )
-    #$File	"${SRCDIR}/common/ps3/vjobutils.cpp"					[$PS3]
-endif()
 target_sources(${OUTBINNAME} PRIVATE "subtitlepanel.cpp")
 target_sources(${OUTBINNAME} PRIVATE "c_vote_controller.h")
 target_sources(${OUTBINNAME} PRIVATE "c_vote_controller.cpp")
@@ -581,13 +575,6 @@ target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/common/CegClientWrapper.cpp")
     target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/SharedFunctorUtils.cpp")
     target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/game/shared/SharedFunctorUtils.h")
 #}
-if( WINDOWS OR POSIX )
-#$Folder	"MP3" [$WINDOWS||$POSIX]
-#{
-    target_sources(${OUTBINNAME} PRIVATE "mp3player.cpp")
-    target_sources(${OUTBINNAME} PRIVATE "mp3player.h")
-#}
-endif()
 
 #$Folder	"Tool Framework"
 #{
