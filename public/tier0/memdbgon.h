@@ -82,8 +82,9 @@
 #undef _aligned_malloc
 #undef _aligned_free
 
-#ifndef MEMDBGON_H
-inline void *MemAlloc_InlineCallocMemset( void *pMem, size_t nCount, size_t nElementSize)
+#ifndef MemAlloc_InlineCallocMemset
+#define MemAlloc_InlineCallocMemset
+inline void *MemAlloc_InlineCallocMemset(void *pMem, size_t nCount, size_t nElementSize)
 {
 	memset(pMem, 0, nElementSize * nCount);
 	return pMem;

@@ -1,5 +1,4 @@
-#ifndef THREADTOOLS_INL
-#define THREADTOOLS_INL
+#pragma once
 
 // This file is included in threadtools.h for PS3 and threadtools.cpp for all other platforms
 //
@@ -645,5 +644,3 @@ INLINE_ON_PS3 void* CThread::ThreadProc(LPVOID pv)
 	return pInit->pThread->m_result;
 #endif
 }
-
-#endif // THREADTOOLS_INL

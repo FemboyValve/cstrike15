@@ -1,9 +1,3 @@
-//======= Copyright (c) 1996-2009, Valve Corporation, All rights reserved. ======
-//
-// Purpose: The base class from which all game entities are derived.
-//
-//===============================================================================
-
 #include "cbase.h"
 #include "globalstate.h"
 #include "isaverestore.h"
@@ -87,7 +81,7 @@ bool CBaseEntity::m_bInDebugSelect = false;	// Used for selection in debug overl
 int CBaseEntity::m_nDebugPlayer = -1;		// Player doing the selection
 
 // This can be set before creating an entity to force it to use a particular edict.
-edict_t *g_pForceAttachEdict = NULL;
+edict_t *g_pForceAttachEdict = nullptr;
 
 bool CBaseEntity::m_bDebugPause = false;		// Whether entity i/o is paused.
 int CBaseEntity::m_nDebugSteps = 1;				// Number of entity outputs to fire before pausing again.
@@ -95,7 +89,7 @@ bool CBaseEntity::sm_bDisableTouchFuncs = false;	// Disables PhysicsTouch and Ph
 
 int CBaseEntity::m_nPredictionRandomSeed = -1;
 int CBaseEntity::m_nPredictionRandomSeedServer = -1;
-CBasePlayer *CBaseEntity::m_pPredictionPlayer = NULL;
+CBasePlayer *CBaseEntity::m_pPredictionPlayer = nullptr;
 
 // Used to make sure nobody calls UpdateTransmitState directly.
 int g_nInsideDispatchUpdateTransmitState = 0;
