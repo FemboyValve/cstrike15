@@ -504,5 +504,5 @@ endif()
 if( (LINUXALL AND DEDICATED) OR OSXALL )
     target_link_libraries(${OUTBINNAME} ${SRCDIR}/lib${PLATSUBDIR}/release/libcryptopp.a)
 elseif( LINUXALL AND NOT DEDICATED )
-    #target_link_libraries(${OUTBINNAME} ${SRCDIR}/lib${PLATSUBDIR}/release/libcryptopp_client.a) #built by us in the setup phase
+    target_link_libraries(${OUTBINNAME} ${SRCDIR}/lib${PLATSUBDIR}/release/libcryptopp_client.a) #built by us in the setup phase
 endif()
