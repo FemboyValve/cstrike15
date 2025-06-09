@@ -7,6 +7,7 @@ class IFileList;
 
 #include "tier1/utlmemory.h"
 #include "engine/ivmodelinfo.h"
+#include "gl_model_private.h"
 
 //-----------------------------------------------------------------------------
 // Purpose: 

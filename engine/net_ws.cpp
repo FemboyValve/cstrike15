@@ -752,7 +752,7 @@ int NET_ReceiveStream( int nSock, char * buf, int len, int flags )
 	return ret;
 }
 
-INetChannel *NET_CreateNetChannel( int socket, const ns_address *adr, const char * name, INetChannelHandler * handler, const byte *pbEncryptionKey, bool bForceNewChannel )
+INetChannel *NET_CreateNetChannel( int socket, const ns_address *adr, const char * name, INetChannelHandler * handler, const ::byte *pbEncryptionKey, bool bForceNewChannel )
 {
 	CNetChan *chan = NULL;
 
@@ -1227,9 +1227,9 @@ bool NET_GetLong( const int sock, netpacket_t *packet )
 	// pHeader is network endian correct
 	sequenceNumber	= LittleLong( pHeader->sequenceNumber );
 	packetID		= LittleShort( (short)pHeader->packetID );
-	// High byte is packet number
+	// High ::byte is packet number
 	packetNumber	= ( packetID >> 8 );	
-	// Low byte is number of total packets
+	// Low ::byte is number of total packets
 	packetCount		= ( packetID & 0xff );	
 
 	int nSplitSizeMinusHeader = (int)LittleShort( (short)pHeader->nSplitSize );
@@ -1476,14 +1476,14 @@ static bool NET_ReceiveDatagram_Helper( const int sock, netpacket_t * packet, bo
 		packet->wiresize = ret;
 
 		MEM_ALLOC_CREDIT();
-		CUtlMemoryFixedGrowable< byte, NET_COMPRESSION_STACKBUF_SIZE > bufVoice( NET_COMPRESSION_STACKBUF_SIZE );
+		CUtlMemoryFixedGrowable< ::byte, NET_COMPRESSION_STACKBUF_SIZE > bufVoice( NET_COMPRESSION_STACKBUF_SIZE );
 
 		unsigned int nVoiceBits = 0u;
 
 		if ( IsX360() || net_dedicatedForXbox )
 		{
 			// X360TBD: Check for voice data and forward it to XAudio
-			// For now, just pull off the 2-byte VDP header and shift the data
+			// For now, just pull off the 2-::byte VDP header and shift the data
 			unsigned short nDataBytes = ( *( unsigned short * )packet->data );
 
 			// 0xFFFF check is necessary because our LAN is broadcasting Source Engine Query requests
@@ -1500,7 +1500,7 @@ static bool NET_ReceiveDatagram_Helper( const int sock, netpacket_t * packet, bo
 						Msg( "* NET_ReceiveDatagram: receiving voice from %s (%d bytes)\n", ns_address_render( packet->from ).String(), nVoiceBytes );
 					}
 
-					byte *pVoice = (byte *)packet->data + 2 + nDataBytes;
+					::byte *pVoice = (::byte *)packet->data + 2 + nDataBytes;
 
 					nVoiceBits = (unsigned int)LittleShort( *( unsigned short *)pVoice );
 					unsigned int nExpectedVoiceBytes = Bits2Bytes( nVoiceBits );
@@ -1552,7 +1552,7 @@ static bool NET_ReceiveDatagram_Helper( const int sock, netpacket_t * packet, bo
 			}
 
 			// Now check if the data on the wire is encrypted?
-			CUtlMemoryFixedGrowable< byte, NET_COMPRESSION_STACKBUF_SIZE > memDecryptedAll( NET_COMPRESSION_STACKBUF_SIZE );
+			CUtlMemoryFixedGrowable< ::byte, NET_COMPRESSION_STACKBUF_SIZE > memDecryptedAll( NET_COMPRESSION_STACKBUF_SIZE );
 			if ( LittleLong( *(int *)packet->data ) != CONNECTIONLESS_HEADER )
 			{
 				// If the channel has encryption then decrypt the packet
@@ -1601,7 +1601,7 @@ static bool NET_ReceiveDatagram_Helper( const int sock, netpacket_t * packet, bo
 			// Next check for compressed message
 			if ( LittleLong( *(int *)packet->data) == NET_HEADER_FLAG_COMPRESSEDPACKET )
 			{
-				byte *pCompressedData = packet->data + sizeof( unsigned int );
+				::byte *pCompressedData = packet->data + sizeof( unsigned int );
 
 				CLZSS lzss;
 				// Decompress
@@ -1610,7 +1610,7 @@ static bool NET_ReceiveDatagram_Helper( const int sock, netpacket_t * packet, bo
 					return false;
 
 				MEM_ALLOC_CREDIT();
-				CUtlMemoryFixedGrowable< byte, NET_COMPRESSION_STACKBUF_SIZE > memDecompressed( NET_COMPRESSION_STACKBUF_SIZE );
+				CUtlMemoryFixedGrowable< ::byte, NET_COMPRESSION_STACKBUF_SIZE > memDecompressed( NET_COMPRESSION_STACKBUF_SIZE );
 				memDecompressed.EnsureCapacity( actualSize );
 
 				unsigned int uDecompressedSize = lzss.SafeUncompress( pCompressedData, memDecompressed.Base(), actualSize );
@@ -1627,8 +1627,8 @@ static bool NET_ReceiveDatagram_Helper( const int sock, netpacket_t * packet, bo
 
 			if ( nVoiceBits > 0 )
 			{
-				// 9th byte is flag byte
-				byte flagByte = *( (byte *)packet->data + sizeof( unsigned int ) + sizeof( unsigned int ) );
+				// 9th ::byte is flag ::byte
+				::byte flagByte = *( (::byte *)packet->data + sizeof( unsigned int ) + sizeof( unsigned int ) );
 				unsigned int unPacketBits = packet->size << 3;
 				int nPadBits = DECODE_PAD_BITS( flagByte );
 				unPacketBits -= nPadBits;
@@ -1638,12 +1638,12 @@ static bool NET_ReceiveDatagram_Helper( const int sock, netpacket_t * packet, bo
 				{
 					//we still want to honor the old checksum so we need to do it here instead of the usual location in CNetChan::ProcessPacketHeader
 					//If the layout of the header ever changes this code will need to be updated.
-					int checkSumByteOffset = sizeof( unsigned int ) + sizeof( unsigned int ) + sizeof( byte );
+					int checkSumByteOffset = sizeof( unsigned int ) + sizeof( unsigned int ) + sizeof( ::byte );
 					packet->message.Seek( checkSumByteOffset << 3 );
 					int oldChecksum = packet->message.ReadUBitLong( 16 );
 					packet->message.Seek(0);
 
-					int rawDataByteOffset = sizeof( unsigned int ) + sizeof( unsigned int ) + sizeof( byte ) + sizeof( unsigned short );
+					int rawDataByteOffset = sizeof( unsigned int ) + sizeof( unsigned int ) + sizeof( ::byte ) + sizeof( unsigned short );
 					void *pvData = packet->data + rawDataByteOffset;
 					int nCheckSumBytes = packet->size - rawDataByteOffset;
 					if ( nCheckSumBytes <= 0 || nCheckSumBytes > NET_MAX_PAYLOAD )
@@ -1680,10 +1680,10 @@ static bool NET_ReceiveDatagram_Helper( const int sock, netpacket_t * packet, bo
 				if( ShouldChecksumPackets() )
 				{
 					//CNetChan::ProcessPacketHeader will still be looking for the checksum so we need to generate one that will keep it happy.
-					int checkSumByteOffset = sizeof( unsigned int ) + sizeof( unsigned int ) + sizeof( byte );
+					int checkSumByteOffset = sizeof( unsigned int ) + sizeof( unsigned int ) + sizeof( ::byte );
 					fixup.SeekToBit( checkSumByteOffset << 3 );//seek to bit position of checksum
 
-					int rawDataByteOffset = sizeof( unsigned int ) + sizeof( unsigned int ) + sizeof( byte ) + sizeof( unsigned short );
+					int rawDataByteOffset = sizeof( unsigned int ) + sizeof( unsigned int ) + sizeof( ::byte ) + sizeof( unsigned short );
 					void *pvData = packet->data + rawDataByteOffset;
 					int nCheckSumBytes = packet->size - rawDataByteOffset;
 					unsigned short newChecksum = BufferToShortChecksum( pvData, nCheckSumBytes );
@@ -1762,7 +1762,7 @@ bool NET_ReceiveDatagram ( const int sock, netpacket_t * packet )
 	}
 }
 
-netpacket_t *NET_GetPacket (int sock, byte *scratch )
+netpacket_t *NET_GetPacket (int sock, ::byte *scratch )
 {
 	if ( !net_packets.IsValidIndex( sock ) )
 		return NULL;
@@ -2144,7 +2144,7 @@ int NET_SendToImpl( SOCKET s, const char * buf, int len, const ns_address &to, i
 	{
 		// 360 uses VDP protocol to piggyback voice data across the network.
 		// [cbGameData][GameData][VoiceData] 
-		// cbGameData is a two-byte prefix that contains the number of game data bytes in native order.
+		// cbGameData is a two-::byte prefix that contains the number of game data bytes in native order.
 		// XLSP servers (the only cross-platform communication possible with a secure network)
 		// swaps the header at the SG, decrypts the GameData and then forwards the packet to the title server.
 		Assert( len < (unsigned short)-1 );
@@ -2282,7 +2282,7 @@ char const *NET_GetDebugFilename( char const *prefix )
 //			*buf - 
 //			len - 
 //-----------------------------------------------------------------------------
-void NET_StorePacket( char const *filename, byte const *buf, int len )
+void NET_StorePacket( char const *filename, ::byte const *buf, int len )
 {
 	FileHandle_t fh;
 
@@ -2454,7 +2454,7 @@ static int NET_SendLong( INetChannel *chan, int sock, SOCKET s, const char * buf
 			Msg( "Saving split packet of %i bytes and %i packets to file %s\n",
 				sendlen, nPacketCount, filename );
 
-			NET_StorePacket( filename, (byte const *)sendbuf, sendlen );
+			NET_StorePacket( filename, (::byte const *)sendbuf, sendlen );
 		}
 		else
 		{
@@ -2606,9 +2606,9 @@ int NET_SendPacket ( INetChannel *chan, int sock,  const ns_address &to, const u
 	}
 
 	MEM_ALLOC_CREDIT();
-	CUtlMemoryFixedGrowable< byte, NET_COMPRESSION_STACKBUF_SIZE > memCompressed( NET_COMPRESSION_STACKBUF_SIZE );
-	CUtlMemoryFixedGrowable< byte, NET_COMPRESSION_STACKBUF_SIZE > memCompressedVoice( NET_COMPRESSION_STACKBUF_SIZE );
-	CUtlMemoryFixedGrowable< byte, NET_COMPRESSION_STACKBUF_SIZE > memEncryptedAll( NET_COMPRESSION_STACKBUF_SIZE );
+	CUtlMemoryFixedGrowable< ::byte, NET_COMPRESSION_STACKBUF_SIZE > memCompressed( NET_COMPRESSION_STACKBUF_SIZE );
+	CUtlMemoryFixedGrowable< ::byte, NET_COMPRESSION_STACKBUF_SIZE > memCompressedVoice( NET_COMPRESSION_STACKBUF_SIZE );
+	CUtlMemoryFixedGrowable< ::byte, NET_COMPRESSION_STACKBUF_SIZE > memEncryptedAll( NET_COMPRESSION_STACKBUF_SIZE );
 
 	int iGameDataLength = pVoicePayload ? length : -1;
 
@@ -2619,18 +2619,18 @@ int NET_SendPacket ( INetChannel *chan, int sock,  const ns_address &to, const u
 	{
 		memCompressedVoice.EnsureCapacity( pVoicePayload->GetNumBytesWritten() + sizeof( unsigned short ) );
 
-		byte *pVoice = (byte *)memCompressedVoice.Base();
+		::byte *pVoice = (::byte *)memCompressedVoice.Base();
 
 		unsigned short usVoiceBits = pVoicePayload->GetNumBitsWritten();
 		*( unsigned short * )pVoice = LittleShort( usVoiceBits );
 		pVoice += sizeof( unsigned short );
 		
 		unsigned int nCompressedLength = pVoicePayload->GetNumBytesWritten();
-		byte *pOutput = NULL;
+		::byte *pOutput = NULL;
 		if ( net_compressvoice.GetBool() )
 		{
 			CLZSS lzss;
-			pOutput = lzss.CompressNoAlloc( pVoicePayload->GetData(), pVoicePayload->GetNumBytesWritten(), (byte *)pVoice, &nCompressedLength );
+			pOutput = lzss.CompressNoAlloc( pVoicePayload->GetData(), pVoicePayload->GetNumBytesWritten(), (::byte *)pVoice, &nCompressedLength );
 		}
 		if ( !pOutput )
 		{
@@ -2654,7 +2654,7 @@ int NET_SendPacket ( INetChannel *chan, int sock,  const ns_address &to, const u
 
 		*(int *)memCompressed.Base() = LittleLong( NET_HEADER_FLAG_COMPRESSEDPACKET );
 
-		byte *pOutput = lzss.CompressNoAlloc( (byte *)data, length, memCompressed.Base() + sizeof( unsigned int ), &nCompressedLength );
+		::byte *pOutput = lzss.CompressNoAlloc( (::byte *)data, length, memCompressed.Base() + sizeof( unsigned int ), &nCompressedLength );
 		if ( pOutput )
 		{
 			data	= memCompressed.Base();
@@ -2662,7 +2662,7 @@ int NET_SendPacket ( INetChannel *chan, int sock,  const ns_address &to, const u
 
 			if ( pVoicePayload && pVoicePayload->GetNumBitsWritten() > 0 )
 			{
-				byte *pVoice = (byte *)memCompressed.Base() + length;
+				::byte *pVoice = (::byte *)memCompressed.Base() + length;
 				Q_memcpy( pVoice, memCompressedVoice.Base(), nVoiceBytes );
 			}
 			
@@ -2678,7 +2678,7 @@ int NET_SendPacket ( INetChannel *chan, int sock,  const ns_address &to, const u
 	{
 		memCompressed.EnsureCapacity( length + nVoiceBytes );
 
-		byte *pVoice = (byte *)memCompressed.Base();
+		::byte *pVoice = (::byte *)memCompressed.Base();
 		Q_memcpy( pVoice, (const void *)data, length );
 		pVoice += length;
 		Q_memcpy( pVoice, memCompressedVoice.Base(), nVoiceBytes );
@@ -2791,7 +2791,7 @@ void NET_OutOfBandPrintf(int sock, const ns_address &adr, const char *format, ..
 
 	int length = Q_strlen(string+4) + 5;
 
-	NET_SendPacket ( NULL, sock, adr, (byte *)string, length );
+	NET_SendPacket ( NULL, sock, adr, (::byte *)string, length );
 }
 
 void NET_OutOfBandDelayedPrintf(int sock, const ns_address &adr, uint32 unMillisecondsDelay, const char *format, ...)
@@ -2807,7 +2807,7 @@ void NET_OutOfBandDelayedPrintf(int sock, const ns_address &adr, uint32 unMillis
 
 	int length = Q_strlen(string+4) + 5;
 
-	NET_SendPacket ( NULL, sock, adr, (byte *)string, length, 0, false, unMillisecondsDelay );
+	NET_SendPacket ( NULL, sock, adr, (::byte *)string, length, 0, false, unMillisecondsDelay );
 }
 
 /*
@@ -4346,7 +4346,7 @@ bool NET_BufferToBufferCompress( char *dest, unsigned int *destLen, char *source
 	Q_memcpy( dest, source, sourceLen );
 	CLZSS s;
 	unsigned int uCompressedLen = 0;
-	byte *pbOut = s.Compress( (byte *)source, sourceLen, &uCompressedLen );
+	::byte *pbOut = s.Compress( (::byte *)source, sourceLen, &uCompressedLen );
 	if ( pbOut && uCompressedLen > 0 && uCompressedLen <= *destLen )
 	{
 		Q_memcpy( dest, pbOut, uCompressedLen );
@@ -4377,9 +4377,9 @@ bool NET_BufferToBufferCompress( char *dest, unsigned int *destLen, char *source
 bool NET_BufferToBufferDecompress( char *dest, unsigned int *destLen, char *source, unsigned int sourceLen )
 {
 	CLZSS s;
-	if ( s.IsCompressed( (byte *)source ) )
+	if ( s.IsCompressed( (::byte *)source ) )
 	{
-		unsigned int uDecompressedLen = s.GetActualSize( (byte *)source );
+		unsigned int uDecompressedLen = s.GetActualSize( (::byte *)source );
 		if ( uDecompressedLen > *destLen )
 		{
 			Warning( "NET_BufferToBufferDecompress with improperly sized dest buffer (%u in, %u needed)\n", *destLen, uDecompressedLen );
@@ -4387,7 +4387,7 @@ bool NET_BufferToBufferDecompress( char *dest, unsigned int *destLen, char *sour
 		}
 		else
 		{
-			*destLen = s.SafeUncompress( (byte *)source, (byte *)dest, *destLen );
+			*destLen = s.SafeUncompress( (::byte *)source, (::byte *)dest, *destLen );
 		}
 	}
 	else
@@ -4560,11 +4560,11 @@ private:
 //////////////////////////////////////////////////////////////////////////
 
 bool NET_CryptVerifyServerCertificateAndAllocateSessionKey( bool bOfficial, const ns_address &from,
-	const byte *pchKeyPub, int numKeyPub,
-	const byte *pchKeySgn, int numKeySgn,
-	byte **pbAllocatedKey, int *pnAllocatedCryptoBlockSize )
+	const ::byte *pchKeyPub, int numKeyPub,
+	const ::byte *pchKeySgn, int numKeySgn,
+	::byte **pbAllocatedKey, int *pnAllocatedCryptoBlockSize )
 {
-	static const byte CsgoMasterPublicKey[] = { 0 }; // Removed for partner depot
+	static const ::byte CsgoMasterPublicKey[] = { 0 }; // Removed for partner depot
 
 	// For now, only IPv4 addresses allowed.  Shouldn't be too hard to figure out how to
 	// generate blocks to sign for other types of addresses
@@ -4613,7 +4613,7 @@ bool NET_CryptVerifyServerCertificateAndAllocateSessionKey( bool bOfficial, cons
 			V_sprintf_safe( chBuffer, "%s/%u", adrMasked.ToString( true ), numAddrBits );
 			bufDataFile.Put( chBuffer, V_strlen( chBuffer ) );
 
-			bCertificateValidated = pub.VerifyMessage( ( byte* ) bufDataFile.Base(), bufDataFile.TellPut(), pchKeySgn, numKeySgn );
+			bCertificateValidated = pub.VerifyMessage( ( ::byte* ) bufDataFile.Base(), bufDataFile.TellPut(), pchKeySgn, numKeySgn );
 #ifdef _DEBUG
 			DevMsg( "NET_CryptVerifyServerCertificateAndAllocateSessionKey: VerifyMessage for %s %s\n",
 				chBuffer, bCertificateValidated ? "succeeded" : "failed" );
@@ -4641,10 +4641,10 @@ bool NET_CryptVerifyServerCertificateAndAllocateSessionKey( bool bOfficial, cons
 	//
 	float flTime = Plat_FloatTime();
 	RandomSeed( * reinterpret_cast< int * >( &flTime ) );
-	byte ubClientKey[NET_CRYPT_KEY_LENGTH];
+	::byte ubClientKey[NET_CRYPT_KEY_LENGTH];
 	for ( int j = 0; j < NET_CRYPT_KEY_LENGTH; ++j )
 	{
-		ubClientKey[ j ] = ( byte ) ( unsigned int ) RandomInt( 0, 255 );
+		ubClientKey[ j ] = ( ::byte ) ( unsigned int ) RandomInt( 0, 255 );
 	}
 
 	//
@@ -4663,7 +4663,7 @@ bool NET_CryptVerifyServerCertificateAndAllocateSessionKey( bool bOfficial, cons
 		uint32 cubCipherText = cBlocks * ( uint32 ) rsaEncryptor.FixedCiphertextLength();
 
 		// ensure there is sufficient room in output buffer for result
-		byte *pbResult = new byte[ NET_CRYPT_KEY_LENGTH + cubCipherText ];
+		::byte *pbResult = new ::byte[ NET_CRYPT_KEY_LENGTH + cubCipherText ];
 		Q_memcpy( pbResult, ubClientKey, NET_CRYPT_KEY_LENGTH );
 		
 		*pbAllocatedKey = pbResult;
@@ -4671,8 +4671,8 @@ bool NET_CryptVerifyServerCertificateAndAllocateSessionKey( bool bOfficial, cons
 
 		// Encryption pass
 		uint32 cubPlaintextData = NET_CRYPT_KEY_LENGTH;
-		const byte *pubPlaintextData = ubClientKey;
-		byte *pubEncryptedData = pbResult + NET_CRYPT_KEY_LENGTH;
+		const ::byte *pubPlaintextData = ubClientKey;
+		::byte *pubEncryptedData = pbResult + NET_CRYPT_KEY_LENGTH;
 
 		// encrypt the message, using as many blocks as required
 		CPoolAllocatedRNG rng;
@@ -4682,7 +4682,7 @@ bool NET_CryptVerifyServerCertificateAndAllocateSessionKey( bool bOfficial, cons
 			uint32 cubToEncrypt = MIN( cubPlaintextData, ( uint32 ) rsaEncryptor.FixedMaxPlaintextLength() );
 			// encrypt the plaintext
 			rsaEncryptor.Encrypt( rng.GetRNG(), pubPlaintextData, cubToEncrypt, pubEncryptedData );
-			// adjust input and output pointers and remaining plaintext byte count
+			// adjust input and output pointers and remaining plaintext ::byte count
 			pubPlaintextData += cubToEncrypt;
 			cubPlaintextData -= cubToEncrypt;
 			pubEncryptedData += rsaEncryptor.FixedCiphertextLength();
@@ -4713,9 +4713,9 @@ bool NET_CryptVerifyServerCertificateAndAllocateSessionKey( bool bOfficial, cons
 }
 
 bool NET_CryptVerifyClientSessionKey( bool bOfficial,
-	const byte *pchKeyPri, int numKeyPri,
-	const byte *pbEncryptedKey, int numEncryptedBytes,
-	byte *pbPlainKey, int numPlainKeyBytes )
+	const ::byte *pchKeyPri, int numKeyPri,
+	const ::byte *pbEncryptedKey, int numEncryptedBytes,
+	::byte *pbPlainKey, int numPlainKeyBytes )
 {
 	try           // handle any exceptions crypto++ may throw
 	{
@@ -4768,7 +4768,7 @@ bool NET_CryptVerifyClientSessionKey( bool bOfficial,
 #endif
 				return false;
 			}
-			// adjust input and output pointers and remaining encrypted byte count
+			// adjust input and output pointers and remaining encrypted ::byte count
 			pbEncryptedKey += cubToDecrypt;
 			cubEncryptedData -= cubToDecrypt;
 			pbPlainKey += decodingResult.messageLength;
@@ -4804,7 +4804,7 @@ bool NET_CryptVerifyClientSessionKey( bool bOfficial,
 	}
 }
 
-bool NET_CryptGetNetworkCertificate( ENetworkCertificate_t eType, const byte **pbData, int *pnumBytes )
+bool NET_CryptGetNetworkCertificate( ENetworkCertificate_t eType, const ::byte **pbData, int *pnumBytes )
 {
 	static char const *s_szCertificateFile = CommandLine()->ParmValue( "-certificate", ( char const * ) NULL );
 	if ( !s_szCertificateFile )
@@ -4857,7 +4857,7 @@ bool NET_CryptGetNetworkCertificate( ENetworkCertificate_t eType, const byte **p
 		}
 	}
 
-	*pbData = ( ( const byte * ) bufCertificate.Base() ) + s_nCertificateOffset[eType];
+	*pbData = ( ( const ::byte * ) bufCertificate.Base() ) + s_nCertificateOffset[eType];
 	*pnumBytes = s_nCertificateLength[eType];
 
 	return true;
@@ -4961,13 +4961,13 @@ CON_COMMAND( net_encrypt_key_signature, "Compute key signature for the payloads"
 		if ( nStringPayloadLength > 0 )
 			bufDataFile.Put( szStringPayload, nStringPayloadLength );
 
-		StringSource stringSourcePrivateKey( ( byte * ) bufPrivateKey.Base(), bufPrivateKey.TellPut(), true );
+		StringSource stringSourcePrivateKey( ( ::byte * ) bufPrivateKey.Base(), bufPrivateKey.TellPut(), true );
 		RSASSA_PKCS1v15_SHA_Signer rsaSigner( stringSourcePrivateKey );
 		CPoolAllocatedRNG rng;
 
 		bufSignature.EnsureCapacity( rsaSigner.MaxSignatureLength() );
 		{
-			size_t len = rsaSigner.SignMessage( rng.GetRNG(), ( byte * ) bufDataFile.Base(), bufDataFile.TellPut(), ( byte * ) bufSignature.Base() );
+			size_t len = rsaSigner.SignMessage( rng.GetRNG(), ( ::byte * ) bufDataFile.Base(), bufDataFile.TellPut(), ( ::byte * ) bufSignature.Base() );
 			bufSignature.SeekPut( CUtlBuffer::SEEK_HEAD, ( int32 ) ( uint32 ) len );
 			bRet = true;
 			Msg( "net_encrypt_key_signature: generated %u bytes signature for payload data +%u=%u bytes\n", bufSignature.TellPut(), nStringPayloadLength, bufDataFile.TellPut() );

@@ -1,18 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $Workfile:     $
-// $Date:         $
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef GL_MODEL_PRIVATE_H
-#define GL_MODEL_PRIVATE_H
-
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "mathlib/vector4d.h"
 #include "tier0/dbg.h"
@@ -825,5 +811,3 @@ inline msurfacelighting_t *SurfaceLighting( SurfaceHandle_t surfID, worldbrushda
 	Assert( pData );
 	return &pData->surfacelighting[surfaceIndex];
 }
-
-#endif // GL_MODEL_PRIVATE_H
