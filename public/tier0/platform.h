@@ -4,6 +4,14 @@
 #define PLATFORM_64BITS 1
 #endif
 
+#ifndef COMPILER_MSVC32 || COMPILER_MSVC64
+#if defined(_MSC_VER) && defined(_M_IX86)
+#define COMPILER_MSVC32
+#elif defined(_MSC_VER) && defined(__x86_64__)
+#define COMPILER_MSVC64
+#endif
+#endif
+
 #if defined( LINUX ) && ((__GNUC__ * 100) + __GNUC_MINOR__) >= 406
 // based on some Jonathan Wakely macros on the net...
 #define GCC_DIAG_STR(s) #s

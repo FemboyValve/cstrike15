@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-CXXFLAGS = -DNDEBUG -g -O2
+CXXFLAGS = -DNDEBUG -g -O2 -fpermissive -D_GLIBCXX_USE_CXX11_ABI=0
 #CXXFLAGS = -g
 # -fPIC is supported. Please report any breakage of -fPIC as a bug.
 CXXFLAGS += -fPIC

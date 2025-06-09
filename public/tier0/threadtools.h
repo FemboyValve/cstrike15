@@ -1,13 +1,4 @@
-//========== Copyright 2005, Valve Corporation, All rights reserved. ========
-//
-// Purpose: A collection of utility classes to simplify thread handling, and
-//			as much as possible contain portability problems. Here avoiding 
-//			including windows.h.
-//
-//=============================================================================
-
-#ifndef THREADTOOLS_H
-#define THREADTOOLS_H
+#pragma once
 
 #include <limits.h>
 
@@ -2631,4 +2622,3 @@ BOOL SetEvent( CThreadEvent *pEvent );
 BOOL ResetEvent( CThreadEvent *pEvent );
 DWORD WaitForMultipleObjects(DWORD nCount, CThreadEvent **lppHandles, BOOL bWaitAll, DWORD dwMilliseconds );
 #endif // _PS3
-#endif // THREADTOOLS_H

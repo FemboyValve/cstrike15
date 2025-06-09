@@ -7,5 +7,5 @@
 $macro EPROJ "engine_ds"
 $macro ESRCDIR "../engine"
 
-$include "../engine/engine_inc.vpc"
+$include "$ESRCDIR/engine_inc.vpc"
 

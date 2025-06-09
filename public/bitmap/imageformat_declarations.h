@@ -1,8 +1,4 @@
-//========== Copyright © Valve Corporation, All rights reserved. ========
-
-#ifndef IMAGEFORMAT_DECLARATIONS_HDR
-#define IMAGEFORMAT_DECLARATIONS_HDR
-
+#pragma once
 
 enum NormalDecodeMode_t
 {
@@ -182,8 +178,4 @@ typedef enum _D3DFORMAT
 		
 		D3DFMT_UNKNOWN
 	} D3DFORMAT;
-#endif
-
-
-
 #endif

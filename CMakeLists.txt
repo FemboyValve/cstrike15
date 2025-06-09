@@ -8,7 +8,7 @@
 # Bzip2*                 inputsystem*           particles*             soundemittersystem*    vgui_surfacelib*
 # choreoobjects*         interfaces*            quickhull*             soundsystem_lowlevel*  videocfg*
 #                        launcher*              Raytrace*              stdshader_dx9*         vpklib*
-#                        launcher_main*                                studiorender*          vscript
+#                        launcher_main*                                studiorender*          vscript*
 #                        localize*                                                            vstdlib*
 # Client_CSGO*           matchmakingbase*       resourcefile*          tier0*                 vtf*
 # datacache*             matchmakingbase_ds*    responserules_runtime* tier1*
@@ -32,6 +32,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer -
 endif()
 
 add_subdirectory(appframework)
+add_subdirectory(external/crypto++-5.61)
 add_subdirectory(interfaces)
 add_subdirectory(fgdlib)
 add_subdirectory(tier0)
@@ -57,10 +58,12 @@ add_subdirectory(bitmap) #also does bitmap_byteswap
 add_subdirectory(bonesetup)
 add_subdirectory(choreoobjects)
 add_subdirectory(datacache)
+add_subdirectory(dedicated)
+add_subdirectory(dedicated_main)
 add_subdirectory(dmserializers)
 add_subdirectory(dmxloader)
-add_subdirectory(dedicated)
 add_subdirectory(engine)
+add_subdirectory(engine_ds)
 add_subdirectory(filesystem)
 add_subdirectory(inputsystem)
 add_subdirectory(localize)
@@ -79,8 +82,7 @@ add_subdirectory(soundemittersystem)
 add_subdirectory(studiorender)
 add_subdirectory(vguimatsurface)
 
-add_subdirectory(game/client) #CSGO Client
-add_subdirectory(game/server) #CSGO Server
+add_subdirectory(game) #CSGO Client and Server
 add_subdirectory(matchmaking) #Does all 4 matchmaking projects
 
 add_subdirectory(launcher_main) #The actual executable that just dlopen's launcher

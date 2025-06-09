@@ -1,11 +1,3 @@
-//====== Copyright c 1996-2007, Valve Corporation, All rights reserved. =======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//=============================================================================//
-
 #include "tier0/platform.h"
 #include "tier0/miniprofiler.h"
 #include "tier0/cache_hints.h"

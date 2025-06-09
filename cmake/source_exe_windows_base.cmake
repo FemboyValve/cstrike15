@@ -25,6 +25,9 @@ set_target_properties( ${OUTBINNAME} PROPERTIES
 
 # Windows executable specific settings
 if(MSVC)
+    # Enable parallel compilation
+    target_compile_options(${OUTBINNAME} PRIVATE /MP)
+    
     # Set subsystem
     set_target_properties(${OUTBINNAME} PROPERTIES
         LINK_FLAGS "/SUBSYSTEM:CONSOLE /DEBUG /INCREMENTAL:NO"
@@ -32,11 +35,11 @@ if(MSVC)
     
     if(WIN64)
         set_target_properties(${OUTBINNAME} PROPERTIES
-            LINK_FLAGS "/SUBSYSTEM:CONSOLE /DEBUG /INCREMENTAL:NO /MACHINE:X64"
+            LINK_FLAGS "/SUBSYSTEM:CONSOLE /DEBUG /INCREMENTAL:NO /MACHINE:X64 COMPILER_MSVC64"
         )
     else()
         set_target_properties(${OUTBINNAME} PROPERTIES
-            LINK_FLAGS "/SUBSYSTEM:CONSOLE /DEBUG /INCREMENTAL:NO /MACHINE:X86"
+            LINK_FLAGS "/SUBSYSTEM:CONSOLE /DEBUG /INCREMENTAL:NO /MACHINE:X86 COMPILER_MSVC32"
         )
     endif()
 endif()
