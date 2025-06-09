@@ -1,28 +1,17 @@
-//===== Copyright  1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: Implements all the functions exported by the GameUI dll
-//
-// $NoKeywords: $
-//===========================================================================//
-
-#if !defined( _GAMECONSOLE ) && !defined( _OSX ) & !defined (LINUX)
+#ifdef WIN32
 #include <windows.h>
 #endif
 #include "cbase.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
-// dgoodenough - io.h and direct.h don't exist on PS3
+
 // PS3_BUILDFIX
-// @wge Fix for OSX too.
-#if !defined( _PS3 ) && !defined( _OSX ) && !defined (LINUX)
-#include <io.h>
+#if defined(WIN32) || defined(_X360)
+#include <direct.h>
+#include <io.h> 
 #endif
 #include <tier0/dbg.h>
-// @wge Fix for OSX too.
-#if !defined( _PS3 ) && !defined( _OSX ) && !defined (LINUX)
-#include <direct.h>
-#endif
 
 #ifdef SendMessage
 #undef SendMessage
@@ -139,13 +128,11 @@ inline UI_BASEMOD_PANEL_CLASS & ConstructUiBaseModPanelClass() { return *BasePan
 
 #endif
 
-// dgoodenough - select correct stub header based on current console
 // PS3_BUILDFIX
-#if defined( _PS3 )
+#if defined( _PS3 ) // dgoodenough - select correct stub header based on current console
 #include "ps3/ps3_win32stubs.h"
 #include <cell/sysmodule.h>
-#endif
-#if defined( _X360 )
+#elif defined( _X360 )
 #include "xbox/xbox_win32stubs.h"
 #endif
 
@@ -156,7 +143,7 @@ inline UI_BASEMOD_PANEL_CLASS & ConstructUiBaseModPanelClass() { return *BasePan
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-IEngineVGui *enginevguifuncs = NULL;
+IEngineVGui *enginevguifuncs = nullptr;
 // dgoodenough - xonline only exists on the 360.  All uses of xonline have had their
 // protection changed like this one
 // PS3_BUILDFIX
@@ -166,13 +153,13 @@ IXOnline  *xonline = NULL;			// 360 only
 #elif defined( _PS3 )
 IPS3SaveRestoreToUI *ps3saveuiapi = NULL;
 #endif
-vgui::ISurface *enginesurfacefuncs = NULL;
-IAchievementMgr *achievementmgr = NULL;
+vgui::ISurface *enginesurfacefuncs = nullptr;
+IAchievementMgr *achievementmgr = nullptr;
 
 class CGameUI;
-CGameUI *g_pGameUI = NULL;
+CGameUI *g_pGameUI = nullptr;
 
-vgui::VPANEL g_hLoadingBackgroundDialog = NULL;
+vgui::VPANEL g_hLoadingBackgroundDialog;
 
 static CGameUI g_GameUI;
 
@@ -184,7 +171,7 @@ IScaleformUI* ScaleformUI()
 #endif
 
 
-static IGameClientExports *g_pGameClientExports = NULL;
+static IGameClientExports *g_pGameClientExports = nullptr;
 IGameClientExports *GameClientExports()
 {
 	return g_pGameClientExports;
@@ -246,7 +233,7 @@ CGameUI::CGameUI()
 //-----------------------------------------------------------------------------
 CGameUI::~CGameUI()
 {
-	g_pGameUI = NULL;
+	g_pGameUI = nullptr;
 }
 
 

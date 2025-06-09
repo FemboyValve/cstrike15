@@ -1,9 +1,3 @@
-//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose:
-//
-// $NoKeywords: $
-//=============================================================================//
 #include "cbase.h"
 #if defined( INCLUDE_SCALEFORM )
 #include "basepanel.h"
@@ -17,7 +11,7 @@
 #include "gametypes.h"
 #include "gameui_interface.h"
 #include "cs_gameplay_hints.h"
-#include "../gameui/cstrike15/cstrike15basepanel.h"
+#include "cstrike15/cstrike15basepanel.h"
 #include "inputsystem/iinputsystem.h"
 #include "vguitextwindow.h"
 #include "teammenu_scaleform.h"
@@ -50,7 +44,7 @@ static float CEG_MAX_LOADING_RANGE = -1.f;
 
 CLoadingScreenScaleform::CLoadingScreenScaleform() :	
 	m_serverInfoReady( false ),
-	m_pPendingKeyValues( NULL ),
+	m_pPendingKeyValues( nullptr ),
 	m_flLoadStartTime( -1.0f ),
 	m_nAnimFrameCurrent( -1 ),
 	m_nAnimFrameTarget( -1 ),
@@ -63,7 +57,7 @@ CLoadingScreenScaleform::CLoadingScreenScaleform() :
 {	
 	m_pendingAttributePurchaseActivate[0] = 0;
 	m_nRequiredAttributeValueForPurchaseActivate = -1;
-	m_pendingCommand[0] = NULL;
+	m_pendingCommand[0] = 0;
 	m_readyForLoading = false;
 	// Register for matchmaking events so that if the load fails, we can go back to the mainmenu
 	g_pMatchFramework->GetEventsSubscription()->Subscribe( this );
@@ -74,7 +68,7 @@ CLoadingScreenScaleform::CLoadingScreenScaleform() :
 
 CLoadingScreenScaleform::~CLoadingScreenScaleform()
 {
-	g_pInputSystem->SetSteamControllerMode( NULL, this );
+	g_pInputSystem->SetSteamControllerMode( nullptr, this );
 
 	g_pMatchFramework->GetEventsSubscription()->Unsubscribe( this );
 

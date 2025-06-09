@@ -1076,42 +1076,36 @@ CEG_NOINLINE void CCSClientGameStats::WriteLeaderboardStats( void )
 		{
 		case CS_GameType_Classic:
 			{
-				if ( bMultiplayerGame && bPublicGame )
+				switch (g_pGameTypes->GetCurrentGameMode())
 				{
-					switch ( g_pGameTypes->GetCurrentGameMode() ) 
-					{
-					case CS_GameMode::Classic_Casual:
-						boardSetIndex = 0; // ONLINE_CASUAL
-						break;
-					case CS_GameMode::Classic_Competitive:
-						boardSetIndex = 1; // ONLINE_COMPETITIVE
-						break;
-					default:
-						Warning( "Leaderboard Write Error: Unknown CurrentGameMode value: %d!\n", g_pGameTypes->GetCurrentGameMode() );
-						break;
-					}
+				case CS_GameMode::Classic_Casual:
+					boardSetIndex = 0; // ONLINE_CASUAL
+					break;
+				case CS_GameMode::Classic_Competitive:
+					boardSetIndex = 1; // ONLINE_COMPETITIVE
+					break;
+				default:
+					Warning("Leaderboard Write Error: Unknown CurrentGameMode value: %d!\n", g_pGameTypes->GetCurrentGameMode());
+					break;
 				}
 			}
 			break;
 
 		case CS_GameType_GunGame:
 			{
-				if ( bMultiplayerGame && bPublicGame )
+				switch (g_pGameTypes->GetCurrentGameMode())
 				{
-					switch ( g_pGameTypes->GetCurrentGameMode() ) 
-					{
-					case CS_GameMode::GunGame_Progressive:
-						boardSetIndex = 2; // ONLINE_GG_PROG
-						break;
+				case CS_GameMode::GunGame_Progressive:
+					boardSetIndex = 2; // ONLINE_GG_PROG
+					break;
 
-					case CS_GameMode::GunGame_Bomb:
-						boardSetIndex = 3; // ONLINE_GG_BOMB
-						break;
+				case CS_GameMode::GunGame_Bomb:
+					boardSetIndex = 3; // ONLINE_GG_BOMB
+					break;
 
-					default: // Unsupported game type
-						Warning( "Leaderboard Write Error: Unknown CurrentGameMode value: %d!\n", g_pGameTypes->GetCurrentGameMode() );
-						break;
-					}
+				default: // Unsupported game type
+					Warning("Leaderboard Write Error: Unknown CurrentGameMode value: %d!\n", g_pGameTypes->GetCurrentGameMode());
+					break;
 				}
 			}
 			break;
@@ -1154,7 +1148,7 @@ CEG_NOINLINE void CCSClientGameStats::WriteLeaderboardStats( void )
 
 		const char* pDeviceName = PlatformInputDevice::GetInputDeviceNameInternal( inputDevice );
 
-		if ( pDeviceName == NULL )
+		if ( pDeviceName == nullptr )
 		{
 			Warning( "Leaderboard Write Error: Invalid input device (InputType_t = %d)- cannot write to ELO leaderboard!\n", inputDevice );
 		}
@@ -1163,7 +1157,7 @@ CEG_NOINLINE void CCSClientGameStats::WriteLeaderboardStats( void )
 			V_snprintf( csBoardName, ARRAYSIZE(csBoardName), "%s_%s", g_LeaderboardIDMap[boardSetIndex].csName, pDeviceName );
 		}
 		
-		KeyValues *pkv = NULL;
+		KeyValues *pkv = nullptr;
 
 		if ( csBoardName[0] != 0 )
 		{

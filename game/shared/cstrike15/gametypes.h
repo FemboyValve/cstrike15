@@ -1,16 +1,4 @@
-//========= Copyright (c) 1996-2011, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Game types and modes
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef GAME_TYPES_H
-#define GAME_TYPES_H
-
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "gametypes/igametypes.h"
 #include "tier1/keyvalues.h"
@@ -337,5 +325,3 @@ private:
 	// this keeps track of whehther the data the loading screen has is correct or not
 	bool m_bLoadingScreenDataIsCorrect;
 };
-
-#endif // GAME_TYPES_H

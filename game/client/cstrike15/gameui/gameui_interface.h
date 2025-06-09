@@ -1,12 +1,3 @@
-//========= Copyright  1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Defines the interface that the GameUI dll exports
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef GAMEUI_INTERFACE_H
-#define GAMEUI_INTERFACE_H
 #pragma once
 
 #include "GameUI/IGameUI.h"
@@ -221,6 +212,3 @@ extern IGameClientExports *GameClientExports();
 #if defined(INCLUDE_SCALEFORM)
 extern IScaleformUI* ScaleformUI();
 #endif
-
-
-#endif // GAMEUI_INTERFACE_H
