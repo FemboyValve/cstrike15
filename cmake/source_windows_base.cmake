@@ -46,7 +46,7 @@ endif()
 
 # Windows specific definitions
 add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS)
-add_definitions(-DNOMINMAX -DWIN32_LEAN_AND_MEAN)
+add_definitions(-DWIN32_LEAN_AND_MEAN)
 
 if(WIN64)
     add_definitions(-DPLATFORM_64BITS)
