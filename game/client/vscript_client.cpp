@@ -1,9 +1,3 @@
-//========== Copyright (c) 2008, Valve Corporation, All rights reserved. ========
-//
-// Purpose:
-//
-//=============================================================================
-
 #include "cbase.h"
 #include "vscript_client.h"
 #include "icommandline.h"

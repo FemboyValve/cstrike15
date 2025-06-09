@@ -1,17 +1,4 @@
-//========= Copyright 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef BASETYPES_H
-#define BASETYPES_H
-
-#ifdef COMPILER_MSVC
 #pragma once
-#endif
-
 
 // This is a trick to get the DLL extension off the -D option on the command line.
 #define DLLExtTokenPaste(x) #x
@@ -699,6 +686,3 @@ protected:
 #define MAX_SPLITSCREEN_CLIENTS	( 1 << MAX_SPLITSCREEN_CLIENT_BITS ) // 2
 
 #include "tier0/valve_on.h"
-
-
-#endif // BASETYPES_H

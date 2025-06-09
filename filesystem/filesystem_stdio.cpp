@@ -1,10 +1,3 @@
-//====== Copyright 1996-2005, Valve Corporation, All rights reserved. =======//
-//
-// Purpose:  
-//
-// $NoKeywords: $
-//=============================================================================//
-
 #include "tier0/platform.h"
 
 #ifdef _WIN32
@@ -24,6 +17,7 @@
 
 #ifdef _WIN32
 #include "tier0/tslist.h"
+#include "windows.h"
 #elif defined(POSIX)
 #include <fcntl.h>
 #ifdef LINUX

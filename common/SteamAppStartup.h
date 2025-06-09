@@ -5,11 +5,7 @@
 //
 //=============================================================================//
 
-#ifndef STEAMAPPSTARTUP_H
-#define STEAMAPPSTARTUP_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: Call this first thing at startup
@@ -20,6 +16,3 @@
 //			if it ruturns false, then continue with normal startup
 //-----------------------------------------------------------------------------
 bool ShouldLaunchAppViaSteam(const char *cmdLine, const char *steamFilesystemDllName, const char *stdioFilesystemDllName);
-
-
-#endif // STEAMAPPSTARTUP_H

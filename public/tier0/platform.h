@@ -70,11 +70,6 @@
 #define PLATFORM_PPC 1
 #endif
 
-
-#ifdef COMPILER_MSVC
-#pragma once
-#endif
-
 #if defined (_PS3)
 
 #if defined( __SPU__ )
@@ -266,7 +261,7 @@
 	#define IsPlatformPS3_PPU()	0
 	#define IsPlatformPS3_SPU()	0
 	#define PLATFORM_WINDOWS	1
-    #define PLATFORM_OPENGL 0
+    #define PLATFORM_OPENGL		0
 
 	#ifndef _X360
 		#define IsPlatformX360() 0
@@ -363,10 +358,7 @@
 #define IsPlatformWindows() 0
 #endif
 
-#ifndef _PS3
-//#include <malloc.h>
-//#include <new.h>
-#else
+#ifdef _PS3
 #include <stdlib.h>     // For malloc()
 #include <alloca.h>     // for alloca()
 #define _alloca alloca
@@ -374,21 +366,6 @@
 		#include <new>
 	#endif
 #endif
-
-
-
-#ifndef _PS3
-//#include <malloc.h>
-//#include <new.h>
-#else
-#include <stdlib.h>     // For malloc()
-#include <alloca.h>     // for alloca()
-#define _alloca alloca
-	#ifdef __cplusplus
-		#include <new>
-	#endif
-#endif
-
 
 //-----------------------------------------------------------------------------
 // Old-school defines we're going to support since much code uses them

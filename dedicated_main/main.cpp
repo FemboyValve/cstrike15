@@ -1,14 +1,3 @@
-//========= Copyright 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//=============================================================================//
-//-----------------------------------------------------------------------------
-// This is just a little redirection tool so I can get all the dlls in bin
-//-----------------------------------------------------------------------------
-
 #include <stdio.h>
 #ifdef _WIN32
 #include <windows.h>
