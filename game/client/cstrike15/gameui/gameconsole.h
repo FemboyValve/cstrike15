@@ -1,15 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef GAMECONSOLE_H
-#define GAMECONSOLE_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "GameUI/IGameConsole.h"
 
@@ -55,5 +44,3 @@ private:
 };
 
 extern CGameConsole &GameConsole();
-
-#endif // GAMECONSOLE_H

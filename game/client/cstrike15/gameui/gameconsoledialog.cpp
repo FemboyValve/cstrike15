@@ -1,10 +1,3 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//===========================================================================//
-
 #include "gameconsoledialog.h"
 #include "gameui_interface.h"
 #include "vgui/IInput.h"

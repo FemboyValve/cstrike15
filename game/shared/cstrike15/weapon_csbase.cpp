@@ -1,10 +1,3 @@
-//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Laser Rifle & Shield combo
-//
-// $NoKeywords: $
-//=============================================================================//
-
 #include "cbase.h"
 #include "in_buttons.h"
 #include "takedamageinfo.h"
@@ -1306,7 +1299,11 @@ const CCSWeaponInfo &CWeaponCSBase::GetCSWpnData() const
 	// For now, just crash now instead of creating a time bomb for later.
 	if ( GetWeaponFileInfoHandle() == GetInvalidWeaponInfoHandle() )
 	{
-		CFmtStr outputStr( "Weapon '%s' script file not found, but its data was accessed. This error is fatal.\n", GetName() ? GetName() : "<unknown>" );
+		const char* name = GetName();
+		if (!name || !*name)
+			name = "<unknown>";
+
+		CFmtStr outputStr("Weapon '%s' script file not found, but its data was accessed. This error is fatal.\n", name);
 		AssertFatalMsg( 0, outputStr.Access() );
 	}
 

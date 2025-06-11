@@ -1,20 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $Workfile:     $
-// $Date:         $
-//
-//-----------------------------------------------------------------------------
-// $Log: $
-//
-// $NoKeywords: $
-//=============================================================================//
-#if !defined( ICONSOLE_H )
-#define ICONSOLE_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include <vgui/vgui.h>
 
@@ -31,5 +15,3 @@ public:
 };
 
 extern IConsole *console;
-
-#endif // ICONSOLE_H
