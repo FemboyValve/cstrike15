@@ -33,7 +33,7 @@ static char *GetBaseDir( const char *pszBuffer )
 	static char	basedir[ MAX_PATH ];
 	char szBuffer[ MAX_PATH ];
 	size_t j;
-	char *pBuffer = NULL;
+	char *pBuffer = nullptr;
 
 	strcpy( szBuffer, pszBuffer );
 

@@ -65,6 +65,9 @@ $Configuration
 		$Create/UsePCHThroughFile		"cbase.h"						 	[!$PS3]
 		$PrecompiledHeaderFile			"$(IntDir)/client.pch"				[!$PS3]
 		$AdditionalOptions			"/Zm168"
+
+		$AdditionalOptions			"$BASE /std:c++17" [$WINDOWS]
+		$AdditionalOptions			"$BASE -std=c++17" [$POSIX]
 	}
 
 	$Linker [!$PS3]
