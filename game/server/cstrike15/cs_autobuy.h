@@ -1,9 +1,3 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Headers and defines for Autobuy and Rebuy 
-//
-//=============================================================================//
-
 /**
  * Weapon classes as used by the AutoBuy
  * Has to be different that the previous ones because these are bitmasked values as a weapon can be from

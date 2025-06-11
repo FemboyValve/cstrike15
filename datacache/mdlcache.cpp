@@ -2524,12 +2524,16 @@ void CMDLCache::UnloadQueuedHardwareData( )
 studiohwdata_t *CMDLCache::GetHardwareData( MDLHandle_t handle )
 {
 	if ( mod_test_not_available.GetBool() )
-		return NULL;
+		return nullptr;
 
 	if ( mod_test_mesh_not_available.GetBool() )
-		return NULL;
+		return nullptr;
 
-	studiodata_t *pStudioData = m_MDLDict[handle];
+	studiodata_t* pStudioData = m_MDLDict[handle];
+
+	if (pStudioData == nullptr)
+		return nullptr;
+	
 	if ( ( pStudioData->m_nFlags & (STUDIODATA_FLAGS_STUDIOMESH_LOADED | STUDIODATA_FLAGS_NO_STUDIOMESH) ) == 0 )
 	{
 		m_pMeshCacheSection->LockMutex();
@@ -2538,7 +2542,7 @@ studiohwdata_t *CMDLCache::GetHardwareData( MDLHandle_t handle )
 			m_pMeshCacheSection->UnlockMutex();
 			if ( !UnserializeHardwareData( handle, mod_load_mesh_async.GetBool() ) )
 			{
-				return NULL;
+				return nullptr;
 			}
 		}
 		else

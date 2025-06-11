@@ -507,7 +507,7 @@ bool CStaticProp::Init( int index, StaticPropLump_t &lump, model_t *pModel )
 	m_DiffuseModulation[3] = lump.m_DiffuseModulation.a * ( 1.0f / 255.0f );
 	MDLCACHE_CRITICAL_SECTION_( g_pMDLCache );
 
-	studiohdr_t *pStudioHdr = modelinfo->GetStudiomodel( m_pModel );
+	studiohdr_t* pStudioHdr = modelinfo->GetStudiomodel(m_pModel);
 
 	if ( pStudioHdr )
 	{
@@ -524,7 +524,7 @@ bool CStaticProp::Init( int index, StaticPropLump_t &lump, model_t *pModel )
 
 #ifndef DEDICATED
 	// Initialize the alpha property
-	if ( !sv.IsDedicated() ) 
+	if (!sv.IsDedicated() && (pStudioHdr != nullptr))
 	{
 		CleanUpAlphaProperty();
 		m_pClientAlphaProperty = g_pClientAlphaPropertyMgr->CreateClientAlphaProperty( this );
@@ -628,6 +628,7 @@ const Vector& CStaticProp::OBBMins( ) const
 	// FIXME: why doesn't this just return m_RenderBBoxMin?
 	VectorSubtract( m_WorldRenderBBoxMin, GetCollisionOrigin(), tv );
 	return tv;
+	//return m_RenderBBoxMin;
 }
 
 const Vector& CStaticProp::OBBMaxs( ) const
@@ -640,6 +641,7 @@ const Vector& CStaticProp::OBBMaxs( ) const
 	// FIXME: why doesn't this just return m_RenderBBoxMax?
 	VectorSubtract( m_WorldRenderBBoxMax, GetCollisionOrigin(), tv );
 	return tv;
+	//return m_RenderBBoxMax;
 }
 
 void CStaticProp::WorldSpaceTriggerBounds( Vector* pVecWorldMins, Vector *pVecWorldMaxs ) const

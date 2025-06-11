@@ -11643,6 +11643,8 @@ void CCSPlayer::ParseAutoBuyString(const char *string, bool &boughtPrimary, bool
 
 		if (ShouldExecuteAutoBuyCommand(commandInfo, boughtPrimary, boughtSecondary ) )
 		{
+			Msg("Autobuy: %s, class=%d, shouldExecute= true , boughtPrimary=%d, boughtSecondary=%d\n",
+				command, commandInfo->m_class, boughtPrimary, boughtSecondary);
 			BuyResult_e result = HandleCommand_Buy( command, commandInfo->m_LoadoutPosition );
 
 			overallResult = CombineBuyResults( overallResult, result );
@@ -11650,6 +11652,7 @@ void CCSPlayer::ParseAutoBuyString(const char *string, bool &boughtPrimary, bool
 			// check to see if we actually bought a primary or secondary weapon this time.
 			PostAutoBuyCommandProcessing(commandInfo, boughtPrimary, boughtSecondary );
 		}
+		Msg("Autobuy: shouldExecute= false\n");
 	}
 
 	if ( overallResult == BUY_CANT_AFFORD )
