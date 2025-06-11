@@ -105,15 +105,6 @@ bool CBaseCombatCharacter::Weapon_CanSwitchTo( CBaseCombatWeapon *pWeapon )
 
 //-----------------------------------------------------------------------------
 // Purpose: 
-// Output : CBaseCombatWeapon
-//-----------------------------------------------------------------------------
-CBaseCombatWeapon *CBaseCombatCharacter::GetActiveWeapon() const
-{
-	return m_hActiveWeapon;
-}
-
-//-----------------------------------------------------------------------------
-// Purpose: 
 // Input  : i - 
 //-----------------------------------------------------------------------------
 CBaseCombatWeapon *CBaseCombatCharacter::GetWeapon( int i ) const

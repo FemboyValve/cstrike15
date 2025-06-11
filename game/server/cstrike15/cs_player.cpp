@@ -2532,10 +2532,16 @@ void CCSPlayer::HandleOutOfAmmoKnifeKills( CCSPlayer* pAttackerPlayer, CWeaponCS
 class CPlayerTrophy : public CPhysicsProp
 {
 public:
-	void OnTouchLoot( CBaseEntity *other )
+	
+	void OnTouchLoot(CBaseEntity *other)
 	{
-	/** Removed for partner depot **/
+		/** Removed for partner depot **/
+		if (!other)
+			return;
+
+		Msg("[Loot] Touched entity: %s (entindex: %d)\n", other->GetClassname(), other->entindex());
 	}
+
 };
 
 void CCSPlayer::Event_Killed( const CTakeDamageInfo &info )
@@ -3051,7 +3057,7 @@ void CCSPlayer::Event_KilledOther( CBaseEntity *pVictim, const CTakeDamageInfo &
 				CWeaponCSBase* pWeapon = dynamic_cast<CWeaponCSBase *>( info.GetWeapon() );
 				CEconItemView* pItem = pWeapon ? pWeapon->GetEconItemView() : NULL;
 				int wID = WEAPON_NONE;
-				if ( pItem != NULL )
+				if ( pItem->IsValid() )
 				{
 					wID = pItem->GetItemIndex();
 				}
@@ -3199,21 +3205,21 @@ void CCSPlayer::Event_KilledOther( CBaseEntity *pVictim, const CTakeDamageInfo &
 					{
 						EmitSound( filter, entindex(), "UI.DeathMatchBonusKill" );
 					}
-					else if ( CSGameRules()->IsPlayingGunGameProgressive() == false )
-					{
-						if ( nConsecutiveKills < 2 )
-						{
-							//EmitSound( filter, entindex(), "Music.Kill_01" );
-						}
-						else if ( nConsecutiveKills < 3 )
-						{
-							//EmitSound( filter, entindex(), "Music.Kill_02" );
-						}
-						else if ( nConsecutiveKills < 4 )
-						{
-							//EmitSound( filter, entindex(), "Music.Kill_03" );
-						}
-					}
+//					else if ( CSGameRules()->IsPlayingGunGameProgressive() == false )
+//					{
+//						if ( nConsecutiveKills < 2 )
+//						{
+//							//EmitSound( filter, entindex(), "Music.Kill_01" );
+//						}
+//						else if ( nConsecutiveKills < 3 )
+//						{
+//							//EmitSound( filter, entindex(), "Music.Kill_02" );
+//						}
+//						else if ( nConsecutiveKills < 4 )
+//						{
+//							//EmitSound( filter, entindex(), "Music.Kill_03" );
+//						}
+//					}
 				}
 			}
 		}

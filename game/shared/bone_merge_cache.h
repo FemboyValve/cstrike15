@@ -1,14 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-//=============================================================================//
-
-#ifndef BONE_MERGE_CACHE_H
-#define BONE_MERGE_CACHE_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #if defined( CLIENT_DLL )
 #undef CBaseAnimating
@@ -112,6 +102,3 @@ inline int CBoneMergeCache::IsBoneMerged( int iBone ) const
 	else
 		return 0;
 }
-
-
-#endif // BONE_MERGE_CACHE_H

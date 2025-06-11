@@ -4176,6 +4176,7 @@ public:
 void C_CSPlayer::CreateAddonModel( int i )
 {
 	/* Removed for partner depot */
+	//Log_Warning("C_CSPlayer::CreateAddonModel");
 }
 
 //-----------------------------------------------------------------------------
@@ -4186,7 +4187,7 @@ void C_CSPlayer::ThirdPersonSwitch( bool bThirdperson )
 {
 	BaseClass::ThirdPersonSwitch( bThirdperson );
 
-	if ( m_hCarriedHostageProp != NULL )
+	if ( m_hCarriedHostageProp.IsValid() )
 	{
 		C_HostageCarriableProp *pHostageProp = static_cast< C_HostageCarriableProp* >( m_hCarriedHostageProp.Get() );
 		if ( pHostageProp )
@@ -4253,7 +4254,7 @@ void C_CSPlayer::UpdateHostageCarryModels()
 {
 	if ( m_hCarriedHostage )
 	{
-		if ( m_hCarriedHostageProp != NULL )
+		if ( m_hCarriedHostageProp.IsValid() )
 		{
 			C_HostageCarriableProp *pHostageProp = static_cast< C_HostageCarriableProp* >( m_hCarriedHostageProp.Get() );
 			if ( pHostageProp )

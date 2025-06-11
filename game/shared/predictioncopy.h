@@ -1,15 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef PREDICTIONCOPY_H
-#define PREDICTIONCOPY_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #ifndef _PS3
 #include <memory.h>
@@ -357,4 +346,3 @@ private:
 #endif
 
 #endif // !CLIENT_DLL
-#endif // PREDICTIONCOPY_H

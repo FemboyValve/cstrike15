@@ -374,7 +374,7 @@ public:
 	void SetBloodColor( int nBloodColor );
 
 	// Weapons..
-	CBaseCombatWeapon*	GetActiveWeapon() const;
+	CBaseCombatWeapon*	GetActiveWeapon() const { return m_hActiveWeapon; }
 	int					WeaponCount() const;
 	CBaseCombatWeapon*	GetWeapon( int i ) const;
 	bool				RemoveWeapon( CBaseCombatWeapon *pWeapon );

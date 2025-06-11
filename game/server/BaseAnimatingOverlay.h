@@ -1,18 +1,8 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//=============================================================================//
-
-// #include "BaseAnimating.h"
-
-#ifndef BASE_ANIMATING_OVERLAY_H
-#define BASE_ANIMATING_OVERLAY_H
-#ifdef _WIN32
 #pragma once
-#endif
+
+#include "networkvar.h"
+#include "datamap.h"
+#include "shared_classnames.h"
 
 class CBaseAnimatingOverlay;
 class IBoneSetup;
@@ -316,5 +306,3 @@ inline void CAnimationLayer::NetworkStateChanged( void *pVar )
 	if ( m_pOwnerEntity )
 		m_pOwnerEntity->NetworkStateChanged();
 }
-
-#endif // BASE_ANIMATING_OVERLAY_H

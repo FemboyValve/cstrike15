@@ -1,16 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: Defines the client-side representation of CBaseCombatCharacter.
-//
-// $NoKeywords: $
-//===========================================================================//
-
-#ifndef C_BASECOMBATCHARACTER_H
-#define C_BASECOMBATCHARACTER_H
-
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "shareddefs.h"
 #include "c_baseflex.h"
@@ -77,7 +65,7 @@ public:
 	// I can't use my current weapon anymore. Switch me to the next best weapon.
 	bool SwitchToNextBestWeapon(C_BaseCombatWeapon *pCurrent);
 
-	virtual C_BaseCombatWeapon	*GetActiveWeapon( void ) const;
+	virtual C_BaseCombatWeapon	*GetActiveWeapon(void) const { return m_hActiveWeapon.Get(); };
 	int							WeaponCount() const;
 	virtual C_BaseCombatWeapon	*GetWeapon( int i ) const;
 
@@ -177,5 +165,3 @@ inline int	C_BaseCombatCharacter::WeaponCount() const
 }
 
 EXTERN_RECV_TABLE(DT_BaseCombatCharacter);
-
-#endif // C_BASECOMBATCHARACTER_H

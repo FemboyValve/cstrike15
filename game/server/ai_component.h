@@ -1,16 +1,6 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose:
-//
-// $NoKeywords: $
-//=============================================================================//
-
-#ifndef AI_COMPONENT_H
-#define AI_COMPONENT_H
-
-#if defined( _WIN32 )
 #pragma once
-#endif
+
+#include "networkvar.h"
 
 class CAI_BaseNPC;
 class CAI_Enemies;
@@ -168,5 +158,3 @@ public:
 	const NPC_CLASS *	GetOuter() const 	{ return (NPC_CLASS *)(CAI_Component::GetOuter()); }
 
 //-----------------------------------------------------------------------------
-
-#endif // AI_COMPONENT_H

@@ -1,18 +1,9 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Simple, small, free-standing tools for building AIs
-//
-//=============================================================================//
-
-#ifndef AI_UTILS_H
-#define AI_UTILS_H
+#pragma once
 
 #include "simtimer.h"
 #include "ai_component.h"
-
-#if defined( _WIN32 )
-#pragma once
-#endif
+#include "baseentity.h"
+#include "util.h"
 
 //-----------------------------------------------------------------------------
 //
@@ -318,5 +309,3 @@ private:
 };
 
 extern string_t g_iszFuncBrushClassname;
-
-#endif // AI_UTILS_H
