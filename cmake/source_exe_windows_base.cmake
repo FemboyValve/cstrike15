@@ -9,7 +9,7 @@ set( IS_LIB_PROJECT "1")
 
 add_definitions( -DEXENAME=${OUTBINNAME} )
 
-add_executable(${OUTBINNAME})
+add_executable(${OUTBINNAME} WIN32)
 
 set_target_properties(${OUTBINNAME} PROPERTIES OUTPUT_NAME "${OUTBINNAME}")
 set_target_properties(${OUTBINNAME} PROPERTIES SUFFIX ".exe")
@@ -30,17 +30,21 @@ if(MSVC)
     
     # Set subsystem
     set_target_properties(${OUTBINNAME} PROPERTIES
-        LINK_FLAGS "/SUBSYSTEM:CONSOLE /DEBUG /INCREMENTAL:NO"
+        LINK_FLAGS "/DEBUG /INCREMENTAL:NO"
     )
     
     if(WIN64)
         set_target_properties(${OUTBINNAME} PROPERTIES
-            LINK_FLAGS "/SUBSYSTEM:CONSOLE /DEBUG /INCREMENTAL:NO /MACHINE:X64 COMPILER_MSVC64"
+            LINK_FLAGS "/DEBUG /INCREMENTAL:NO /MACHINE:X64"
         )
+
+        add_definitions(-DCOMPILER_MSVC64)
     else()
         set_target_properties(${OUTBINNAME} PROPERTIES
-            LINK_FLAGS "/SUBSYSTEM:CONSOLE /DEBUG /INCREMENTAL:NO /MACHINE:X86 COMPILER_MSVC32"
+            LINK_FLAGS "/DEBUG /INCREMENTAL:NO /MACHINE:X86 "
         )
+
+        add_definitions(-DCOMPILER_MSVC32)
     endif()
 endif()
 

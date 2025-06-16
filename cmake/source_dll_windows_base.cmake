@@ -31,6 +31,9 @@ set_target_properties( ${OUTBINNAME} PROPERTIES
 
 # Windows DLL specific settings
 if(MSVC)
+    # Enable parallel compilation
+    target_compile_options(${OUTBINNAME} PRIVATE /MP)
+    
     # Generate import library
     set_target_properties(${OUTBINNAME} PROPERTIES 
         WINDOWS_EXPORT_ALL_SYMBOLS TRUE
@@ -40,7 +43,16 @@ if(MSVC)
     set_target_properties(${OUTBINNAME} PROPERTIES
         LINK_FLAGS "/DEBUG /INCREMENTAL:NO"
     )
+
+    if(WIN64)
+        add_definitions(-DCOMPILER_MSVC64)
+    else()
+        add_definitions(-DCOMPILER_MSVC32)
+    endif()
 endif()
+
+
+
 
 if( NOSKELETONBASE )
     message(STATUS "Not including Skeleton base.")

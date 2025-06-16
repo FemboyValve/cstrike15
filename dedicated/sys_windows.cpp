@@ -1,11 +1,5 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ========//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//=============================================================================//
 #include <windows.h> 
+#include <winsock.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>

@@ -1,17 +1,9 @@
-#//-----------------------------------------------------------------------------
 #//	CLIENT_CSTRIKE15.VPC
-#//
-#//	Project Script
-#//-----------------------------------------------------------------------------
-
-#There are other projects in this folder, but this cmake is focused towards csgo a.k.a. cstrike15
-
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 project(Client_CSGO)
 set(SRCDIR "${CMAKE_SOURCE_DIR}")
 set(GAMENAME "csgo")
 set(CSGO "1")
-#set(DONT_DOWNGRADE_ABI "1")
 
 add_definitions(-DCSTRIKE_CLIENT_DLL -DCSTRIKE_DLL -DGAMEUI_EMBEDDED -DGAMEUI_EXPORTS -DVERSION_SAFE_STEAM_API_INTERFACES -DINCLUDE_SCALEFORM -DUSE_ECONOMY_FEATURES)
 add_definitions(-DALLOW_TEXT_MODE=1)

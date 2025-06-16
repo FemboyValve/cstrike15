@@ -23,6 +23,7 @@ project(cstrike15)
 option(Debug_GCC_Build "Debug GCC Build" OFF)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+include(detect_platform)
 include(game_detect)
 
 #gcc debug stuff

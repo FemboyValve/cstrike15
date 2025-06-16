@@ -1,10 +1,5 @@
-//====== Copyright 1996-2005, Valve Corporation, All rights reserved. =======//
-//
 // Purpose: Implementation of the VGUI ISurface interface using the 
 // material system to implement it
-//
-//=============================================================================//
-
 #define SUPPORT_CUSTOM_FONT_FORMAT
 
 #ifdef SUPPORT_CUSTOM_FONT_FORMAT
@@ -13,6 +8,7 @@
 
 #if defined( WIN32) && !defined( _X360 )
 #include <windows.h>
+#include <shellapi.h>
 #endif
 #ifdef OSX
 #include <Carbon/Carbon.h>
