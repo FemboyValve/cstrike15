@@ -1,14 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//=============================================================================//
-#if !defined( ISYS_H )
-#define ISYS_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include "interface.h"
 
@@ -41,5 +31,3 @@ public:
 };
 
 extern ISys *sys;
-
-#endif // ISYS_H

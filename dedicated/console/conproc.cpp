@@ -1,10 +1,3 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//=============================================================================//
 #ifdef _WIN32
 // conproc.c -- support for qhost
 #include <stdio.h>

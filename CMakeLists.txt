@@ -26,6 +26,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 include(detect_platform)
 include(game_detect)
 
+set(USE_SCALEFORM 1) # TEMP HACK 
+
 #gcc debug stuff
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND Debug_GCC_Build)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer -g")

@@ -1,9 +1,3 @@
-//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose:
-//
-// $NoKeywords: $
-//=============================================================================//
 #include "cbase.h"
 #if defined( INCLUDE_SCALEFORM )
 #include "basepanel.h"
@@ -24,6 +18,7 @@
 #include "vgui/ISurface.h"
 #include "soundsystem/isoundsystem.h"
 #ifdef _WIN32
+#include <Windows.h>
 #include "dsound.h"
 #endif
 

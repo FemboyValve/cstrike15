@@ -11,6 +11,7 @@
 #include <windows.h>
 #include "shlwapi.h" // registry stuff
 #include <direct.h>
+#include <winsock.h>
 #endif
 #elif defined ( OSX ) 
 #include <Carbon/Carbon.h>

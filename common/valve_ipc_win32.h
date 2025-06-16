@@ -1,17 +1,6 @@
-//====== Copyright c 1996-2007, Valve Corporation, All rights reserved. =======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//=============================================================================//
-
-#ifndef VALVE_IPC_WIN32
-#define VALVE_IPC_WIN32
-#ifdef _WIN32
 #pragma once
-#endif
 
+#include <rpc.h>
 #include <rpcdce.h>
 
 // Fwd declarations
@@ -930,8 +919,3 @@ VALVE_IPC_IMPL BOOL CValveIpcClient::ExecuteCommand( LPVOID bufIn, DWORD numInBy
 	}
 	return bTransact;
 }
-
-
-
-
-#endif // #ifndef VALVE_IPC_WIN32

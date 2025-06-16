@@ -1,12 +1,4 @@
-//===== Copyright © Valve Corporation, All rights reserved. ======//
-#ifndef IGAMEUISYSTEMMGR_H
-#define IGAMEUISYSTEMMGR_H
-
-#ifdef _WIN32
 #pragma once
-#endif
-
-
 
 // Forward declarations
 class IGameUISystemMgr;
@@ -256,6 +248,3 @@ namespace { \
 		} \
 	} s_LinkHelper; \
 };
-
-
-#endif // IGAMEUISYSTEMMGR_H
