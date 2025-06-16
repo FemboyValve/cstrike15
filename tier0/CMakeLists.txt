@@ -1,8 +1,3 @@
-#//-----------------------------------------------------------------------------
-#//	TIER0.VPC
-#//
-#//	Project Script
-#//-----------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.16)
 project(libtier0_client)
 set(SRCDIR "${CMAKE_SOURCE_DIR}")
@@ -15,6 +10,7 @@ set(NOSKELETONBASE "1")
 
 include(${CMAKE_MODULE_PATH}/detect_platform.cmake)
 include(${CMAKE_MODULE_PATH}/source_dll_base.cmake)
+include(vpc)
 
 if( WINDOWS OR X360 )
     add_definitions(-DTIER0_DLL_EXPORT -DCROSS_PLATFORM_VERSION=1 -DTHREAD_MUTEX_TRACING_ENABLED)
@@ -29,48 +25,49 @@ if( LINUXALL )
     target_compile_options(${OUTBINNAME} PRIVATE -shared -fPIC)
 endif()
 
-target_sources(${OUTBINNAME} PRIVATE "../unitlib/unitlib.cpp")
-target_sources(${OUTBINNAME} PRIVATE "assert_dialog.cpp")
-target_sources(${OUTBINNAME} PRIVATE "commandline.cpp")
-target_sources(${OUTBINNAME} PRIVATE "cpu.cpp")
-target_sources(${OUTBINNAME} PRIVATE "cpumonitoring.cpp")
-target_sources(${OUTBINNAME} PRIVATE "cputopology.cpp")
-if( POSIX )
-    target_sources(${OUTBINNAME} PRIVATE "cpu_posix.cpp")
-endif()
-target_sources(${OUTBINNAME} PRIVATE "dbg.cpp")
-target_sources(${OUTBINNAME} PRIVATE "fasttimer.cpp")
-target_sources(${OUTBINNAME} PRIVATE "logging.cpp")
-target_sources(${OUTBINNAME} PRIVATE "mem.cpp")
-target_sources(${OUTBINNAME} PRIVATE "mem_helpers.cpp")
-target_sources(${OUTBINNAME} PRIVATE "memdbg.cpp")
-target_sources(${OUTBINNAME} PRIVATE "memvirt.cpp")
-target_sources(${OUTBINNAME} PRIVATE "memstd.cpp")
-target_sources(${OUTBINNAME} PRIVATE "memvalidate.cpp")
-target_sources(${OUTBINNAME} PRIVATE "dynfunction.cpp")
-target_sources(${OUTBINNAME} PRIVATE "minidump.cpp")
-target_sources(${OUTBINNAME} PRIVATE "tier0_strtools.cpp")
-target_sources(${OUTBINNAME} PRIVATE "miniprofiler.cpp")
-target_sources(${OUTBINNAME} PRIVATE "perfstats.cpp")
-if( POSIX )
-    target_sources(${OUTBINNAME} PRIVATE "platform_posix.cpp")
-endif()
-target_sources(${OUTBINNAME} PRIVATE "platform_independent.cpp")
-target_sources(${OUTBINNAME} PRIVATE "platwindow.cpp")
-if( POSIX OR PS3 )
-    target_sources(${OUTBINNAME} PRIVATE "pme_posix.cpp")
-endif()
-target_sources(${OUTBINNAME} PRIVATE "progressbar.cpp")
-target_sources(${OUTBINNAME} PRIVATE "security.cpp")
-target_sources(${OUTBINNAME} PRIVATE "stackstats.cpp")
-target_sources(${OUTBINNAME} PRIVATE "stacktools.cpp")
-target_sources(${OUTBINNAME} PRIVATE "systeminformation.cpp")
-target_sources(${OUTBINNAME} PRIVATE "threadtools.cpp")
-target_sources(${OUTBINNAME} PRIVATE "tslist.cpp")
-target_sources(${OUTBINNAME} PRIVATE "vatoms.cpp")
-target_sources(${OUTBINNAME} PRIVATE "vprof.cpp")
-target_sources(${OUTBINNAME} PRIVATE "vtuneinterface.cpp")
-target_sources(${OUTBINNAME} PRIVATE "win32consoleio.cpp")
+# stupid i know win32 version is called platform.cpp maybe rename?
+vpc_file(tier0_src
+    "platform.cpp" WIN32 
+    "../unitlib/unitlib.cpp"
+    "platform_posix.cpp" POSIX
+    "cpu_posix.cpp" POSIX
+    "assert_dialog.cpp"
+    "commandline.cpp"
+    "cpu.cpp"
+    "cpumonitoring.cpp"
+    "cputopology.cpp"
+    "dbg.cpp"
+    "fasttimer.cpp"
+    "logging.cpp"
+    "mem.cpp"
+    "pme_posix.cpp" POSIX OR PS3
+    "mem_helpers.cpp"
+    "memdbg.cpp"
+    "memvirt.cpp"
+    "memstd.cpp"
+    "memvalidate.cpp"
+    "dynfunction.cpp"
+    "minidump.cpp"
+    "tier0_strtools.cpp"
+    "miniprofiler.cpp"
+    "perfstats.cpp"
+    "platform_independent.cpp"
+    "platwindow.cpp"
+    "progressbar.cpp"
+    "security.cpp"
+    "stackstats.cpp"
+    "stacktools.cpp"
+    "systeminformation.cpp"
+    "threadtools.cpp"
+    "tslist.cpp"
+    "vatoms.cpp"
+    "vprof.cpp"
+    "vtuneinterface.cpp"
+    "win32consoleio.cpp"
+)
+
+target_sources(${OUTBINNAME} PRIVATE ${tier0_src})
+
 if( LINUXALL )
     #target_sources(${OUTBINNAME} PRIVATE "../tier1/pathmatch.cpp" )
 endif()
@@ -87,4 +84,6 @@ endif()
 #$LibExternal	 "$SRCDIR/thirdparty/telemetry/lib/libtelemetryx86.link" [$LINUX32 && !$RAD_TELEMETRY_DISABLED]
 #$LibExternal	 "$SRCDIR/thirdparty/telemetry/lib/libtelemetryx64.link" [$LINUX64 && !$RAD_TELEMETRY_DISABLED]
 
-target_link_libraries(${OUTBINNAME} dl pthread)
+if( POSIX )
+    target_link_libraries(${OUTBINNAME} dl pthread)
+endif()

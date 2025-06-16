@@ -20,4 +20,9 @@ set_target_properties( ${OUTLIBNAME} PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${OUTLIBDIR}"
         )
 
+if(MSVC)
+    # Enable parallel compilation
+    target_compile_options(${OUTLIBNAME} PRIVATE /MP)
+endif()
+
 set(OutputFile "${OUTLIBDIR}/${OUTLIBNAME}${_STATICLIB_EXT}")
