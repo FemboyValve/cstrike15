@@ -1,6 +1,6 @@
 # CS\:OO (Counter Strike: Open Offensive)
 
-This project is a modified version of **Counter-Strike: Global Offensive (2017) before Operation Hydra src leak**.
+This project is a modified version of **Counter-Strike: Global Offensive (2017) before Operation Hydra update**.
 
 ---
 
