@@ -1,15 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-//=============================================================================//
-
-#ifndef CS_WEAPON_PARSE_H
-#define CS_WEAPON_PARSE_H
-#ifdef _WIN32
 #pragma once
-#endif
-
 
 #ifdef CLIENT_DLL
 	#define CWeaponCSBase C_WeaponCSBase
@@ -428,5 +417,3 @@ const char *WeaponIDToAlias( int id );
 CSWeaponID AliasToWeaponID( const char *szAlias );
 const CCSWeaponInfo* GetWeaponInfo( CSWeaponID weaponID );
 bool IsGunWeapon( CSWeaponType weaponType );
-
-#endif // CS_WEAPON_PARSE_H

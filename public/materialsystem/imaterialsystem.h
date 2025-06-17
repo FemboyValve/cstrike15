@@ -1,17 +1,4 @@
-//===== Copyright � 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//===========================================================================//
-
-#ifndef IMATERIALSYSTEM_H
-#define IMATERIALSYSTEM_H
-
-#ifdef _WIN32
 #pragma once
-#endif
 
 #define OVERBRIGHT 2.0f
 #define OO_OVERBRIGHT ( 1.0f / 2.0f )
@@ -2124,5 +2111,3 @@ static void DoMatSysQueueMark( IMaterialSystem *pMaterialSystem, const char *psz
 
 DECLARE_TIER2_INTERFACE( IMaterialSystem, materials );
 DECLARE_TIER2_INTERFACE( IMaterialSystem, g_pMaterialSystem );
-
-#endif // IMATERIALSYSTEM_H

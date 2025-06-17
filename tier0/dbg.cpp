@@ -1,11 +1,3 @@
-//===== Copyright (c) 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//===========================================================================//
-
 #include "tier0/platform.h"
 
 #if defined( PLATFORM_WINDOWS_PC )

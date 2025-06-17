@@ -64,6 +64,7 @@ vpc_file(tier0_src
     "vprof.cpp"
     "vtuneinterface.cpp"
     "win32consoleio.cpp"
+	"../public/tier0/l2cache.h"
 )
 
 target_sources(${OUTBINNAME} PRIVATE ${tier0_src})

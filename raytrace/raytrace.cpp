@@ -1,5 +1,3 @@
-// $Id$
-
 #include "raytrace.h"
 #include <filesystem_tools.h>
 #include <cmdlib.h>

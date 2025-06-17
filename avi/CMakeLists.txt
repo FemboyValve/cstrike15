@@ -58,7 +58,13 @@ if( QUICKTIME_VIDEO OR QUICKTIME_WINDOWS )
     target_sources(${OUTBINNAME} PRIVATE "quicktime.cpp")
 endif()
 
-if( WINDOWS OR X360 OR POSIX )
+
+if( WINDOWS) # TODO: ... what kind of stupid implementation is this? ill try to fix it some day
+    target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/tier2_client.lib ${LIBPUBLIC}/tier3_client.lib)
+    # do we have to link against sdl and sdl_mixer libs?
+endif()
+
+if( X360 OR POSIX )
     target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/tier2_client.a ${LIBPUBLIC}/tier3_client.a)
     if( LINUXALL )
         target_link_libraries(${OUTBINNAME} ${SRCDIR}/lib/common/libSDL2_mixer.a)

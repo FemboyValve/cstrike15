@@ -202,7 +202,7 @@ void R_LoadWorldGeometry( bool bDXChange )
 
 	MaterialSystem_CreateSortinfo();
 
-	// UNDONE: This is a really crappy place to do this - shouldn't this stuff be in the modelloader?
+	// TODO: This is a really crappy place to do this - shouldn't this stuff be in the modelloader?
 
 	// If this is the first time we've tried to render this map, create a few one-time data structures
 	// These all get cleared out if Map_UnloadModel is ever called by the modelloader interface ( and that happens

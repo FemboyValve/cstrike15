@@ -1,16 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: Shared CS definitions.
-//
-//=============================================================================//
-
-#ifndef CS_ACHIEVEMENTDEFS_H
-#define CS_ACHIEVEMENTDEFS_H
-#ifdef _WIN32
 #pragma once
-#endif
-
-
 
 //=============================================================================
 // Achievement ID Definitions
@@ -272,6 +260,3 @@ typedef enum
 	CSSeason1_End               // Must be after last season 1 achievement
 
 } eCSAchievementType;
-
-
-#endif // CS_ACHIEVEMENTDEFS_H

@@ -1,9 +1,4 @@
-#//-----------------------------------------------------------------------------
-#//	LAUNCHER_MAIN.VPC
-#//
-#//	Project Script
-#//-----------------------------------------------------------------------------
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 project(launcher_main)
 set(SRCDIR "${CMAKE_SOURCE_DIR}")
 set(CMAKE_MODULE_PATH ${SRCDIR}/cmake)
@@ -32,4 +27,6 @@ include(${CMAKE_MODULE_PATH}/source_exe_base.cmake)
 
 target_sources(${OUTBINNAME} PRIVATE main.cpp)
 
-target_link_libraries(${OUTBINNAME} dl) #link for dlopen.
+if(POSIX)
+	target_link_libraries(${OUTBINNAME} dl) #link for dlopen.
+endif()
