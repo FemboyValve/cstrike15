@@ -33,12 +33,6 @@ This project requires **Visual Studio 2015 Update 3** to build.
      * ✅ **Microsoft Foundation Classes for C++** (this includes MFC and ATL)
 4. Complete the installation.
 
-Once installed, `afxres.h` and other required headers will be available at:
-
-```
-C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\
-```
-
 > 💡 *Support for newer compilers and CMake is planned for future updates.*
 
 ---
