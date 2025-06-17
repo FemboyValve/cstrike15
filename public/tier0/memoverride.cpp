@@ -1,10 +1,5 @@
-//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
-//
 // Purpose: Insert this file into all projects using the memory system
 // It will cause that project to use the shader memory allocator
-//
-// $NoKeywords: $
-//=============================================================================//
 
 #ifdef SN_TARGET_PS3
 
@@ -506,7 +501,8 @@ void *_realloc_base( void *pMem, size_t nSize )
 	return ReallocUnattributed( pMem, nSize );
 }
 
-void *_recalloc_base( void *pMem, size_t nSize )
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
+void *_recalloc_base(void *pMem, size_t nSize)
 {
 	void *pMemOut = ReallocUnattributed( pMem, nSize );
 	if (!pMem)
@@ -515,6 +511,7 @@ void *_recalloc_base( void *pMem, size_t nSize )
 	}
 	return pMemOut;
 }
+#endif
 
 void _free_base( void *pMem )
 {
@@ -553,9 +550,10 @@ void * __cdecl _realloc_crt(void *ptr, size_t size)
 
 void * __cdecl _recalloc_crt(void *ptr, size_t count, size_t size)
 {
-	return _recalloc_base( ptr, size * count );
+	return _recalloc_base(ptr, count, size);
 }
 
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
 ALLOC_CALL void * __cdecl _recalloc ( void * memblock, size_t count, size_t size )
 {
 	void *pMem = ReallocUnattributed( memblock, size * count );
@@ -565,8 +563,10 @@ ALLOC_CALL void * __cdecl _recalloc ( void * memblock, size_t count, size_t size
 	}
 	return pMem;
 }
+#endif
 
-size_t _msize_base( void *pMem )
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
+size_t _msize_base(void *pMem)
 {
 	return g_pMemAlloc->GetSize(pMem);
 }
@@ -575,6 +575,7 @@ size_t _msize( void *pMem )
 {
 	return _msize_base(pMem);
 }
+#endif
 
 size_t msize( void *pMem )
 {
