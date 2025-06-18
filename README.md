@@ -9,6 +9,7 @@ This project is a modified version of **Counter-Strike: Global Offensive (2017) 
 * **Active development**
 * **Experimental features**
 * **Expect bugs and incomplete functionality**
+* **Compiles with windows 10 sdk (10.0.22621.0) but currently the game crashes...**
 
 ---
 

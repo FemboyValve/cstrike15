@@ -1,6 +1,3 @@
-// Purpose: Insert this file into all projects using the memory system
-// It will cause that project to use the shader memory allocator
-
 #ifdef SN_TARGET_PS3
 
 #ifdef PS3MEMOVERRIDEWRAP
@@ -358,6 +355,12 @@ _purecall_handler OldPurecallHandler = _set_purecall_handler( VPurecallHandler )
 extern "C" void __cxa_pure_virtual() { VPurecallHandler(); }
 #endif
 
+#ifndef USE_OLD_MEM_ALLOC
+#if _WIN32_WINNT <= 0x0603 // if win sdk 8.1 or below
+#define USE_OLD_MEM_ALLOC 1
+#endif
+#endif // USE_OLD_MEM_ALLOC
+
 #include "tier0/dbg.h"
 #include "tier0/memalloc.h"
 #include <string.h>
@@ -388,6 +391,7 @@ extern "C" void __cxa_pure_virtual() { VPurecallHandler(); }
 #endif
 
 const char *g_pszModule = MKSTRING( MEMOVERRIDE_MODULE );
+#if USE_OLD_MEM_ALLOC
 inline void *AllocUnattributed( size_t nSize )
 {
 #if !defined(USE_LIGHT_MEM_DEBUG) && !defined(USE_MEM_DEBUG)
@@ -407,7 +411,16 @@ inline void *ReallocUnattributed( void *pMem, size_t nSize )
 }
 
 #undef inline
-
+#else
+inline void *AllocUnattributed(size_t nSize)
+{
+	return malloc(nSize);
+}
+inline void *ReallocUnattributed(void *pMem, size_t nSize)
+{
+	return realloc(pMem, nSize);
+}
+#endif
 
 //-----------------------------------------------------------------------------
 // Standard functions in the CRT that we're going to override to call our allocator
@@ -501,8 +514,8 @@ void *_realloc_base( void *pMem, size_t nSize )
 	return ReallocUnattributed( pMem, nSize );
 }
 
-#if !defined(_MSC_VER) || (_MSC_VER < 1900)
-void *_recalloc_base(void *pMem, size_t nSize)
+#if USE_OLD_MEM_ALLOC
+void *_recalloc_base( void *pMem, size_t nSize )
 {
 	void *pMemOut = ReallocUnattributed( pMem, nSize );
 	if (!pMem)
@@ -550,10 +563,14 @@ void * __cdecl _realloc_crt(void *ptr, size_t size)
 
 void * __cdecl _recalloc_crt(void *ptr, size_t count, size_t size)
 {
+#if USE_OLD_MEM_ALLOC
+	return _recalloc_base( ptr, size * count );
+#else
 	return _recalloc_base(ptr, count, size);
+#endif
 }
 
-#if !defined(_MSC_VER) || (_MSC_VER < 1900)
+#if USE_OLD_MEM_ALLOC
 ALLOC_CALL void * __cdecl _recalloc ( void * memblock, size_t count, size_t size )
 {
 	void *pMem = ReallocUnattributed( memblock, size * count );
@@ -563,10 +580,8 @@ ALLOC_CALL void * __cdecl _recalloc ( void * memblock, size_t count, size_t size
 	}
 	return pMem;
 }
-#endif
 
-#if !defined(_MSC_VER) || (_MSC_VER < 1900)
-size_t _msize_base(void *pMem)
+size_t _msize_base( void *pMem )
 {
 	return g_pMemAlloc->GetSize(pMem);
 }
