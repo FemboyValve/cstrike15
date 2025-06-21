@@ -1,9 +1,3 @@
-//========= Copyright (c) 1996-2003, Valve LLC, All rights reserved. ============
-//
-// Purpose: 
-//
-//=============================================================================
-
 #include "cbase.h"
 #include "cstrike15_item_inventory.h"
 #include "econ_entity_creation.h"

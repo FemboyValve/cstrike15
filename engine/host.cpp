@@ -5404,7 +5404,7 @@ public:
 
 	virtual void PassSignaturesArray( void *pvArray )
 	{
-		;
+		return;
 	}
 }
 g_CScaleformSlotInitControllerEngineImpl;

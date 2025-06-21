@@ -1,9 +1,3 @@
-//========= Copyright � 1996-2003, Valve LLC, All rights reserved. ============
-//
-// Purpose: 
-//
-//=============================================================================
-
 #include "cbase.h"
 #include "econ_item_inventory.h"
 #include "vgui/ILocalize.h"

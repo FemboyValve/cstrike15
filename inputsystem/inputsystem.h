@@ -1,28 +1,17 @@
-//===== Copyright 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//===========================================================================//
-#ifndef INPUTSYSTEM_H
-#define INPUTSYSTEM_H
-#ifdef _WIN32
 #pragma once
-#endif
-
-#define DONT_DEFINE_DWORD
 
 #include "platform.h"
 #include "basetypes.h"
 
 #ifdef PLATFORM_WINDOWS_PC
+#define DONT_DEFINE_DWORD
 #define OEMRESOURCE //for OCR_* cursor junk
 #define _WIN32_WINNT 0x502
 #include <windows.h>
 #include <zmouse.h>
 #include "xbox/xboxstubs.h"
 #include "../../dx9sdk/include/XInput.h"
+#include <joystickapi.h>
 #endif
 
 #if defined( _WIN32 ) && defined( USE_SDL )
@@ -624,6 +613,3 @@ inline bool CInputSystem::ShouldGenerateUIEvents() const
 {
 	return m_nUIEventClientCount > 0;
 }
-
-
-#endif // INPUTSYSTEM_H

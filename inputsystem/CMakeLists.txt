@@ -41,5 +41,9 @@ endif()
 target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/common/platforminputdevice.cpp")
 
 target_link_libraries(${OUTBINNAME} tier2_client mathlib_client)
-#Requires evil proprietary link to libsteam_api
+
+if(POSIX)
 target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/libsteam_api.so)
+elseif(WINDOWS)
+target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/steam_api.lib)
+endif()
