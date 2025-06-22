@@ -14,7 +14,14 @@ add_definitions(-DDEDICATED -DLAUNCHERONLY)
 
 #linker
 if( WINDOWS )
-    target_link_libraries(${OUTBINNAME} wsock32.lib odbc32.lib odbccp32.lib winmm.lib)
+    target_link_libraries(${OUTBINNAME} 
+        wsock32.lib 
+        odbc32.lib 
+        odbccp32.lib 
+        winmm.lib
+        rpcrt4.lib      # Add RPC runtime library for UUID functions
+        ole32.lib       # Sometimes needed alongside rpcrt4
+    )
 endif()
 if( OSXALL )
     #$SystemLibraries                     "iconv" [$OSXALL]
@@ -51,26 +58,39 @@ vpc_file(dedicated_src
 )
 
 target_sources(${OUTBINNAME} PRIVATE ${dedicated_src})
+target_include_directories(${OUTBINNAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-#SKIPPING - NEED THESE FIRST
-#$Lib	appframework
-#$Lib	dmxloader
-#$ImplibExternal	steam_api							[ ( $WIN32 || $POSIX || $PS3 ) && !$NO_STEAM ]
-#$ImplibExternal	steam_api64							[ $WIN64 && !$NO_STEAM ]
-#$Lib	mathlib
-#$Lib 	tier2
-#$Lib	tier3
-#$Lib 	vpklib
-#$Lib	vgui_controls [$WINDOWS||$OSXALL]
-
+# Steam API linking
 if( (NOT DEFINED NO_STEAM) OR (${NO_STEAM})  )
-    #grug
+    if(WINDOWS)
+        target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/steam_api.lib)
+    elseif(POSIX)
+        target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/libsteam_api.so)
+    endif()
 else()
     message(FATAL_ERROR "CMake steam_api integration is disabled.")
 endif()
 
-target_link_libraries(${OUTBINNAME} appframework_client dmxloader_client mathlib_client tier2_client tier3_client libvstdlib_client vpklib_client)
+# Link libraries in correct order to resolve dependencies
+target_link_libraries(${OUTBINNAME} 
+    appframework_client 
+    dmxloader_client 
+    mathlib_client 
+    tier3_client          # Move tier3 before tier2/tier1 
+    tier2_client 
+    tier1_client          # tier1 depends on RPC functions
+    libvstdlib_client     # Move vstdlib after tier libraries
+    vpklib_client
+)
 
 if( WINDOWS OR OSXALL )
     target_link_libraries(${OUTBINNAME} vgui_controls_client)
+endif()
+
+# Add linker flags to handle memory override conflicts
+if( WINDOWS )
+    target_link_options(${OUTBINNAME} PRIVATE 
+        /FORCE:MULTIPLE     # Allow multiple symbol definitions (use with caution)
+        # Alternative: /NODEFAULTLIB:msvcrt.lib if using static runtime
+    )
 endif()

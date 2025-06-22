@@ -12,6 +12,7 @@ set(OUTBINDIR ${SRCDIR}/../game/bin)
 
 include(${CMAKE_MODULE_PATH}/detect_platform.cmake)
 include(${CMAKE_MODULE_PATH}/source_dll_base.cmake)
+include(vpc)
 
 add_definitions(-DMDLCACHE_DLL_EXPORT)
 
@@ -19,15 +20,33 @@ if( LINUXALL )
     target_compile_options(${OUTBINNAME} PRIVATE -shared -fPIC)
 endif()
 
-target_sources(${OUTBINNAME} PRIVATE "datacache.cpp")
-target_sources(${OUTBINNAME} PRIVATE "mdlcache.cpp")
-target_sources(${OUTBINNAME} PRIVATE "mdlcombine.cpp")
-target_sources(${OUTBINNAME} PRIVATE "vtfcombine.cpp")
-target_sources(${OUTBINNAME} PRIVATE "resourceaccesscontrol.cpp")
-target_sources(${OUTBINNAME} PRIVATE "precachesystem.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/public/studio.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/public/studio_virtualmodel.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/common/studiobyteswap.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/utils/common/datalinker.cpp")
+# Add linker flags to handle multiply defined symbols on Windows
+if(WIN32)
+    target_link_options(${OUTBINNAME} PRIVATE 
+        "/FORCE:MULTIPLE"  # Allow multiple symbol definitions
+        # Alternative: Use /IGNORE:4006 to ignore specific warnings
+        # "/IGNORE:4006"
+    )
+endif()
 
-target_link_libraries(${OUTBINNAME} tier2_client tier3_client mathlib_client libvstdlib_client)
+vpc_file(datacache_src 
+    "datacache.cpp"
+    "mdlcache.cpp"
+    "mdlcombine.cpp"
+    "vtfcombine.cpp"
+    "resourceaccesscontrol.cpp"
+    "precachesystem.cpp"
+    "${SRCDIR}/public/studio.cpp"
+    "${SRCDIR}/public/studio_virtualmodel.cpp"
+    "${SRCDIR}/common/studiobyteswap.cpp"
+    "${SRCDIR}/utils/common/datalinker.cpp"
+)
+
+target_sources(${OUTBINNAME} PRIVATE ${datacache_src})
+
+target_link_libraries(${OUTBINNAME} 
+    tier2_client 
+    tier3_client 
+    mathlib_client 
+    libvstdlib_client
+)
