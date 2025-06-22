@@ -47,7 +47,8 @@ This project requires **Visual Studio 2015 Update 3** to build.
    Run `CreateSolution.bat` to generate the `.sln` file.
 
 3. **Build the project**
-   Open `csgo_partner.sln` in Visual Studio 2015 and build the solution.
+   > ⚠️ **Note:** Build in Release configuration currently debug doesnt work.
+   Open `csgo.sln` in Visual Studio 2015 and build the solution.
 
 4. **Download game assets** *(Windows only)*
    Use the following Steam CLI commands to download the required depots:
@@ -84,9 +85,13 @@ Ensure you have the following installed:
 
 #### **Build Instructions**
 
-*(Currently, specific CMake build instructions for Windows are not provided in the source. The project recommends using VPC for Windows setups at this time.)*
+> ⚠️ **Note:** PLEASE DO NOT USE CMAKE you have been warned.
 
-> 💡 *Support for newer compilers and CMake is planned for future updates.*
+1. **Generate Visual Studio solution**
+   Run `CMakeCreateSoluion.bat` to generate the `.sln` file.
+
+2. **Build the project**
+   Open `cstrike15.sln` found in ``build`` folder and open thje project with Visual Studio 2015 and build the solution.
 
 ---
 
