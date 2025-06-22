@@ -345,20 +345,10 @@ set(TEXTTOARRAY_SCRIPT "${CMAKE_SOURCE_DIR}/devtools/bin/texttoarray.pl")
 set(NUT_SOURCE "${CMAKE_SOURCE_DIR}/game/client/vscript_client.nut")
 set(NUT_HEADER "${CMAKE_SOURCE_DIR}/game/client/vscript_client_nut.h")
 
-# Detect OS to configure command correctly
-if(WINDOWS)
-    # Windows: use cmd-compatible redirection syntax
-    set(GEN_NUT_HEADER_COMMAND
-        ${CMAKE_COMMAND} -E echo "Generating ${NUT_HEADER} from ${NUT_SOURCE}" &&
-        perl.exe ${TEXTTOARRAY_SCRIPT} ${NUT_SOURCE} g_Script_vscript_client > ${NUT_HEADER}
-    )
-else()
-    # Unix-like: standard bash redirection
-    set(GEN_NUT_HEADER_COMMAND
-        ${CMAKE_COMMAND} -E echo "Generating ${NUT_HEADER} from ${NUT_SOURCE}" &&
-        perl ${TEXTTOARRAY_SCRIPT} ${NUT_SOURCE} g_Script_vscript_client > ${NUT_HEADER}
-    )
-endif()
+set(GEN_NUT_HEADER_COMMAND
+    ${CMAKE_COMMAND} -E echo "Generating ${NUT_HEADER} from ${NUT_SOURCE}" &&
+    perl ${TEXTTOARRAY_SCRIPT} ${NUT_SOURCE} g_Script_vscript_client > ${NUT_HEADER}
+)
 
 # Create the custom command
 add_custom_command(
