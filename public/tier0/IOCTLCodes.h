@@ -1,12 +1,3 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//=============================================================================//
-#ifndef IOCTLCODES_H
-#define IOCTLCODES_H
 #pragma once
 
 // Define the IOCTL codes we will use.  The IOCTL code contains a command
@@ -24,6 +15,3 @@
 
 #define IOCTL_READ_MSR \
     CTL_CODE( DEVICE_FILE_TYPE, 0x901, METHOD_BUFFERED, FILE_READ_ACCESS )
-
-
-#endif IOCTLCODES_H

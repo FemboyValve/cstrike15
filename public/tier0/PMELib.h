@@ -1,12 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//===========================================================================//
-#ifndef PMELIB_H
-#define PMELIB_H
+#pragma once
 
 //#include "windows.h"
 
@@ -208,5 +200,3 @@ enum PerfErrors
 };
 
 #pragma warning( pop )
-
-#endif // PMELIB_H

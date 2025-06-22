@@ -1,13 +1,6 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: 
-//
-// $NoKeywords: $
-//
-//===========================================================================//
-
 #ifdef _WIN32
 #include <windows.h>
+#include <winioctl.h>
 
 #pragma warning( disable : 4530 )   // warning: exception handler -GX option
 

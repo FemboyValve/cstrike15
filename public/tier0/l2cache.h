@@ -1,13 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
-//
-// Purpose: 
-//
-//=============================================================================//
-#ifndef CL2CACHE_H
-#define CL2CACHE_H
-#ifdef _WIN32
 #pragma once
-#endif
 
 class P4Event_BSQ_cache_reference;
 
@@ -42,6 +33,3 @@ private:
 	int64							m_i64End;
 	int								m_iL2CacheMissCount;
 };
-
-#endif   // CL2CACHE_H
-

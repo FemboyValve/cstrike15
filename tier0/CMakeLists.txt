@@ -25,7 +25,7 @@ if( LINUXALL )
     target_compile_options(${OUTBINNAME} PRIVATE -shared -fPIC)
 endif()
 
-# stupid i know win32 version is called platform.cpp maybe rename?
+# TODO: platform.cpp is the win32 version - maybe rename?
 vpc_file(tier0_src
     "platform.cpp" WIN32 
     "../unitlib/unitlib.cpp"
@@ -45,6 +45,9 @@ vpc_file(tier0_src
     "memdbg.cpp"
     "memvirt.cpp"
     "memstd.cpp"
+    "memstd.h"
+    "memprocessheap.cpp"
+    "mem_helpers.h"
     "memvalidate.cpp"
     "dynfunction.cpp"
     "minidump.cpp"
@@ -64,7 +67,13 @@ vpc_file(tier0_src
     "vprof.cpp"
     "vtuneinterface.cpp"
     "win32consoleio.cpp"
+    "../public/tier0/PMELib.h"
+    "pme.cpp"
+    "PMELib.cpp"
 	"../public/tier0/l2cache.h"
+    "etwprof.cpp"
+    "../public/tier0/etwprof.h"
+    "dlmalloc/malloc.cpp" WIN32
 )
 
 target_sources(${OUTBINNAME} PRIVATE ${tier0_src})
