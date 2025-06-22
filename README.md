@@ -59,7 +59,38 @@ This project requires **Visual Studio 2015 Update 3** to build.
 
 ---
 
-## 🛠 Setup Instructions (Linux)
+### **🛠️ Setup instructions (CMake Windows)**
+
+> ⚠️ **Note:** CMake isn't complete yet; please use VPC for Windows.
+
+This section outlines the prerequisites and steps for building the project using CMake on Windows.
+
+#### **Prerequisites**
+
+Ensure you have the following installed:
+
+* [**Perl**](https://strawberryperl.com/)
+* [**CMake**](https://cmake.org/)
+* **Microsoft Visual Studio 2015 (MSVC 2015) Update 3**
+
+    * **How to install ATL/MFC components for Visual Studio 2015:**
+        1.  Run the Visual Studio 2015 installer (`vs_community.exe` or similar).
+        2.  Choose "**Modify**" if Visual Studio is already installed, or "**Custom Install**" for a new installation.
+        3.  In the "**Select features**" menu, expand "**Programming Languages**" > "**Visual C++**".
+        4.  Check the following:
+            * ✅ **Common Tools for Visual C++ 2015**
+            * ✅ **Microsoft Foundation Classes for C++** (this includes MFC and ATL)
+        5.  Complete the installation.
+
+#### **Build Instructions**
+
+*(Currently, specific CMake build instructions for Windows are not provided in the source. The project recommends using VPC for Windows setups at this time.)*
+
+> 💡 *Support for newer compilers and CMake is planned for future updates.*
+
+---
+
+## 🛠️ Setup Instructions (Linux)
 
 > ⚠️ **Note:** These instructions are incomplete. For best results, refer to **Kisak’s official setup guide**. This section provides a basic local build guide.
 

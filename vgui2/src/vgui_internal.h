@@ -1,16 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: Wraps pointers to basic vgui interfaces
-//
-// $NoKeywords: $
-//===========================================================================//
-
-#ifndef VGUI_INTERNAL_H
-#define VGUI_INTERNAL_H
-
-#ifdef _WIN32
 #pragma once
-#endif
 
 #include <vgui/vgui.h>
 #include "interface.h"
@@ -47,8 +35,3 @@ extern class IPanel *g_pIPanel;
 // methods
 void vgui_strcpy(char *dst, int dstLen, const char *src);
 } // namespace vgui
-
-
-
-
-#endif // VGUI_INTERNAL_H

@@ -1,11 +1,3 @@
-//===== Copyright 1996-2005, Valve Corporation, All rights reserved. ======//
-//
-// Purpose: Core implementation of vgui
-//
-// $NoKeywords: $
-//===========================================================================//
-
-
 #if defined( WIN32 ) && !defined( _GAMECONSOLE )
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
