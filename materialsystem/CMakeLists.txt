@@ -29,16 +29,21 @@ if( NOT POSIX )
 endif()
 add_definitions(-DALLOW_TEXT_MODE=1)
 
-target_sources(${OUTBINNAME} PRIVATE "CColorCorrection.cpp")
-target_sources(${OUTBINNAME} PRIVATE "cmaterial.cpp")
-target_sources(${OUTBINNAME} PRIVATE "cmaterial_queuefriendly.cpp")
-target_sources(${OUTBINNAME} PRIVATE "CMaterialSubRect.cpp")
-target_sources(${OUTBINNAME} PRIVATE "cmaterialvar.cpp")
-target_sources(${OUTBINNAME} PRIVATE "cmatnullrendercontext.cpp")
-target_sources(${OUTBINNAME} PRIVATE "colorspace.cpp")
-target_sources(${OUTBINNAME} PRIVATE "ctexture.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/public/filesystem_helpers.cpp")
-target_sources(${OUTBINNAME} PRIVATE "imagepacker.cpp")
+vpc_file(materialsystem_src
+    "CColorCorrection.cpp"
+    "cmaterial.cpp"
+    "cmaterial_queuefriendly.cpp"
+    "CMaterialSubRect.cpp"
+    "cmaterialvar.cpp"
+    "cmatnullrendercontext.cpp"
+    "colorspace.cpp"
+    "ctexture.cpp"
+    "${SRCDIR}/public/filesystem_helpers.cpp"
+    "imagepacker.cpp"
+)
+
+target_sources(${OUTBINNAME} PRIVATE ${materialsystem_src})
+
 target_sources(${OUTBINNAME} PRIVATE "mat_stub.cpp")
 target_sources(${OUTBINNAME} PRIVATE "materialsystem_global.cpp")
 target_sources(${OUTBINNAME} PRIVATE "morph.cpp")
@@ -56,7 +61,7 @@ target_sources(${OUTBINNAME} PRIVATE "cmatpaintmaps.cpp")
 target_sources(${OUTBINNAME} PRIVATE "cmatrendercontext.cpp")
 target_sources(${OUTBINNAME} PRIVATE "cmatqueuedrendercontext.cpp")
 
-target_link_libraries(${OUTBINNAME} bitmap_client mathlib_client shaderlib_client tier2_client tier3_client vtf_client libvstdlib_client)
+target_link_libraries(${OUTBINNAME} vtf_client bitmap_client mathlib_client shaderlib_client tier2_client tier3_client  libvstdlib_client)
 
 #if building as dll..
 #$Implib togl [!$IS_LIB_PROJECT && $GL && !$DEDICATED]

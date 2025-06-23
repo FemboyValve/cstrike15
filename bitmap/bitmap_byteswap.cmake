@@ -4,7 +4,7 @@
 #//	Project Script
 #//-----------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.16)
-project(bitmap_libraries)
+project(bitmap_byteswap)
 set(SRCDIR "${CMAKE_SOURCE_DIR}")
 set(CMAKE_MODULE_PATH ${SRCDIR}/cmake)
 include(${CMAKE_MODULE_PATH}/detect_platform.cmake)
@@ -15,15 +15,10 @@ set(OUTLIBNAME "bitmap_byteswap_client")
 include(${CMAKE_MODULE_PATH}/source_lib_base.cmake)
 include(vpc)
 
-#set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
-if(WINDOWS)
-	#include(bitmap_byteswap.cmake)
-endif()
-
 target_sources(${OUTLIBNAME} PRIVATE ImageByteSwap.cpp)
 
 #build bitmap_client
-set(OUTLIBNAME "bitmap_client")
+set(OUTLIBNAME "bitmap_byteswap")
 
 include(${CMAKE_MODULE_PATH}/source_lib_base.cmake)
 
@@ -42,7 +37,6 @@ vpc_file(bitmap_src
 	"floatbitmap_bilateralfilter.cpp"
 	"floatcubemap.cpp"
 	"imageformat.cpp"
-	"../public/nvtc.h"
 )
 
 target_sources(${OUTLIBNAME} PRIVATE ${bitmap_src})
@@ -58,11 +52,11 @@ if(WIN32)
     # Link Libraries
     if(CMAKE_SIZEOF_VOID_P EQUAL 4)
         # 32-bit Windows
-        #target_link_directories(${PROJECT_NAME} PRIVATE "${CMAKE_SOURCE_DIR}/lib/public/nvtc")
+        target_link_directories(${PROJECT_NAME} PRIVATE "${CMAKE_SOURCE_DIR}/lib/public/nvtc")
     else()
         # 64-bit Windows
         target_link_directories(${PROJECT_NAME} PRIVATE "${CMAKE_SOURCE_DIR}/lib/public/nvtc64")
     endif()
     
-    #target_link_libraries(${PROJECT_NAME} PRIVATE bitmap_byteswap)
+    target_link_libraries(${PROJECT_NAME} PRIVATE bitmap_byteswap)
 endif()

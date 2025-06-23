@@ -24,28 +24,47 @@ endif()
 add_definitions(-DBENCHMARK -DVGUIMATSURFACE_DLL_EXPORT -DGAMEUI_EXPORTS -DDONT_PROTECT_FILEIO_FUNCTIONS -DPROTECTED_THINGS_ENABLE)
 add_definitions(-DENABLE_CHROMEHTMLWINDOW)
 
+# Fix for memory function redefinition on Windows
+if( WIN32 )
+    target_link_options(${OUTBINNAME} PRIVATE 
+        "/FORCE:MULTIPLE"
+        "/IGNORE:4006"
+        "/IGNORE:4221"
+    )
+endif()
+
 if( LINUXALL )
     target_link_options(${OUTBINNAME} PRIVATE "-L/usr/lib32 -L/usr/lib -L/usr/lib/i386-linux-gnu")
     target_link_libraries(${OUTBINNAME} fontconfig freetype SDL2)
 endif()
 
-target_sources(${OUTBINNAME} PRIVATE "Clip2D.cpp")
-target_sources(${OUTBINNAME} PRIVATE "Cursor.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/public/filesystem_helpers.cpp")
-target_sources(${OUTBINNAME} PRIVATE "Input.cpp")
-target_sources(${OUTBINNAME} PRIVATE "MatSystemSurface.cpp")
-#File from mathlib.. fuck it, this single file won't link for some reason. It is a very simple file, so i'm duplicating it here.
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/mathlib/halton.cpp")
+vpc_file(vguimatsurface_src
+    "Clip2D.cpp"
+    "Cursor.cpp"
+    "../public/filesystem_helpers.cpp"
+    "Input.cpp"
+    "MatSystemSurface.cpp"
+    "../mathlib/halton.cpp"
+    "memorybitmap.cpp" WINDOWS
+    "../vgui2/src/htmlwindow.cpp" WINDOWS
+    "../vgui2/src/vgui_key_translation.cpp"
+    "../public/vgui_controls/vgui_controls.cpp"
+)
 
-if( WINDOWS )
-    #$File	"memorybitmap.cpp"						[$WINDOWS]
-    #$File	"$SRCDIR\vgui2\src\htmlwindow.cpp"		[$WINDOWS]
-endif()
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/vgui2/src/vgui_key_translation.cpp")
-target_sources(${OUTBINNAME} PRIVATE "${SRCDIR}/public/vgui_controls/vgui_controls.cpp")
+target_sources(${OUTBINNAME} PRIVATE ${vguimatsurface_src})
 
 if( LINUXALL )
     target_link_libraries(${OUTBINNAME} fontconfig freetype SDL2)
 endif()
 
-target_link_libraries(${OUTBINNAME} vgui_controls_client vgui_surfacelib_client dmxloader_client tier2_client tier3_client mathlib_client bitmap_client tier0_client libvstdlib_client )
+target_link_libraries(${OUTBINNAME} 
+    vgui_controls_client 
+    vgui_surfacelib_client 
+    dmxloader_client 
+    libtier0_client 
+    tier2_client 
+    tier3_client 
+    mathlib_client 
+    bitmap_client 
+    libvstdlib_client
+)

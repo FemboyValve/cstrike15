@@ -43,9 +43,9 @@ remove_definitions(-DBASE) #used by cryptopp REEE
 add_definitions(-DALLOW_TEXT_MODE=1)
 
 if( WINDOWS )
-    #		$AdditionalDependencies			"$BASE dinput8.lib winmm.lib wsock32.lib ws2_32.lib wininet.lib vfw32.lib Rpcrt4.lib Iphlpapi.lib imm32.lib" [$WINDOWS]
-    #		$AdditionalLibraryDirectories	"$BASE;${SRCDIR}\lib\common\vc7;${SRCDIR}\dx9sdk\lib" [$WINDOWS]
-    #  		$AdditionalOptions				"$BASE /nodefaultlib:msvcrt.lib" [$WINDOWS]
+    target_link_libraries(${OUTBINNAME} dinput8.lib winmm.lib wsock32.lib ws2_32.lib wininet.lib vfw32.lib Rpcrt4.lib Iphlpapi.lib imm32.lib)
+    link_directories(${SRCDIR}/lib/common/vc7 ${SRCDIR}/dx9sdk/lib)
+    target_link_options(${OUTBINNAME} PRIVATE /nodefaultlib:msvcrt.lib)
 endif()
 if( LINUXALL AND (NOT DEDICATED) )
     target_link_libraries(${OUTBINNAME} SDL2 rt openal)
@@ -440,9 +440,9 @@ if( (NOT DEFINED NO_STEAM) )
     #Looks like we have to include libsteam_api
     message("building with steam_api")
     if (UNIX AND NOT APPLE)
-    target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/libsteam_api.so)
-    else() #windows
-    target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/steam_api.dll)
+        target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/libsteam_api.so)
+    elseif(WINDOWS)
+        target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/steam_api.dll)
     endif()
 else()
     #message(FATAL_ERROR "CMake steam_api integration is disabled.")

@@ -19,13 +19,14 @@ set(OUTBINDIR "${SRCDIR}/../game/bin")
 
 include(${CMAKE_MODULE_PATH}/detect_platform.cmake)
 include(${CMAKE_MODULE_PATH}/source_dll_base.cmake)
-#include("${CMAKE_MODULE_PATH}/source_video_base.cmake") already included in source_bases.
 
 if( QUICKTIME_WINDOWS )
     #$AdditionalIncludeDirectories	"$BASE,..\common\quicktime_win32\"		[$QUICKTIME_WINDOWS]
 endif()
-if( WINDOWS )
-    #$AdditionalIncludeDirectories	"$BASE;$SRCDIR\dx9sdk\include"			[$WINDOWS]
+if(WINDOWS)
+    target_include_directories(${OUTBINNAME} PRIVATE 
+        ${SRCDIR}/dx9sdk/include
+    )
 endif()
 
 #Compiler
@@ -42,26 +43,38 @@ if( LINUXALL )
     target_link_libraries(${OUTBINNAME} SDL2)
 endif()
 
-
-
 #source files
-if( WINDOWS )
-    target_sources(${OUTBINNAME} PRIVATE "avi.cpp")
-endif()
-if( OSXALL )
-    target_sources(${OUTBINNAME} PRIVATE "avi_osx.cpp")
-else()
-    target_sources(${OUTBINNAME} PRIVATE "bink.cpp")
-endif()
+vpc_file(valveavi_src
+    "avi.cpp" WINDOWS
+    "avi_osx.cpp" OSXALL
+    "bink.cpp" NOT OSXALL
+    "quicktime.cpp" QUICKTIME_VIDEO OR QUICKTIME_WINDOWS
 
-if( QUICKTIME_VIDEO OR QUICKTIME_WINDOWS )
-    target_sources(${OUTBINNAME} PRIVATE "quicktime.cpp")
-endif()
+    "avi.h"
+    "quicktime.h"
+    "../public/avi/iavi.h"
+    "../public/pixelwriter.h"
 
+    "../public/avi/iavi.h"
+	"../public/avi/ibik.h"
+	"../public/avi/iquicktime.h"
+)
 
-if( WINDOWS) # TODO: ... what kind of stupid implementation is this? ill try to fix it some day
-    target_link_libraries(${OUTBINNAME} ${LIBPUBLIC}/tier2_client.lib ${LIBPUBLIC}/tier3_client.lib)
+target_sources(${OUTBINNAME} PRIVATE ${valveavi_src})
+
+if( WINDOWS)
+    target_link_libraries(${OUTBINNAME} 
+    libvstdlib_client
+    libtier0_client
+    tier2_client 
+    tier3_client
+    avifil32
+    vfw32
+    winmm
+    )
+
     # do we have to link against sdl and sdl_mixer libs?
+    # yes but only if we use quicktime instead.
 endif()
 
 if( X360 OR POSIX )
